@@ -5,13 +5,16 @@ from coir.models import YourCustomDEModel
 import ollama
 
 
-poss_LLM= {"llama3.2", "gemma3", "mistral"}
+poss_LLM= {"llama3.2", "gemma3", "phi3"}
 
 
 
 model_name = "intfloat/e5-base-v2"
-chos_LLMmodel = {"mistral"}
-useLLm = False
+chos_LLMmodel = {"phi3"}
+useLLm = True
+
+poss_prompts = {'Give context words for this query', 'Give some suitable or similar code in different programming languages'}
+
 
 # Load the model
 model = YourCustomDEModel(model_name=model_name)
@@ -22,15 +25,16 @@ model = YourCustomDEModel(model_name=model_name)
 tasks = get_tasks(tasks=["codetrans-dl"])
 ##flag for requeueing
 # Initialize evaluation
-evaluation = COIR(tasks=tasks,batch_size=64, type ="hybrid")
+evaluation = COIR(tasks=tasks,batch_size=64, type ="semantic")
 
     
 if useLLm and chos_LLMmodel:
     for llm in chos_LLMmodel.intersection(poss_LLM):
-        results = evaluation.run(model, output_folder=f"results", useLLm=useLLm, llmname=llm)
+        for pmp in poss_prompts.intersection({'Give context words for this query'}):
+            results = evaluation.run(model, output_folder="results", useLLm=useLLm, llmname=llm, prompt=pmp)
 else:
     # Run evaluation
-    results = evaluation.run(model, output_folder="results", useLLm=useLLm, llmname='')
+    results = evaluation.run(model, output_folder="results", useLLm=useLLm, llmname='', prompt='')
     
 
 print(results)

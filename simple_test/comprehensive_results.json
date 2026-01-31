@@ -1,0 +1,49 @@
+{
+  "evaluation_metadata": {
+    "model_name": "intfloat/e5-base-v2",
+    "batch_size": 8,
+    "total_execution_time": 1.0779199600219727,
+    "tasks_evaluated": [
+      "codetrans-dl"
+    ],
+    "methods_tested": [
+      "jaccard",
+      "bm25"
+    ]
+  },
+  "results": {
+    "jaccard": {
+      "config_name": "jaccard",
+      "description": "Lexical Search using Jaccard Similarity",
+      "error": "LexicalJaccardSearch.search() takes 4 positional arguments but 5 were given",
+      "execution_time": 0,
+      "results": {}
+    },
+    "bm25": {
+      "config_name": "bm25",
+      "description": "Lexical Search using BM25 Algorithm",
+      "error": "LexicalBM25Search.search() takes 4 positional arguments but 5 were given",
+      "execution_time": 0,
+      "results": {}
+    }
+  },
+  "comparison_report": {
+    "summary": {
+      "total_methods_tested": 2,
+      "successful_evaluations": 0,
+      "failed_evaluations": 2,
+      "total_execution_time": 1.0779199600219727
+    },
+    "method_performance": {
+      "jaccard": {
+        "status": "failed",
+        "error": "LexicalJaccardSearch.search() takes 4 positional arguments but 5 were given"
+      },
+      "bm25": {
+        "status": "failed",
+        "error": "LexicalBM25Search.search() takes 4 positional arguments but 5 were given"
+      }
+    },
+    "metric_comparison": {}
+  }
+}

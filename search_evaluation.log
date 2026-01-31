@@ -1,0 +1,311 @@
+2026-01-31 16:27:09,935 - INFO - Initialized evaluator with model: intfloat/e5-base-v2
+2026-01-31 16:27:09,935 - INFO - Available search methods: ['dense', 'semantic', 'jaccard', 'bm25', 'bm25_tuned', 'simple_hybrid', 'advanced_hybrid_rrf', 'advanced_hybrid_weighted']
+2026-01-31 16:27:09,935 - INFO - Quick mode: testing basic methods only
+2026-01-31 16:27:09,935 - INFO - 🚀 Starting comprehensive search methods evaluation
+2026-01-31 16:27:09,935 - INFO - Loading tasks: ['codetrans-dl']
+2026-01-31 16:27:10,676 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:27:10,734 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/328b6b6870fce952a3d5d49a8672518a0e6f6f58/README.md "HTTP/1.1 200 OK"
+2026-01-31 16:27:10,795 - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/328b6b6870fce952a3d5d49a8672518a0e6f6f58/README.md "HTTP/1.1 200 OK"
+2026-01-31 16:27:10,968 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/328b6b6870fce952a3d5d49a8672518a0e6f6f58/codetrans-dl-queries-corpus.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:27:10,969 - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-01-31 16:27:11,684 - INFO - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/CoIR-Retrieval/codetrans-dl-queries-corpus.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:27:12,034 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/revision/328b6b6870fce952a3d5d49a8672518a0e6f6f58 "HTTP/1.1 200 OK"
+2026-01-31 16:27:12,197 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/328b6b6870fce952a3d5d49a8672518a0e6f6f58/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-01-31 16:27:12,830 - INFO - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=CoIR-Retrieval/codetrans-dl-queries-corpus "HTTP/1.1 200 OK"
+2026-01-31 16:27:13,161 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/tree/328b6b6870fce952a3d5d49a8672518a0e6f6f58/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:27:13,430 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/tree/328b6b6870fce952a3d5d49a8672518a0e6f6f58?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:27:13,978 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/328b6b6870fce952a3d5d49a8672518a0e6f6f58/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-01-31 16:27:14,246 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/328b6b6870fce952a3d5d49a8672518a0e6f6f58/data/corpus-00000-of-00001-11c5cf794bd42584.parquet "HTTP/1.1 302 Found"
+2026-01-31 16:27:14,511 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/xet-read-token/328b6b6870fce952a3d5d49a8672518a0e6f6f58 "HTTP/1.1 200 OK"
+2026-01-31 16:27:16,972 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/328b6b6870fce952a3d5d49a8672518a0e6f6f58/data/queries-00000-of-00001-9061ad8d3085f988.parquet "HTTP/1.1 302 Found"
+2026-01-31 16:27:17,869 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:27:17,972 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/CoIR-Retrieval/codetrans-dl-qrels/3c26def7e3903a50c219584fedc85d3ad77fac43/README.md "HTTP/1.1 200 OK"
+2026-01-31 16:27:18,110 - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/datasets/CoIR-Retrieval/codetrans-dl-qrels/3c26def7e3903a50c219584fedc85d3ad77fac43/README.md "HTTP/1.1 200 OK"
+2026-01-31 16:27:18,281 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/codetrans-dl-qrels.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:27:18,997 - INFO - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/CoIR-Retrieval/codetrans-dl-qrels/CoIR-Retrieval/codetrans-dl-qrels.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:27:19,227 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-qrels/revision/3c26def7e3903a50c219584fedc85d3ad77fac43 "HTTP/1.1 200 OK"
+2026-01-31 16:27:19,520 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-01-31 16:27:19,912 - INFO - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=CoIR-Retrieval/codetrans-dl-qrels "HTTP/1.1 200 OK"
+2026-01-31 16:27:20,165 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-qrels/tree/3c26def7e3903a50c219584fedc85d3ad77fac43/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:27:20,338 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-qrels/tree/3c26def7e3903a50c219584fedc85d3ad77fac43?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:27:20,507 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-01-31 16:27:20,737 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/data/train-00000-of-00001-59ec367a1dd2609c.parquet "HTTP/1.1 302 Found"
+2026-01-31 16:27:20,936 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-qrels/xet-read-token/3c26def7e3903a50c219584fedc85d3ad77fac43 "HTTP/1.1 200 OK"
+2026-01-31 16:27:21,556 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/data/test-00000-of-00001-77eb237675ca8fef.parquet "HTTP/1.1 302 Found"
+2026-01-31 16:27:22,155 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/data/valid-00000-of-00001-10daa073d1a16855.parquet "HTTP/1.1 302 Found"
+2026-01-31 16:27:22,622 - INFO - Loading Corpus...
+2026-01-31 16:27:22,627 - INFO - Loaded 816 Documents.
+2026-01-31 16:27:22,627 - INFO - Doc Example: {'text': "x = paddle.arange(12)\nx.numel()\nX = paddle.reshape(x, (3, 4))\npaddle.zeros((2, 3, 4))\npaddle.ones((2, 3, 4))\npaddle.randn((3, 4),'float32')\npaddle.to_tensor([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\nx = paddle.to_tensor([1.0, 2, 4, 8])\ny = paddle.to_tensor([2, 2, 2, 2])\nx + y, x - y, x * y, x / y, x**y\npaddle.exp(x)\nX = paddle.arange(12, dtype='float32').reshape((3, 4))\nY = paddle.to_tensor([[2.0, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\npaddle.concat((X, Y), axis=0), paddle.concat((X, Y), axis=1)\nX.sum()\na = paddle.reshape(paddle.arange(3), (3, 1))\nb = paddle.reshape(paddle.arange(2), (1, 2))\nX[1, 2] = 9\nX[0:2, :] = 12\nZ = paddle.zeros_like(Y)\nZ = X + Y\nbefore = id(X)\nX += Y\nid(X) == before\nA = X.numpy()\nB = paddle.to_tensor(A)\ntype(A), type(B)\na = paddle.to_tensor([3.5])\na, a.item(), float(a), int(a)", 'title': ''}
+2026-01-31 16:27:22,627 - INFO - Loading Queries...
+2026-01-31 16:27:22,631 - INFO - Loaded 180 Queries.
+2026-01-31 16:27:22,631 - INFO - Query Example: import tensorflow as tf
+from d2l import tensorflow as d2l
+class MultiHeadAttention(tf.keras.layers.Layer):
+    def __init__(self, key_size, query_size, value_size, num_hiddens, num_heads, dropout, bias=False, **kwargs):
+        super().__init__(**kwargs)
+        self.num_heads = num_heads
+        self.attention = d2l.DotProductAttention(dropout)
+        self.W_q = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+        self.W_k = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+        self.W_v = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+        self.W_o = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+    def call(self, queries, keys, values, valid_lens, **kwargs):
+
+        queries = transpose_qkv(self.W_q(queries), self.num_heads)
+        keys = transpose_qkv(self.W_k(keys), self.num_heads)
+        values = transpose_qkv(self.W_v(values), self.num_heads)
+        if valid_lens is not None:
+            valid_lens = tf.repeat(valid_lens, repeats=self.num_heads, axis=0)
+        output = self.attention(queries, keys, values, valid_lens, **kwargs)
+        output_concat = transpose_output(output, self.num_heads)
+        return self.W_o(output_concat)
+def transpose_qkv(X, num_heads):
+    X = tf.reshape(X, shape=(X.shape[0], X.shape[1], num_heads, -1))
+    X = tf.transpose(X, perm=(0, 2, 1, 3))
+    return tf.reshape(X, shape=(-1, X.shape[2], X.shape[3]))
+def transpose_output(X, num_heads):
+    X = tf.reshape(X, shape=(-1, num_heads, X.shape[1], X.shape[2]))
+    X = tf.transpose(X, perm=(0, 2, 1, 3))
+    return tf.reshape(X, shape=(X.shape[0], X.shape[1], -1))
+num_hiddens, num_heads = 100, 5
+attention = MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens, num_hiddens, num_heads, 0.5)
+batch_size, num_queries = 2, 4
+num_kvpairs, valid_lens = 6, tf.constant([3, 2])
+X = tf.ones((batch_size, num_queries, num_hiddens))
+Y = tf.ones((batch_size, num_kvpairs, num_hiddens))
+attention(X, Y, Y, valid_lens, training=False).shape
+2026-01-31 16:27:22,632 - INFO - Loaded 1 tasks successfully
+2026-01-31 16:27:22,632 - INFO - Testing 4 search methods: ['dense', 'jaccard', 'bm25', 'simple_hybrid']
+2026-01-31 16:27:22,632 - INFO - [1/4] Testing dense
+2026-01-31 16:27:22,632 - INFO - Evaluating dense: Dense/Semantic Search (Original CoIR)
+2026-01-31 16:27:22,632 - INFO - Loading model: intfloat/e5-base-v2
+2026-01-31 16:27:22,888 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:27:22,964 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/config.json "HTTP/1.1 200 OK"
+2026-01-31 16:27:23,024 - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/config.json "HTTP/1.1 200 OK"
+2026-01-31 16:27:23,194 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:27:23,254 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-01-31 16:27:23,334 - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-01-31 16:27:23,539 - INFO - HTTP Request: GET https://huggingface.co/api/models/intfloat/e5-base-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-01-31 16:27:23,853 - INFO - HTTP Request: GET https://huggingface.co/api/models/intfloat/e5-base-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:27:24,131 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/vocab.txt "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:27:24,205 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/vocab.txt "HTTP/1.1 200 OK"
+2026-01-31 16:27:24,394 - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/vocab.txt "HTTP/1.1 200 OK"
+2026-01-31 16:27:24,946 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:27:25,026 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/tokenizer.json "HTTP/1.1 200 OK"
+2026-01-31 16:27:25,129 - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/tokenizer.json "HTTP/1.1 200 OK"
+2026-01-31 16:27:26,849 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/added_tokens.json "HTTP/1.1 404 Not Found"
+2026-01-31 16:27:27,019 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/special_tokens_map.json "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:27:27,085 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-01-31 16:27:27,144 - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-01-31 16:27:27,317 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/chat_template.jinja "HTTP/1.1 404 Not Found"
+2026-01-31 16:27:27,649 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:27:27,731 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/config.json "HTTP/1.1 200 OK"
+2026-01-31 16:27:27,903 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-01-31 16:27:28,109 - INFO - HTTP Request: GET https://huggingface.co/api/models/intfloat/e5-base-v2/xet-read-token/f52bf8ec8c7124536f0efb74aca902b2995e5bcd "HTTP/1.1 200 OK"
+2026-01-31 16:30:11,551 - INFO - Initialized evaluator with model: intfloat/e5-base-v2
+2026-01-31 16:30:11,551 - INFO - Available search methods: ['dense', 'semantic', 'jaccard', 'bm25', 'bm25_tuned', 'simple_hybrid', 'advanced_hybrid_rrf', 'advanced_hybrid_weighted']
+2026-01-31 16:30:11,551 - INFO - Quick mode: testing basic methods only
+2026-01-31 16:30:11,551 - INFO - 🚀 Starting comprehensive search methods evaluation
+2026-01-31 16:30:11,551 - INFO - Loading tasks: ['codetrans-dl']
+2026-01-31 16:30:11,934 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:30:11,934 - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-01-31 16:30:11,993 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/328b6b6870fce952a3d5d49a8672518a0e6f6f58/README.md "HTTP/1.1 200 OK"
+2026-01-31 16:30:12,147 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/328b6b6870fce952a3d5d49a8672518a0e6f6f58/codetrans-dl-queries-corpus.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:30:12,653 - INFO - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/CoIR-Retrieval/codetrans-dl-queries-corpus.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:30:12,808 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/revision/328b6b6870fce952a3d5d49a8672518a0e6f6f58 "HTTP/1.1 200 OK"
+2026-01-31 16:30:12,963 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/328b6b6870fce952a3d5d49a8672518a0e6f6f58/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-01-31 16:30:13,377 - INFO - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=CoIR-Retrieval/codetrans-dl-queries-corpus "HTTP/1.1 200 OK"
+2026-01-31 16:30:13,535 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/tree/328b6b6870fce952a3d5d49a8672518a0e6f6f58/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:30:13,695 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/tree/328b6b6870fce952a3d5d49a8672518a0e6f6f58?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:30:13,854 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/328b6b6870fce952a3d5d49a8672518a0e6f6f58/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-01-31 16:30:14,031 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:30:14,089 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/CoIR-Retrieval/codetrans-dl-qrels/3c26def7e3903a50c219584fedc85d3ad77fac43/README.md "HTTP/1.1 200 OK"
+2026-01-31 16:30:14,239 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/codetrans-dl-qrels.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:30:14,382 - INFO - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/CoIR-Retrieval/codetrans-dl-qrels/CoIR-Retrieval/codetrans-dl-qrels.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:30:14,543 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-qrels/revision/3c26def7e3903a50c219584fedc85d3ad77fac43 "HTTP/1.1 200 OK"
+2026-01-31 16:30:14,693 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-01-31 16:30:14,859 - INFO - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=CoIR-Retrieval/codetrans-dl-qrels "HTTP/1.1 200 OK"
+2026-01-31 16:30:15,021 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-qrels/tree/3c26def7e3903a50c219584fedc85d3ad77fac43/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:30:15,175 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-qrels/tree/3c26def7e3903a50c219584fedc85d3ad77fac43?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:30:15,330 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-01-31 16:30:15,409 - INFO - Loading Corpus...
+2026-01-31 16:30:15,414 - INFO - Loaded 816 Documents.
+2026-01-31 16:30:15,414 - INFO - Doc Example: {'text': "x = paddle.arange(12)\nx.numel()\nX = paddle.reshape(x, (3, 4))\npaddle.zeros((2, 3, 4))\npaddle.ones((2, 3, 4))\npaddle.randn((3, 4),'float32')\npaddle.to_tensor([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\nx = paddle.to_tensor([1.0, 2, 4, 8])\ny = paddle.to_tensor([2, 2, 2, 2])\nx + y, x - y, x * y, x / y, x**y\npaddle.exp(x)\nX = paddle.arange(12, dtype='float32').reshape((3, 4))\nY = paddle.to_tensor([[2.0, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\npaddle.concat((X, Y), axis=0), paddle.concat((X, Y), axis=1)\nX.sum()\na = paddle.reshape(paddle.arange(3), (3, 1))\nb = paddle.reshape(paddle.arange(2), (1, 2))\nX[1, 2] = 9\nX[0:2, :] = 12\nZ = paddle.zeros_like(Y)\nZ = X + Y\nbefore = id(X)\nX += Y\nid(X) == before\nA = X.numpy()\nB = paddle.to_tensor(A)\ntype(A), type(B)\na = paddle.to_tensor([3.5])\na, a.item(), float(a), int(a)", 'title': ''}
+2026-01-31 16:30:15,414 - INFO - Loading Queries...
+2026-01-31 16:30:15,420 - INFO - Loaded 180 Queries.
+2026-01-31 16:30:15,421 - INFO - Query Example: import tensorflow as tf
+from d2l import tensorflow as d2l
+class MultiHeadAttention(tf.keras.layers.Layer):
+    def __init__(self, key_size, query_size, value_size, num_hiddens, num_heads, dropout, bias=False, **kwargs):
+        super().__init__(**kwargs)
+        self.num_heads = num_heads
+        self.attention = d2l.DotProductAttention(dropout)
+        self.W_q = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+        self.W_k = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+        self.W_v = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+        self.W_o = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+    def call(self, queries, keys, values, valid_lens, **kwargs):
+
+        queries = transpose_qkv(self.W_q(queries), self.num_heads)
+        keys = transpose_qkv(self.W_k(keys), self.num_heads)
+        values = transpose_qkv(self.W_v(values), self.num_heads)
+        if valid_lens is not None:
+            valid_lens = tf.repeat(valid_lens, repeats=self.num_heads, axis=0)
+        output = self.attention(queries, keys, values, valid_lens, **kwargs)
+        output_concat = transpose_output(output, self.num_heads)
+        return self.W_o(output_concat)
+def transpose_qkv(X, num_heads):
+    X = tf.reshape(X, shape=(X.shape[0], X.shape[1], num_heads, -1))
+    X = tf.transpose(X, perm=(0, 2, 1, 3))
+    return tf.reshape(X, shape=(-1, X.shape[2], X.shape[3]))
+def transpose_output(X, num_heads):
+    X = tf.reshape(X, shape=(-1, num_heads, X.shape[1], X.shape[2]))
+    X = tf.transpose(X, perm=(0, 2, 1, 3))
+    return tf.reshape(X, shape=(X.shape[0], X.shape[1], -1))
+num_hiddens, num_heads = 100, 5
+attention = MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens, num_hiddens, num_heads, 0.5)
+batch_size, num_queries = 2, 4
+num_kvpairs, valid_lens = 6, tf.constant([3, 2])
+X = tf.ones((batch_size, num_queries, num_hiddens))
+Y = tf.ones((batch_size, num_kvpairs, num_hiddens))
+attention(X, Y, Y, valid_lens, training=False).shape
+2026-01-31 16:30:15,422 - INFO - Loaded 1 tasks successfully
+2026-01-31 16:30:15,422 - INFO - Testing 4 search methods: ['dense', 'jaccard', 'bm25', 'simple_hybrid']
+2026-01-31 16:30:15,422 - INFO - [1/4] Testing dense
+2026-01-31 16:30:15,422 - INFO - Evaluating dense: Dense/Semantic Search (Original CoIR)
+2026-01-31 16:30:15,422 - INFO - Loading model: intfloat/e5-base-v2
+2026-01-31 16:30:15,567 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:30:15,623 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/config.json "HTTP/1.1 200 OK"
+2026-01-31 16:30:15,772 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:30:15,830 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-01-31 16:30:15,985 - INFO - HTTP Request: GET https://huggingface.co/api/models/intfloat/e5-base-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-01-31 16:30:16,139 - INFO - HTTP Request: GET https://huggingface.co/api/models/intfloat/e5-base-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:30:16,331 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:30:16,391 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/config.json "HTTP/1.1 200 OK"
+2026-01-31 16:30:16,566 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-01-31 16:30:16,716 - INFO - HTTP Request: GET https://huggingface.co/api/models/intfloat/e5-base-v2/xet-read-token/f52bf8ec8c7124536f0efb74aca902b2995e5bcd "HTTP/1.1 200 OK"
+2026-01-31 16:36:58,483 - INFO - Model loaded successfully
+2026-01-31 16:36:58,483 - INFO - Encoding Queries...
+2026-01-31 16:36:58,483 - INFO - Encoding 180 texts...
+2026-01-31 16:37:36,181 - INFO - Encoded 180 embeddings.
+2026-01-31 16:37:36,181 - INFO - Sorting Corpus by document length (Longest first)...
+2026-01-31 16:37:36,181 - INFO - Encoding Corpus in batches... Warning: This might take a while!
+2026-01-31 16:37:36,182 - INFO - Scoring Function: Cosine Similarity (cos_sim)
+2026-01-31 16:37:36,182 - INFO - Encoding Batch 1/1...
+2026-01-31 16:37:36,182 - INFO - Encoding 816 texts...
+2026-01-31 16:40:22,072 - INFO - Encoded 816 embeddings.
+2026-01-31 16:40:22,168 - INFO - For evaluation, we ignore identical query and document ids (default), please explicitly set ``ignore_identical_ids=False`` to ignore this.
+2026-01-31 16:40:22,235 - INFO - Evaluation completed successfully
+2026-01-31 16:40:22,238 - INFO - Results for codetrans-dl saved to test_evaluation/dense
+2026-01-31 16:40:22,239 - INFO - ✅ dense completed in 606.82 seconds
+2026-01-31 16:40:22,239 - INFO - [2/4] Testing jaccard
+2026-01-31 16:40:22,239 - INFO - Evaluating jaccard: Lexical Search using Jaccard Similarity
+2026-01-31 16:40:22,239 - ERROR - ❌ jaccard failed: LexicalJaccardSearch.search() takes 4 positional arguments but 5 were given
+2026-01-31 16:40:22,239 - INFO - [3/4] Testing bm25
+2026-01-31 16:40:22,239 - INFO - Evaluating bm25: Lexical Search using BM25 Algorithm
+2026-01-31 16:40:22,239 - ERROR - ❌ bm25 failed: LexicalBM25Search.search() takes 4 positional arguments but 5 were given
+2026-01-31 16:40:22,240 - INFO - [4/4] Testing simple_hybrid
+2026-01-31 16:40:22,240 - INFO - Evaluating simple_hybrid: Simple Hybrid Search (Dense + Lexical)
+2026-01-31 16:40:22,240 - INFO - Encoding Queries...
+2026-01-31 16:40:22,240 - INFO - Encoding 180 texts...
+2026-01-31 16:41:13,526 - INFO - Encoded 180 embeddings.
+2026-01-31 16:41:13,526 - INFO - Sorting Corpus by document length (Longest first)...
+2026-01-31 16:41:13,527 - INFO - Encoding Corpus in batches... Warning: This might take a while!
+2026-01-31 16:41:13,527 - INFO - Scoring Function: Cosine Similarity (cos_sim)
+2026-01-31 16:41:13,527 - INFO - Encoding Batch 1/1...
+2026-01-31 16:41:13,527 - INFO - Encoding 816 texts...
+2026-01-31 16:44:13,107 - INFO - Encoded 816 embeddings.
+2026-01-31 16:44:15,758 - INFO - For evaluation, we ignore identical query and document ids (default), please explicitly set ``ignore_identical_ids=False`` to ignore this.
+2026-01-31 16:44:15,808 - INFO - Evaluation completed successfully
+2026-01-31 16:44:15,809 - INFO - Results for codetrans-dl saved to test_evaluation/simple_hybrid
+2026-01-31 16:44:15,823 - INFO - ✅ simple_hybrid completed in 233.58 seconds
+2026-01-31 16:44:15,824 - INFO - 🎉 Comprehensive evaluation completed in 840.40 seconds
+2026-01-31 16:44:15,824 - INFO - 📊 Results saved to: test_evaluation
+2026-01-31 16:44:15,824 - INFO - 📋 Report available at: test_evaluation/evaluation_report.md
+2026-01-31 16:54:22,689 - INFO - Initialized evaluator with model: intfloat/e5-base-v2
+2026-01-31 16:54:22,690 - INFO - Available search methods: ['dense', 'semantic', 'jaccard', 'bm25', 'bm25_tuned', 'simple_hybrid', 'advanced_hybrid_rrf', 'advanced_hybrid_weighted']
+2026-01-31 16:54:22,690 - INFO - 🚀 Starting comprehensive search methods evaluation
+2026-01-31 16:54:22,690 - INFO - Loading tasks: ['codetrans-dl']
+2026-01-31 16:54:23,116 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:54:23,117 - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-01-31 16:54:23,172 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/328b6b6870fce952a3d5d49a8672518a0e6f6f58/README.md "HTTP/1.1 200 OK"
+2026-01-31 16:54:23,339 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/328b6b6870fce952a3d5d49a8672518a0e6f6f58/codetrans-dl-queries-corpus.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:54:24,008 - INFO - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/CoIR-Retrieval/codetrans-dl-queries-corpus.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:54:24,164 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/revision/328b6b6870fce952a3d5d49a8672518a0e6f6f58 "HTTP/1.1 200 OK"
+2026-01-31 16:54:24,317 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/328b6b6870fce952a3d5d49a8672518a0e6f6f58/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-01-31 16:54:24,736 - INFO - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=CoIR-Retrieval/codetrans-dl-queries-corpus "HTTP/1.1 200 OK"
+2026-01-31 16:54:24,930 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/tree/328b6b6870fce952a3d5d49a8672518a0e6f6f58/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:54:25,136 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/tree/328b6b6870fce952a3d5d49a8672518a0e6f6f58?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:54:25,289 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-queries-corpus/resolve/328b6b6870fce952a3d5d49a8672518a0e6f6f58/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-01-31 16:54:25,466 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:54:25,520 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/CoIR-Retrieval/codetrans-dl-qrels/3c26def7e3903a50c219584fedc85d3ad77fac43/README.md "HTTP/1.1 200 OK"
+2026-01-31 16:54:25,670 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/codetrans-dl-qrels.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:54:25,851 - INFO - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/CoIR-Retrieval/codetrans-dl-qrels/CoIR-Retrieval/codetrans-dl-qrels.py "HTTP/1.1 404 Not Found"
+2026-01-31 16:54:26,004 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-qrels/revision/3c26def7e3903a50c219584fedc85d3ad77fac43 "HTTP/1.1 200 OK"
+2026-01-31 16:54:26,261 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-01-31 16:54:27,082 - INFO - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=CoIR-Retrieval/codetrans-dl-qrels "HTTP/1.1 200 OK"
+2026-01-31 16:54:27,392 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-qrels/tree/3c26def7e3903a50c219584fedc85d3ad77fac43/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:54:27,541 - INFO - HTTP Request: GET https://huggingface.co/api/datasets/CoIR-Retrieval/codetrans-dl-qrels/tree/3c26def7e3903a50c219584fedc85d3ad77fac43?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:54:27,702 - INFO - HTTP Request: HEAD https://huggingface.co/datasets/CoIR-Retrieval/codetrans-dl-qrels/resolve/3c26def7e3903a50c219584fedc85d3ad77fac43/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-01-31 16:54:27,760 - INFO - Loading Corpus...
+2026-01-31 16:54:27,765 - INFO - Loaded 816 Documents.
+2026-01-31 16:54:27,765 - INFO - Doc Example: {'text': "x = paddle.arange(12)\nx.numel()\nX = paddle.reshape(x, (3, 4))\npaddle.zeros((2, 3, 4))\npaddle.ones((2, 3, 4))\npaddle.randn((3, 4),'float32')\npaddle.to_tensor([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\nx = paddle.to_tensor([1.0, 2, 4, 8])\ny = paddle.to_tensor([2, 2, 2, 2])\nx + y, x - y, x * y, x / y, x**y\npaddle.exp(x)\nX = paddle.arange(12, dtype='float32').reshape((3, 4))\nY = paddle.to_tensor([[2.0, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\npaddle.concat((X, Y), axis=0), paddle.concat((X, Y), axis=1)\nX.sum()\na = paddle.reshape(paddle.arange(3), (3, 1))\nb = paddle.reshape(paddle.arange(2), (1, 2))\nX[1, 2] = 9\nX[0:2, :] = 12\nZ = paddle.zeros_like(Y)\nZ = X + Y\nbefore = id(X)\nX += Y\nid(X) == before\nA = X.numpy()\nB = paddle.to_tensor(A)\ntype(A), type(B)\na = paddle.to_tensor([3.5])\na, a.item(), float(a), int(a)", 'title': ''}
+2026-01-31 16:54:27,765 - INFO - Loading Queries...
+2026-01-31 16:54:27,771 - INFO - Loaded 180 Queries.
+2026-01-31 16:54:27,771 - INFO - Query Example: import tensorflow as tf
+from d2l import tensorflow as d2l
+class MultiHeadAttention(tf.keras.layers.Layer):
+    def __init__(self, key_size, query_size, value_size, num_hiddens, num_heads, dropout, bias=False, **kwargs):
+        super().__init__(**kwargs)
+        self.num_heads = num_heads
+        self.attention = d2l.DotProductAttention(dropout)
+        self.W_q = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+        self.W_k = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+        self.W_v = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+        self.W_o = tf.keras.layers.Dense(num_hiddens, use_bias=bias)
+    def call(self, queries, keys, values, valid_lens, **kwargs):
+
+        queries = transpose_qkv(self.W_q(queries), self.num_heads)
+        keys = transpose_qkv(self.W_k(keys), self.num_heads)
+        values = transpose_qkv(self.W_v(values), self.num_heads)
+        if valid_lens is not None:
+            valid_lens = tf.repeat(valid_lens, repeats=self.num_heads, axis=0)
+        output = self.attention(queries, keys, values, valid_lens, **kwargs)
+        output_concat = transpose_output(output, self.num_heads)
+        return self.W_o(output_concat)
+def transpose_qkv(X, num_heads):
+    X = tf.reshape(X, shape=(X.shape[0], X.shape[1], num_heads, -1))
+    X = tf.transpose(X, perm=(0, 2, 1, 3))
+    return tf.reshape(X, shape=(-1, X.shape[2], X.shape[3]))
+def transpose_output(X, num_heads):
+    X = tf.reshape(X, shape=(-1, num_heads, X.shape[1], X.shape[2]))
+    X = tf.transpose(X, perm=(0, 2, 1, 3))
+    return tf.reshape(X, shape=(X.shape[0], X.shape[1], -1))
+num_hiddens, num_heads = 100, 5
+attention = MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens, num_hiddens, num_heads, 0.5)
+batch_size, num_queries = 2, 4
+num_kvpairs, valid_lens = 6, tf.constant([3, 2])
+X = tf.ones((batch_size, num_queries, num_hiddens))
+Y = tf.ones((batch_size, num_kvpairs, num_hiddens))
+attention(X, Y, Y, valid_lens, training=False).shape
+2026-01-31 16:54:27,772 - INFO - Loaded 1 tasks successfully
+2026-01-31 16:54:27,772 - INFO - Testing 2 search methods: ['jaccard', 'bm25']
+2026-01-31 16:54:27,772 - INFO - [1/2] Testing jaccard
+2026-01-31 16:54:27,772 - INFO - Evaluating jaccard: Lexical Search using Jaccard Similarity
+2026-01-31 16:54:27,772 - INFO - Loading model: intfloat/e5-base-v2
+2026-01-31 16:54:27,919 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:54:27,978 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/config.json "HTTP/1.1 200 OK"
+2026-01-31 16:54:28,134 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:54:28,196 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-01-31 16:54:28,349 - INFO - HTTP Request: GET https://huggingface.co/api/models/intfloat/e5-base-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-01-31 16:54:28,525 - INFO - HTTP Request: GET https://huggingface.co/api/models/intfloat/e5-base-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-01-31 16:54:28,711 - INFO - HTTP Request: HEAD https://huggingface.co/intfloat/e5-base-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-01-31 16:54:28,769 - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/intfloat/e5-base-v2/f52bf8ec8c7124536f0efb74aca902b2995e5bcd/config.json "HTTP/1.1 200 OK"
+2026-01-31 16:54:28,850 - INFO - Model loaded successfully
+2026-01-31 16:54:28,850 - ERROR - ❌ jaccard failed: LexicalJaccardSearch.search() takes 4 positional arguments but 5 were given
+2026-01-31 16:54:28,850 - INFO - [2/2] Testing bm25
+2026-01-31 16:54:28,850 - INFO - Evaluating bm25: Lexical Search using BM25 Algorithm
+2026-01-31 16:54:28,850 - ERROR - ❌ bm25 failed: LexicalBM25Search.search() takes 4 positional arguments but 5 were given
+2026-01-31 16:54:28,850 - INFO - 🎉 Comprehensive evaluation completed in 1.08 seconds
+2026-01-31 16:54:28,850 - INFO - 📊 Results saved to: simple_test
+2026-01-31 16:54:28,850 - INFO - 📋 Report available at: simple_test/evaluation_report.md

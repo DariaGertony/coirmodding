@@ -1,78 +1,95 @@
-from .. import BaseSearch
-from .elastic_search import ElasticSearch
-import tqdm
-import time
-from typing import List, Dict
+from typing import Dict
+import bm25s
+from ..base import BaseSearch
 
-def sleep(seconds):
-    if seconds: time.sleep(seconds) 
 
-class BM25Search(BaseSearch):
-    def __init__(self, index_name: str, hostname: str = "localhost", keys: Dict[str, str] = {"title": "title", "body": "txt"}, language: str = "english",
-                 batch_size: int = 128, timeout: int = 100, retry_on_timeout: bool = True, maxsize: int = 24, number_of_shards: int = "default", 
-                 initialize: bool = True, sleep_for: int = 2):
-        self.results = {}
+class LexicalBM25Search(BaseSearch):
+    """
+    Lexical search implementation using BM25 algorithm.
+    
+    Uses the bm25s library for efficient BM25 implementation with
+    English stopwords removal and tokenization.
+    """
+    
+    def __init__(self, batch_size: int = 128, **kwargs):
+        """
+        Initialize the BM25 search.
+        
+        Args:
+            batch_size: Batch size for processing (kept for interface compatibility)
+            **kwargs: Additional keyword arguments
+        """
         self.batch_size = batch_size
-        self.initialize = initialize
-        self.sleep_for = sleep_for
-        self.config = {
-            "hostname": hostname, 
-            "index_name": index_name,
-            "keys": keys,
-            "timeout": timeout,
-            "retry_on_timeout": retry_on_timeout,
-            "maxsize": maxsize,
-            "number_of_shards": number_of_shards,
-            "language": language
-        }
-        self.es = ElasticSearch(self.config)
-        if self.initialize:
-            self.initialise()
+        self.results = {}
     
-    def initialise(self):
-        self.es.delete_index()
-        sleep(self.sleep_for)
-        self.es.create_index()
-    
-    def search(self, corpus: Dict[str, Dict[str, str]], queries: Dict[str, str], top_k: int, *args, **kwargs) -> Dict[str, Dict[str, float]]:
+    def search(self,
+               corpus: Dict[str, Dict[str, str]],
+               queries: Dict[str, str],
+               top_k: int,
+               score_function: str = "cos_sim",
+               **kwargs) -> Dict[str, Dict[str, float]]:
+        """
+        Perform BM25-based search.
         
-        # Index the corpus within elastic-search
-        # False, if the corpus has been already indexed
-        if self.initialize:
-            self.index(corpus)
-            # Sleep for few seconds so that elastic-search indexes the docs properly
-            sleep(self.sleep_for)
-        
-        #retrieve results from BM25 
-        query_ids = list(queries.keys())
-        queries = [queries[qid] for qid in query_ids]
-        
-        for start_idx in tqdm.trange(0, len(queries), self.batch_size, desc='que'):
-            query_ids_batch = query_ids[start_idx:start_idx+self.batch_size]
-            results = self.es.lexical_multisearch(
-                texts=queries[start_idx:start_idx+self.batch_size], 
-                top_hits=top_k + 1) # Add 1 extra if query is present with documents
+        Args:
+            corpus: Dictionary mapping corpus IDs to documents with 'title' and 'text' fields
+            queries: Dictionary mapping query IDs to query strings
+            top_k: Number of top results to return per query
+            **kwargs: Additional keyword arguments
             
-            for (query_id, hit) in zip(query_ids_batch, results):
-                scores = {}
-                for corpus_id, score in hit['hits']:
-                    if corpus_id != query_id: # query doesnt return in results
-                        scores[corpus_id] = score
-                    self.results[query_id] = scores
+        Returns:
+            Dictionary mapping query IDs to dictionaries of document IDs and scores
+        """
+        query_ids = list(queries.keys())
         
-        return self.results
+        # Initialize results dictionary
+        results = {qid: {} for qid in query_ids}
         
-    
-    def index(self, corpus: Dict[str, Dict[str, str]]):
-        progress = tqdm.tqdm(unit="docs", total=len(corpus))
-        # dictionary structure = {_id: {title_key: title, text_key: text}}
-        dictionary = {idx: {
-            self.config["keys"]["title"]: corpus[idx].get("title", None), 
-            self.config["keys"]["body"]: corpus[idx].get("text", None)
-            } for idx in list(corpus.keys())
-        }
-        self.es.bulk_add_to_index(
-                generate_actions=self.es.generate_actions(
-                dictionary=dictionary, update=False),
-                progress=progress
-                )
+        # Handle empty corpus case
+        if not corpus:
+            return results
+        
+        # Sort corpus by document length (longest first) for consistency with other implementations
+        corpus_ids = sorted(corpus, key=lambda k: len(corpus[k].get("title", "") + corpus[k].get("text", "")), reverse=True)
+        
+        # Extract corpus texts
+        corpus_texts = [corpus[cid].get("text", "") for cid in corpus_ids]
+        
+        # Handle case where all corpus texts are empty
+        if not any(text.strip() for text in corpus_texts):
+            return results
+        
+        # Tokenize corpus with English stopwords removal
+        tokenized_corpus = bm25s.tokenize(corpus_texts, stopwords="en")
+        
+        # Create and index BM25 retriever
+        retriever = bm25s.BM25()
+        retriever.index(tokenized_corpus)
+        
+        # Process each query
+        for qid, query_text in queries.items():
+            # Skip empty queries
+            if not query_text.strip():
+                continue
+                
+            # Tokenize query with English stopwords removal
+            tokenized_query = bm25s.tokenize(query_text, stopwords="en")
+            
+            # Adjust top_k if corpus is smaller
+            effective_top_k = min(top_k, len(corpus_texts))
+            
+            # Skip if no effective top_k
+            if effective_top_k <= 0:
+                continue
+            
+            # Retrieve top-k documents
+            doc_indexes, scores = retriever.retrieve(tokenized_query, k=effective_top_k)
+            
+            # Convert results to the expected format
+            for idx, score in zip(doc_indexes[0], scores[0]):
+                corpus_id = corpus_ids[idx]
+                # Skip self-matches (when query ID matches document ID)
+                if corpus_id != qid:
+                    results[qid][corpus_id] = float(score)
+        
+        return results

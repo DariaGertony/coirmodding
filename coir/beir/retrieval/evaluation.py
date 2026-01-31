@@ -14,16 +14,76 @@ class EvaluateRetrieval:
         self.retriever = retriever
         self.score_function = score_function
             
-    def retrieve(self, corpus: Dict[str, Dict[str, str]], queries: Dict[str, str], **kwargs) -> Dict[str, Dict[str, float]]:
+    def retrieve(self, corpus: Dict[str, Dict[str, str]],
+                 queries: Dict[str, str],
+                 use_llm: bool = False,
+                 llm_name: str = '',
+                 prompt: str = "",
+                 **kwargs) -> Dict[str, Dict[str, float]]:
+        """
+        Retrieve results with optional LLM query expansion.
+        
+        Args:
+            corpus: Document corpus
+            queries: Query dictionary
+            use_llm: Whether to use LLM for query expansion
+            llm_name: Name of the LLM model to use
+            prompt: Prompt template for query expansion
+            **kwargs: Additional arguments passed to the search method
+            
+        Returns:
+            Dictionary of query results
+        """
         if not self.retriever:
             raise ValueError("Model/Technique has not been provided!")
+        
+        # Handle LLM query expansion if requested
+        if use_llm and llm_name:
+            try:
+                from .search.llm import QueryExpander
+                expander = QueryExpander(llm_name, prompt)
+                expanded_queries = expander.expand_queries(list(queries.values()))
+                queries = dict(zip(queries.keys(), expanded_queries))
+            except ImportError:
+                logger.warning("LLM components not available, proceeding without query expansion")
+            except Exception as e:
+                logger.warning(f"Query expansion failed: {e}, proceeding with original queries")
+        
+        # Use the search method's search function
         return self.retriever.search(corpus, queries, self.top_k, self.score_function, **kwargs)
     
-    def rerank(self, 
-            corpus: Dict[str, Dict[str, str]], 
+    def rerank(self,
+            corpus: Dict[str, Dict[str, str]],
             queries: Dict[str, str],
             results: Dict[str, Dict[str, float]],
-            top_k: int) -> Dict[str, Dict[str, float]]:
+            top_k: int,
+            use_llm: bool = False,
+            llm_name: str = '') -> Dict[str, Dict[str, float]]:
+        """
+        Rerank results with optional LLM enhancement.
+        
+        Args:
+            corpus: Document corpus
+            queries: Query dictionary
+            results: Initial retrieval results
+            top_k: Number of top results to return
+            use_llm: Whether to use LLM for query expansion
+            llm_name: Name of the LLM model to use
+            
+        Returns:
+            Dictionary of reranked query results
+        """
+        # Handle LLM query expansion for reranking if requested
+        if use_llm and llm_name:
+            try:
+                from .search.llm import QueryExpander
+                expander = QueryExpander(llm_name, "")  # Empty prompt for reranking
+                expanded_queries = expander.expand_queries(list(queries.values()))
+                queries = dict(zip(queries.keys(), expanded_queries))
+            except ImportError:
+                logger.warning("LLM components not available, proceeding without query expansion")
+            except Exception as e:
+                logger.warning(f"Query expansion failed: {e}, proceeding with original queries")
     
         new_corpus = {}
     
@@ -83,10 +143,8 @@ class EvaluateRetrieval:
             recall[f"Recall@{k}"] = round(recall[f"Recall@{k}"]/len(scores), 5)
             precision[f"P@{k}"] = round(precision[f"P@{k}"]/len(scores), 5)
         
-        for eval in [ndcg, _map, recall, precision]:
-            logger.info("\n")
-            for k in eval.keys():
-                logger.info("{}: {:.4f}".format(k, eval[k]))
+        # Log summary metrics (reduced verbosity)
+        logger.info("Evaluation completed successfully")
 
         return ndcg, _map, recall, precision
     

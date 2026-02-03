@@ -1,7 +1,0 @@
-torch
-numpy
-scipy
-# Inherits dependencies from dense and lexical search:
-# - bm25s (from lexical search)
-# - sentence-transformers (from dense search)
-# - transformers (from reranking)

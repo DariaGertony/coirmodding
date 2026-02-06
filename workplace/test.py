@@ -9,9 +9,9 @@ import ollama
 
 poss_LLM= {"llama3.2", "gemma3", "phi3"}
 
-# intfloat/e5-base-v2   BAAI/bge-m3
+# intfloat/e5-base-v2   BAAI/bge-m3 intfloat/multilingual-e5-base
 
-model_name = "BAAI/bge-m3"
+model_name = "intfloat/multilingual-e5-base"
 chos_LLMmodel = {"phi3"}
 useLLm = False
 rerank = False
@@ -28,7 +28,7 @@ model = YourCustomDEModel(model_name=model_name)
 tasks = get_tasks(tasks=["stackoverflow-qa"])
 ##flag for requeueing
 # Initialize evaluation
-evaluation = COIR(tasks=tasks,batch_size=72, type ="hybrid_bm25")
+evaluation = COIR(tasks=tasks,batch_size=72, type ="semantic")
 
     
 if useLLm and chos_LLMmodel:

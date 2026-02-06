@@ -14,7 +14,7 @@ poss_LLM= {"llama3.2", "gemma3", "phi3"}
 model_name = "BAAI/bge-m3"
 chos_LLMmodel = {"phi3"}
 useLLm = False
-rerank = True
+rerank = False
 
 poss_prompts = {'Give context words for this query', 'Give some suitable or similar code in different programming languages'}
 
@@ -28,7 +28,7 @@ model = YourCustomDEModel(model_name=model_name)
 tasks = get_tasks(tasks=["stackoverflow-qa"])
 ##flag for requeueing
 # Initialize evaluation
-evaluation = COIR(tasks=tasks,batch_size=64, type ="hybrid_bm25")
+evaluation = COIR(tasks=tasks,batch_size=72, type ="hybrid_bm25")
 
     
 if useLLm and chos_LLMmodel:

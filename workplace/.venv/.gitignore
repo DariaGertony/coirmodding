@@ -1,1 +1,9 @@
 *
+*.pyc
+!/.gitignore
+!/Lib/
+!/Lib/site-packages/
+!/Lib/site-packages/coir/
+!/Lib/site-packages/coir/**
+/Lib/site-packages/coir/__pycache__
+/Lib/site-packages/coir/beir/__pycache__

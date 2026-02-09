@@ -34,10 +34,10 @@ evaluation = COIR(tasks=tasks,batch_size=72, type ="hybrid")
 if useLLm and chos_LLMmodel:
     for llm in chos_LLMmodel.intersection(poss_LLM):
         for pmp in poss_prompts.intersection({'Give context words for this query'}):
-            results = evaluation.run(model, output_folder="res", useLLm=useLLm, llmname=llm, prompt=pmp, to_rerank=rerank)
+            results = evaluation.run(model, output_folder="results", useLLm=useLLm, llmname=llm, prompt=pmp, to_rerank=rerank)
 else:
     # Run evaluation
-    results = evaluation.run(model, output_folder="res", useLLm=useLLm, llmname='', prompt='', to_rerank=rerank)
+    results = evaluation.run(model, output_folder="results", useLLm=useLLm, llmname='', prompt='', to_rerank=rerank)
     
 
 print(results)

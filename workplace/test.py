@@ -10,9 +10,9 @@ import ollama
 
 poss_LLM= {"llama3.2", "gemma3", "phi3"}
 
-# intfloat/e5-base-v2   BAAI/bge-m3 intfloat/multilingual-e5-base
+# intfloat/e5-base   BAAI/bge-m3 intfloat/multilingual-e5-base
 
-model_name = "intfloat/e5-base-v2"
+model_name = "intfloat/e5-base"
 chos_LLMmodel = {"phi3"}
 useLLm = False
 rerank = False

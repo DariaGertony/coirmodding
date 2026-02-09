@@ -1,6 +1,5 @@
 {
-    "clear": {
-        "intfloat/e5-base-v2": {
+    
             "metrics": {
                 "NDCG": {
                     "NDCG@1": 0.08889,
@@ -36,5 +35,4 @@
                 }
             }
         }
-    }
-}
+    

@@ -243,14 +243,126 @@ def plot_barchart_for_task(task_name, df, output_dir):
         print(f"  ✓ barchart: {metric}")
     return True
 
+def plot_pareto_front_all_models(task_name, methods_data, output_dir, xm = "Recall", ym = "NDCG"):
+    """
+    Строит ЕДИНЫЙ график с Парето-фронтами всех моделей в задаче.
+    
+    Каждая модель: свой цвет + линия из точек @1, @3, @5, @10, @20, @100, @1000
+    Точки с одинаковым k имеют одинаковую форму (маркеры).
+    
+    Args:
+        task_name (str): имя задачи (codetrans-dl, stackoverflow-qa)
+        methods_data (dict): {"method1": {metrics}, "method2": {...}}
+        output_dir (str): папка для сохранения
+    """
+    # Ключевые k для отображения (включая @20, если есть)
+    k_targets = [1, 3, 5, 10, 100, 1000]
+    marker_map = {
+        1: 'o',   # круг
+        3: '^',   # треугольник
+        5: 's',   # квадрат
+        10: 'D',  # ромб
+        100: 'x',  # крест
+        1000: '.'  # точка
+    }
 
-def visualize_tasks(input_root="./piplines_results", output_base="./visualizations"):
+    # Подготовка данных
+    models = list(methods_data.keys())
+    if not models:
+        return False
+
+    # Цвета для моделей
+    colors = plt.cm.tab10(np.linspace(0, 1, min(len(models), 10)))
+
+    fig, ax = plt.subplots(figsize=(10, 8))
+
+    legend_elements = []
+    
+    xlevels = [[] for k in k_targets]
+    ylevels = [[] for k in k_targets]
+
+    for idx, model_name in enumerate(models):
+        metrics = methods_data[model_name]
+        color = colors[idx % len(colors)]
+
+        recall_vals = []
+        ndcg_vals = []
+        ks_used = []
+
+
+        for i, k in enumerate(k_targets):
+            ndcg_key = f"{ym}@{k}"
+            recall_key = f"{xm}@{k}"
+            if ndcg_key in metrics and recall_key in metrics:
+                v1 = metrics[ndcg_key]
+                ndcg_vals.append(v1)
+                v2 = metrics[recall_key]
+                recall_vals.append(v2)
+                ks_used.append(k)
+
+        if not ndcg_vals:
+            continue
+
+        # Рисуем линию фронта (серая, тонкая)
+        ax.plot(recall_vals, ndcg_vals, '-', color=color, alpha=0.4, linewidth=1.2, zorder=1)
+       
+
+        # Рисуем точки с маркерами по k
+        for i, k in enumerate(ks_used):
+            x = recall_vals[i]
+            y = ndcg_vals[i]
+            marker = marker_map.get(k, 'o')
+            ax.scatter(x, y, marker=marker, s=60, color=color,
+                       edgecolors='black', linewidth=0.8, zorder=5,
+                       label=f'{model_name} (@{k})' if k == ks_used[0] else "")
+
+        legend_elements.append(
+            plt.Line2D([0], [0], color=color, lw=3, label=model_name)
+        )
+    legend_elements_k = [
+        plt.Line2D([0], [0], marker=marker_map[k], color='black', linestyle='',
+                   markersize=8, label=f'@{k}')
+        for k in k_targets
+    ]
+    marker_legend = [
+        plt.Line2D([0], [0], marker=marker_map[k], color='black',
+                   linestyle='', markersize=8, label=f'@{k}')
+        for k in k_targets if any(k in methods_data[m] for m in methods_data)
+    ]
+    
+    legend_elements += marker_legend
+    all_legend = legend_elements + [plt.Line2D([0], [0], color='none', label='')] + legend_elements_k
+
+    ax.set_xlabel(f'{xm}@k', fontweight='bold')
+    ax.set_ylabel(f'{ym}@k', fontweight='bold')
+    ax.set_title(f'{task_name}: Парето-фронты всех моделей\n({ym}@k vs {xm}@k)', fontweight='bold')
+    ax.grid(True, alpha=0.3)
+    ax.legend(handles=all_legend, loc='lower right', ncol=1, fontsize=9, framealpha=0.95)
+
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, f'pareto_all_models.png'))
+    plt.close()
+    print(f"  ✓ pareto-all: {task_name}")
+    return True
+
+
+def visualize_tasks(input_root="./results", output_base="./visualizations"):
     print("=" * 60)
     print("ВИЗУАЛИЗАЦИЯ ПО ЗАДАЧАМ")
     print("=" * 60)
 
+    
+    root = Path(input_root)
+    parts = [f for f in root.rglob("*.json")][0].parts
+    print(parts)
+    task_idx = parts.index(root.name) + 1 if root.name in parts else 1
+    modname = parts[task_idx+1] +"-"+ parts[task_idx+2]
+
+    output_base+= "_"+modname
+
     os.makedirs(output_base, exist_ok=True)
     clear_folder(output_base)
+
 
     tasks = load_tasks_from_folder(input_root)
     if not tasks:
@@ -271,9 +383,9 @@ def visualize_tasks(input_root="./piplines_results", output_base="./visualizatio
         plot_scatter_for_task(task_name, df, task_output)
         plot_topk_for_task(task_name, methods_data, task_output)
         plot_barchart_for_task(task_name, df, task_output)
+        plot_pareto_front_all_models(task_name, methods_data, task_output, ym = "MAP")
 
-        df.to_csv(os.path.join(task_output, 'summary.csv'), encoding='utf-8-sig')
-        print(f"  → Сохранено в: {task_output}")
+
 
     print("\n" + "=" * 60)
     print("ГОТОВО!")

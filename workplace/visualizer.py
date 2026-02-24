@@ -1,4 +1,3 @@
-
 import os
 import json
 import pandas as pd
@@ -6,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 from pathlib import Path
+import shutil
 
 matplotlib.use('Agg')
 
@@ -35,60 +35,73 @@ def clear_folder(folder_path):
             if os.path.isfile(item_path) or os.path.islink(item_path):
                 os.unlink(item_path)
             elif os.path.isdir(item_path):
-                import shutil
                 shutil.rmtree(item_path)
         print(f"✓ Очистка: {folder_path}")
     except Exception as e:
         print(f"⚠ Ошибка при очистке {folder_path}: {e}")
 
 
-def load_tasks_from_folder(root_folder):
+def load_tasks_and_models(root_folder):
+    """
+    Обрабатывает структуру:
+        root/<task>/<model_part1>/<model_part2>/file.json
     
-    root = Path(root_folder)
+    Возвращает:
+        {
+            "codetrans-dl": {
+                "intfloat-e5-base-v2": {
+                    "method1": {metrics},
+                    "method2": {metrics},
+                    ...
+                },
+                ...
+            },
+            ...
+        }
+    """
+    root = Path(root_folder).resolve()
     tasks = {}
 
     for json_file in root.rglob("*.json"):
-        parts = json_file.parts
-        if len(parts) < 3:
-            continue
-
         try:
-            task_idx = parts.index(root.name) + 1 if root.name in parts else 1
-            task_name = parts[task_idx]
-        except ValueError:
-            if len(parts) >= 4:
-                task_name = parts[-4]
-            else:
+            # Получаем относительный путь от root
+            rel_parts = json_file.relative_to(root).parts
+            if len(rel_parts) < 3:
                 continue
 
-        method_name = json_file.stem
+            task_name = rel_parts[0]
+            model_parts = rel_parts[1:-1]  # всё между задачей и файлом
+            method_name = json_file.stem
 
-        try:
+            # Собираем имя модели: "intfloat-e5-base-v2"
+            model_name = "-".join(model_parts)
+
+            # Читаем JSON
             with open(json_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
+
+            # Извлекаем метрики
+            raw_metrics = data.get("metrics ", data.get("metrics", {}))
+            if not raw_metrics:
+                print(f"⚠ Пропущен: нет 'metrics' в {json_file}")
+                continue
+
+            metrics_flat = {}
+            for metric_type_key, values in raw_metrics.items():
+                clean_metric_type = metric_type_key.strip()
+                for k, v in values.items():
+                    clean_k = k.strip()
+                    metrics_flat[clean_k] = v
+
+            # Сохраняем
+            if task_name not in tasks:
+                tasks[task_name] = {}
+            if model_name not in tasks[task_name]:
+                tasks[task_name][model_name] = {}
+            tasks[task_name][model_name][method_name] = metrics_flat
+
         except Exception as e:
-            print(f"⚠ Пропущен файл {json_file}: {e}")
-            continue
-
-        raw_metrics = None
-        if "metrics " in data:
-            raw_metrics = data["metrics "]
-        elif "metrics" in data:
-            raw_metrics = data["metrics"]
-        else:
-            print(f"⚠ Нет 'metrics' в {json_file}")
-            continue
-
-        metrics_flat = {}
-        for metric_type_key, values in raw_metrics.items():
-            clean_metric_type = metric_type_key.strip()
-            for k, v in values.items():
-                clean_k = k.strip()
-                metrics_flat[clean_k] = v
-
-        if task_name not in tasks:
-            tasks[task_name] = {}
-        tasks[task_name][method_name] = metrics_flat
+            print(f"⚠ Ошибка при обработке {json_file}: {e}")
 
     return tasks
 
@@ -348,44 +361,34 @@ def plot_pareto_front_all_models(task_name, methods_data, output_dir, xm = "Reca
 
 def visualize_tasks(input_root="./results", output_base="./visualizations"):
     print("=" * 60)
-    print("ВИЗУАЛИЗАЦИЯ ПО ЗАДАЧАМ")
+    print("ВИЗУАЛИЗАЦИЯ ПО ЗАДАЧАМ И МОДЕЛЯМ")
     print("=" * 60)
 
-    
-    root = Path(input_root)
-    parts = [f for f in root.rglob("*.json")][0].parts
-    print(parts)
-    task_idx = parts.index(root.name) + 1 if root.name in parts else 1
-    modname = parts[task_idx+1] +"-"+ parts[task_idx+2]
+    tasks_by_model = load_tasks_and_models(input_root)
+    if not tasks_by_model:
+        print("❌ Не найдено данных")
+        return
 
-    output_base+= "_"+modname
-
+    # Создаём общую выходную папку
     os.makedirs(output_base, exist_ok=True)
     clear_folder(output_base)
 
+    for task_name, models in tasks_by_model.items():
+        for model_name, methods_data in models.items():
+            print(f"\nОбработка: {task_name} / {model_name} ({len(methods_data)} методов)")
 
-    tasks = load_tasks_from_folder(input_root)
-    if not tasks:
-        print("❌ Не найдено задач (JSON-файлов в подпапках)")
-        return
+            df = pd.DataFrame.from_dict(methods_data, orient='index')
+            if df.empty:
+                continue
 
-    print(f"Найдено задач: {len(tasks)}")
-    for task_name, methods_data in tasks.items():
-        print(f"\nОбработка задачи: {task_name} ({len(methods_data)} методов)")
+            # Папка: visualizations/codetrans-dl/intfloat-e5-base-v2/
+            task_output = os.path.join(output_base, task_name, model_name)
+            os.makedirs(task_output, exist_ok=True)
 
-        df = pd.DataFrame.from_dict(methods_data, orient='index')
-        if df.empty:
-            continue
-
-        task_output = os.path.join(output_base, task_name)
-        os.makedirs(task_output, exist_ok=True)
-
-        plot_scatter_for_task(task_name, df, task_output)
-        plot_topk_for_task(task_name, methods_data, task_output)
-        plot_barchart_for_task(task_name, df, task_output)
-        plot_pareto_front_all_models(task_name, methods_data, task_output, ym = "MAP")
-
-
+            plot_scatter_for_task(task_name, df, task_output)
+            plot_topk_for_task(task_name, methods_data, task_output)
+            plot_barchart_for_task(task_name, df, task_output)
+            plot_pareto_front_all_models(task_name, methods_data, task_output, ym="MAP")
 
     print("\n" + "=" * 60)
     print("ГОТОВО!")

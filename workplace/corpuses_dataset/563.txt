@@ -1,0 +1,39 @@
+import warnings
+warnings.filterwarnings(action='ignore')
+import paddle
+x = paddle.arange(4, dtype='float32')
+x = paddle.to_tensor(x, stop_gradient=False)
+y = 2 * paddle.dot(x, x)
+y.backward()
+x.grad
+x.grad == 4 * x
+x.clear_gradient()
+y = paddle.sum(x)
+y.backward()
+x.grad
+x.clear_gradient()
+y = x * x
+paddle.sum(y).backward()
+x.grad
+x.clear_gradient()
+y = x * x
+u = y.detach()
+z = u * x
+paddle.sum(z).backward()
+x.grad == u
+x.clear_gradient()
+paddle.sum(y).backward()
+x.grad == 2 * x
+def f(a):
+    b = a * 2
+    while paddle.norm(b) < 1000:
+        b = b * 2
+    if paddle.sum(b) > 0:
+        c = b
+    else:
+        c = 100 * b
+    return c
+a = paddle.to_tensor(paddle.randn(shape=[1]), stop_gradient=False)
+d = f(a)
+d.backward()
+a.grad == d / a

@@ -1,0 +1,2 @@
+import torch
+X, y = torch.tensor(inputs.values), torch.tensor(outputs.values)

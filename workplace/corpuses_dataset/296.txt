@@ -1,0 +1,55 @@
+c = torch.tensor(0.15 * np.pi)
+def f(x):
+    return x * torch.cos(c * x)
+def f_grad(x):
+    return torch.cos(c * x) - c * x * torch.sin(c * x)
+show_trace(gd(2, f_grad), f)
+def show_trace_2d(f, results):
+    d2l.set_figsize()
+    d2l.plt.plot(*zip(*results), '-o', color='
+    x1, x2 = torch.meshgrid(torch.arange(-5.5, 1.0, 0.1), torch.arange(-3.0, 1.0, 0.1))
+    d2l.plt.contour(x1, x2, f(x1, x2), colors='
+    d2l.plt.xlabel('x1')
+    d2l.plt.ylabel('x2')
+c = torch.tensor(0.5)
+def f(x):
+    return torch.cosh(c * x)
+def f_grad(x):
+    return c * torch.sinh(c * x)
+def f_hess(x):
+    return c**2 * torch.cosh(c * x)
+def newton(eta=1):
+    x = 10.0
+    results = [x]
+    for i in range(10):
+        x -= eta * f_grad(x) / f_hess(x)
+        results.append(float(x))
+    return results
+show_trace(newton(), f)
+c = torch.tensor(0.15 * np.pi)
+def f(x):
+    return x * torch.cos(c * x)
+def f_grad(x):
+    return torch.cos(c * x) - c * x * torch.sin(c * x)
+def f_hess(x):
+    return - 2 * c * torch.sin(c * x) - x * c**2 * torch.cos(c * x)
+show_trace(newton(), f)
+%matplotlib inline
+import math
+import torch
+from d2l import torch as d2l
+def f(x1, x2):
+    return x1 ** 2 + 2 * x2 ** 2
+def f_grad(x1, x2):
+    return 2 * x1, 4 * x2
+def sgd(x1, x2, s1, s2, f_grad):
+    g1, g2 = f_grad(x1, x2)
+    g1 += torch.normal(0.0, 1, (1,))
+    g2 += torch.normal(0.0, 1, (1,))
+    eta_t = eta * lr()
+    return (x1 - eta_t * g1, x2 - eta_t * g2, 0, 0)
+def constant_lr():
+    return 1
+eta = 0.1
+lr = constant_lr
+d2l.show_trace_2d(f, d2l.train_2d(sgd, steps=50, f_grad=f_grad))

@@ -1,0 +1,14 @@
+import tensorflow as tf
+from tensorflow.keras.layers import Dense
+from d2l import tensorflow as d2l
+def get_net():
+    net = tf.keras.Sequential()
+    net.add(Dense(256, input_shape = (512,), activation = "relu"))
+    net.add(Dense(128, activation = "relu"))
+    net.add(Dense(2, activation = "linear"))
+    return net
+x = tf.random.normal([1,512])
+net = get_net()
+net(x)
+net = tf.function(net)
+net(x)

@@ -1,0 +1,7 @@
+%matplotlib inline
+from matplotlib_inline import backend_inline
+from mxnet import np, npx
+from d2l import mxnet as d2l
+npx.set_np()
+def f(x):
+    return 3 * x ** 2 - 4 * x

@@ -1,0 +1,28 @@
+x = np.arange(12)
+x.size
+X = x.reshape(3, 4)
+np.zeros((2, 3, 4))
+np.ones((2, 3, 4))
+np.random.normal(0, 1, size=(3, 4))
+np.array([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
+x = np.array([1, 2, 4, 8])
+y = np.array([2, 2, 2, 2])
+x + y, x - y, x * y, x / y, x ** y
+np.exp(x)
+X = np.arange(12).reshape(3, 4)
+Y = np.array([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
+np.concatenate([X, Y], axis=0), np.concatenate([X, Y], axis=1)
+X.sum()
+a = np.arange(3).reshape(3, 1)
+b = np.arange(2).reshape(1, 2)
+X[1, 2] = 9
+X[0:2, :] = 12
+Z = np.zeros_like(Y)
+Z[:] = X + Y
+before = id(X)
+X += Y
+id(X) == before
+A = X.asnumpy()
+B = np.array(A)
+a = np.array([3.5])
+print(a, a.item(), float(a), int(a))

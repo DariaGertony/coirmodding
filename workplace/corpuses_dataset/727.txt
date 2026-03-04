@@ -1,0 +1,13 @@
+%matplotlib inline
+from mpl_toolkits import mplot3d
+from mxnet import np, npx
+from d2l import mxnet as d2l
+npx.set_np()
+f = lambda x: 0.5 * x**2
+g = lambda x: np.cos(np.pi * x)
+h = lambda x: np.exp(0.5 * x)
+x, segment = np.arange(-2, 2, 0.01), np.array([-1.5, 1])
+d2l.use_svg_display()
+_, axes = d2l.plt.subplots(1, 3, figsize=(9, 3))
+for ax, func in zip(axes, [f, g, h]):
+    d2l.plot([x, segment], [func(x), func(segment)], axes=ax)

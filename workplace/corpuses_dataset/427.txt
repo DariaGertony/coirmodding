@@ -1,0 +1,21 @@
+%matplotlib inline
+import warnings
+from d2l import paddle as d2l
+warnings.filterwarnings("ignore")
+import paddle
+x = paddle.arange(-8.0, 8.0, 0.1, dtype='float32')
+x.stop_gradient = False
+y = paddle.nn.functional.relu(x)
+d2l.plot(x.detach().numpy(), y.detach().numpy(), 'x', 'relu(x)', figsize=(5, 2.5))
+y.backward(paddle.ones_like(x), retain_graph=True)
+d2l.plot(x.detach().numpy(), x.grad.numpy(), 'x', 'grad of relu', figsize=(5, 2.5))
+y = paddle.nn.functional.sigmoid(x)
+d2l.plot(x.detach().numpy(), y.detach().numpy(), 'x', 'sigmoid(x)', figsize=(5, 2.5))
+x.clear_gradient()
+y.backward(paddle.ones_like(x), retain_graph=True)
+d2l.plot(x.detach().numpy(), x.grad.numpy(), 'x', 'grad of sigmoid', figsize=(5, 2.5))
+y = paddle.tanh(x)
+d2l.plot(x.detach().numpy(), y.detach().numpy(), 'x', 'tanh(x)', figsize=(5, 2.5))
+x.clear_gradient()
+y.backward(paddle.ones_like(x), retain_graph=True)
+d2l.plot(x.detach().numpy(), x.grad.numpy(), 'x', 'grad of tanh', figsize=(5, 2.5))

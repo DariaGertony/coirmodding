@@ -1,0 +1,37 @@
+from mxnet import autograd, np, npx
+npx.set_np()
+x = np.arange(4.0)
+x.attach_grad()
+x.grad
+with autograd.record():
+    y = 2 * np.dot(x, x)
+with autograd.record():
+    y = x.sum()
+y.backward()
+x.grad
+with autograd.record():
+    y = x * x
+y.backward()
+x.grad
+with autograd.record():
+    y = x * x
+    u = y.detach()
+    z = u * x
+z.backward()
+x.grad == u
+y.backward()
+x.grad == 2 * x
+def f(a):
+    b = a * 2
+    while np.linalg.norm(b) < 1000:
+        b = b * 2
+    if b.sum() > 0:
+        c = b
+    else:
+        c = 100 * b
+    return c
+a = np.random.normal()
+a.attach_grad()
+with autograd.record():
+    d = f(a)
+d.backward()

@@ -1,0 +1,2 @@
+from mxnet import np
+X, y = np.array(inputs.values), np.array(outputs.values)

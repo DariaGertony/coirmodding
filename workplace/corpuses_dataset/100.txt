@@ -1,0 +1,54 @@
+import warnings
+from d2l import paddle as d2l
+warnings.filterwarnings("ignore")
+import paddle
+from paddle import nn
+n_train = 50
+x_train = paddle.sort(paddle.rand([n_train]) * 5)
+def f(x):
+    return 2 * paddle.sin(x) + x**0.8
+y_train = f(x_train) + paddle.normal(0.0, 0.5, (n_train,))
+x_test = paddle.arange(0, 5, 0.1, dtype='float32')
+y_truth = f(x_test)
+n_test = len(x_test)
+n_test
+y_hat = paddle.repeat_interleave(y_train.mean(), n_test)
+plot_kernel_reg(y_hat)
+X_repeat = x_test.repeat_interleave(n_train).reshape((-1, n_train))
+attention_weights = nn.functional.softmax(-(X_repeat - x_train)**2 / 2, axis=1)
+y_hat = paddle.matmul(attention_weights, y_train)
+plot_kernel_reg(y_hat)
+d2l.show_heatmaps(attention_weights.unsqueeze(0).unsqueeze(0), xlabel='Sorted training inputs', ylabel='Sorted testing inputs')
+X = paddle.ones((2, 1, 4))
+Y = paddle.ones((2, 4, 6))
+paddle.bmm(X, Y).shape
+weights = paddle.ones((2, 10)) * 0.1
+values = paddle.arange(20, dtype='float32').reshape((2, 10))
+paddle.bmm(weights.unsqueeze(1), values.unsqueeze(-1))
+class NWKernelRegression(nn.Layer):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.w = paddle.create_parameter((1,), dtype='float32')
+    def forward(self, queries, keys, values):
+        queries = queries.reshape((queries.shape[0], 1)).tile([keys.shape[1]]).reshape((-1, keys.shape[1]))
+        self.attention_weight = nn.functional.softmax(-((queries - keys) * self.w)**2 / 2, axis=1)
+        return paddle.bmm(self.attention_weight.unsqueeze(1), values.unsqueeze(-1)).reshape((-1, ))
+X_tile = x_train.tile([n_train, 1])
+Y_tile = y_train.tile([n_train, 1])
+keys = X_tile[(1 - paddle.eye(n_train)).astype(paddle.bool)].reshape((n_train, -1))
+values = Y_tile[(1 - paddle.eye(n_train)).astype(paddle.bool)].reshape((n_train, -1))
+net = NWKernelRegression()
+loss = nn.MSELoss(reduction='none')
+trainer = paddle.optimizer.SGD(learning_rate=0.5, parameters=net.parameters())
+animator = d2l.Animator(xlabel='epoch', ylabel='loss', xlim=[1, 5])
+for epoch in range(5):
+    trainer.clear_grad()
+    l = loss(net(x_train, keys, values), y_train)
+    l.sum().backward()
+    trainer.step()
+    animator.add(epoch + 1, float(l.sum()))
+keys = x_train.tile([n_test, 1])
+values = y_train.tile([n_test, 1])
+y_hat = net(x_test, keys, values).unsqueeze(1).detach()
+plot_kernel_reg(y_hat)
+d2l.show_heatmaps(net.attention_weight.unsqueeze(0).unsqueeze(0), xlabel='Sorted training inputs', ylabel='Sorter testing, inputs')

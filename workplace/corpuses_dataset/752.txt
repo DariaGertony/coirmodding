@@ -1,0 +1,16 @@
+from mxnet import np, npx
+from mxnet.gluon import nn
+from d2l import mxnet as d2l
+npx.set_np()
+def get_net():
+    net = nn.HybridSequential()
+    net.add(nn.Dense(256, activation='relu'),
+            nn.Dense(128, activation='relu'),
+            nn.Dense(2))
+    net.initialize()
+    return net
+x = np.random.normal(size=(1, 512))
+net = get_net()
+net(x)
+net.hybridize()
+net(x)

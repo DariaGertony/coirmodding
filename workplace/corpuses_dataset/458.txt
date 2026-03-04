@@ -1,0 +1,22 @@
+import warnings
+from d2l import paddle as d2l
+warnings.filterwarnings("ignore")
+import numpy as np
+import paddle
+true_w = paddle.to_tensor([2, -3.4])
+true_b = 4.2
+features, labels = d2l.synthetic_data(true_w, true_b, 1000)
+def load_array(data_arrays, batch_size, is_train=True):
+    dataset = paddle.io.TensorDataset(data_arrays)
+    return paddle.io.DataLoader(dataset, batch_size=batch_size, shuffle=is_train, return_list=True)
+batch_size = 10
+data_iter = load_array((features, labels), batch_size)
+from paddle import nn
+net = nn.Sequential(nn.Linear(2, 1))
+weight_attr = paddle.ParamAttr(initializer=paddle.nn.initializer.Normal(0, 0.01))
+bias_attr = paddle.ParamAttr(initializer=None)
+net = nn.Sequential(nn.Linear(2, 1, weight_attr=weight_attr, bias_attr=bias_attr))
+loss = nn.MSELoss()
+trainer =  paddle.optimizer.SGD(learning_rate=0.03, parameters=net.parameters())
+w = net[0].weight
+b = net[0].bias

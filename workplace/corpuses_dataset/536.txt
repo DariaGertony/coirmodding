@@ -1,0 +1,22 @@
+import math
+import torch
+from d2l import torch as d2l
+d2l.set_figsize()
+gammas = [0.95, 0.9, 0.8, 0.7]
+for gamma in gammas:
+    x = torch.arange(40).detach().numpy()
+    d2l.plt.plot(x, (1-gamma) * gamma ** x, label=f'gamma = {gamma:.2f}')
+d2l.plt.xlabel('time');
+def init_rmsprop_states(feature_dim):
+    s_w = torch.zeros((feature_dim, 1))
+    s_b = torch.zeros(1)
+    return (s_w, s_b)
+def rmsprop(params, states, hyperparams):
+    gamma, eps = hyperparams['gamma'], 1e-6
+    for p, s in zip(params, states):
+        with torch.no_grad():
+            s[:] = gamma * s + (1 - gamma) * torch.square(p.grad)
+            p[:] -= hyperparams['lr'] * p.grad / torch.sqrt(s + eps)
+        p.grad.data.zero_()
+trainer = torch.optim.RMSprop
+d2l.train_concise_ch11(trainer, {'lr': 0.01, 'alpha': 0.9}, data_iter)

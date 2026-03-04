@@ -1,0 +1,17 @@
+import os
+from mxnet import np, npx
+from d2l import mxnet as d2l
+npx.set_np()
+def build_array_nmt(lines, vocab, num_steps):
+    lines = [vocab[l] for l in lines]
+    lines = [l + [vocab['<eos>']] for l in lines]
+    array = np.array([truncate_pad(l, num_steps, vocab['<pad>']) for l in lines])
+    valid_len = (array != vocab['<pad>']).astype(np.int32).sum(1)
+    return array, valid_len
+train_iter, src_vocab, tgt_vocab = load_data_nmt(batch_size=2, num_steps=8)
+for X, X_valid_len, Y, Y_valid_len in train_iter:
+    print('X:', X.astype(np.int32))
+    print('Valid length of X:', X_valid_len)
+    print('Y:', Y.astype(np.int32))
+    print('Valid length of Y:', Y_valid_len)
+    break

@@ -1,0 +1,162 @@
+#include <algorithm>
+#include <array>
+#include <iterator>
+#include <limits>
+#include <tuple>
+
+namespace detail_ {
+
+
+constexpr auto digits = std::array{'0','1','2','3','4','5','6','7','8','9'};
+
+
+template <typename OutputIterator>
+constexpr auto encode_run_length(std::size_t n, OutputIterator out)
+{
+    constexpr auto base = digits.size();
+    
+    
+    auto const num_digits = [base](auto n)
+    {
+        auto d = std::size_t{1};
+        while ((n /= digits.size()))
+            ++d;
+        return d;
+    }(n);
+    
+    
+    auto base_power = [base](auto n)
+    {
+        auto res = decltype(base){1};
+        for (auto i = decltype(n){1}; i < n; ++i)
+            res *= base;
+        return res;
+    };
+    
+    
+    for (auto i = decltype(num_digits){0}; i < num_digits; ++i)
+        *out++ = digits[(n / base_power(num_digits - i)) % base];
+    
+    return out;
+}
+
+
+
+
+template <typename InputIterator>
+auto decode_run_length(InputIterator first, InputIterator last)
+{
+    auto count = std::size_t{0};
+    
+    while (first != last)
+    {
+        
+        auto const p = std::find(digits.begin(), digits.end(), *first);
+        if (p == digits.end())
+            break;
+        
+        
+        count *= digits.size();
+        count += std::distance(digits.begin(), p);
+        
+        
+        ++first;
+    }
+    
+    return std::tuple{count, first};
+}
+
+} 
+
+template <typename InputIterator, typename OutputIterator>
+constexpr auto encode(InputIterator first, InputIterator last, OutputIterator out)
+{
+    while (first != last)
+    {
+        
+        auto const value = *first++;
+        
+        
+        auto count = std::size_t{1};
+        while (first != last && *first == value)
+        {
+            ++count;
+            ++first;
+        }
+        
+        
+        out = detail_::encode_run_length(count, out);
+        *out++ = value;
+    }
+    
+    return out;
+}
+
+
+
+
+
+
+template <typename InputIterator, typename OutputIterator>
+auto decode(InputIterator first, InputIterator last, OutputIterator out)
+{
+    while (first != last)
+    {
+        using detail_::digits;
+        
+        
+        
+        auto count = std::size_t{1};
+        if (std::find(digits.begin(), digits.end(), *first) != digits.end())
+            std::tie(count, first) = detail_::decode_run_length(first, last);
+        
+        
+        out = std::fill_n(out, count, *first++);
+    }
+    
+    return out;
+}
+
+template <typename Range, typename OutputIterator>
+constexpr auto encode(Range&& range, OutputIterator out)
+{
+    using std::begin;
+    using std::end;
+    
+    return encode(begin(range), end(range), out);
+}
+
+template <typename Range, typename OutputIterator>
+auto decode(Range&& range, OutputIterator out)
+{
+    using std::begin;
+    using std::end;
+    
+    return decode(begin(range), end(range), out);
+}
+
+
+
+#include <iostream>
+#include <string_view>
+
+int main()
+{
+    using namespace std::literals;
+    
+    constexpr auto test_string = "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW"sv;
+    
+    std::cout << "Input:  \"" << test_string << "\"\n";
+    std::cout << "Output: \"";
+    
+    encode(test_string, std::ostreambuf_iterator<char>{std::cout});
+    std::cout << "\"\n";
+    
+    auto encoded_str = std::string{};
+    auto decoded_str = std::string{};
+    encode(test_string, std::back_inserter(encoded_str));
+    decode(encoded_str, std::back_inserter(decoded_str));
+    
+    std::cout.setf(std::cout.boolalpha);
+    std::cout << "Round trip works: " << (test_string == decoded_str) << '\n';
+}

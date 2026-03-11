@@ -1,0 +1,137 @@
+#include <iostream>
+
+
+auto Zero = [](auto){ return [](auto x){ return x; }; };
+
+
+auto True = [](auto a){ return [=](auto){ return a; }; };
+auto False = [](auto){ return [](auto b){ return b; }; };
+
+
+auto Successor(auto a) {
+    return [=](auto f) {
+        return [=](auto x) {
+            return a(f)(f(x));
+        };
+    };
+}
+
+
+auto Add(auto a, auto b) {
+    return [=](auto f) {
+        return [=](auto x) {
+            return a(f)(b(f)(x));
+        };
+    };
+}
+
+
+auto Multiply(auto a, auto b) {
+    return [=](auto f) {
+        return a(b(f));
+    };
+}
+
+
+auto Exp(auto a, auto b) {
+    return b(a);
+}
+
+
+auto IsZero(auto a){
+    return a([](auto){ return False; })(True);
+}
+
+
+auto Predecessor(auto a) {
+    return [=](auto f) {
+        return [=](auto x) {
+            return a(
+                [=](auto g) {
+                    return [=](auto h){
+                        return h(g(f));
+                    };
+                }
+             )([=](auto){ return x; })([](auto y){ return y; });
+        };
+    };
+}
+
+
+auto Subtract(auto a, auto b) {
+    {
+        return b([](auto c){ return Predecessor(c); })(a);
+    };
+}
+
+namespace
+{
+    
+
+    
+    auto Divr(decltype(Zero), auto) {
+        return Zero;
+    }
+
+    
+    auto Divr(auto a, auto b) {
+        auto a_minus_b = Subtract(a, b);
+        auto isZero = IsZero(a_minus_b);
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        return isZero
+                    (Zero)
+                    (Successor(Divr(isZero(Zero)(a_minus_b), b)));
+    }
+}
+
+
+auto Divide(auto a, auto b) {
+    return Divr(Successor(a), b);
+}
+
+
+template <int N> constexpr auto ToChurch() {
+    if constexpr(N<=0) return Zero;
+    else return Successor(ToChurch<N-1>());
+}
+
+
+int ToInt(auto church) {
+    return church([](int n){ return n + 1; })(0);
+}
+
+int main() {
+    
+    auto three = Successor(Successor(Successor(Zero)));
+    auto four = Successor(three);
+    auto six = ToChurch<6>();
+    auto ten = ToChurch<10>();
+    auto thousand = Exp(ten, three);
+
+    std::cout << "\n 3 + 4 = " << ToInt(Add(three, four));
+    std::cout << "\n 3 * 4 = " << ToInt(Multiply(three, four));
+    std::cout << "\n 3^4 = " << ToInt(Exp(three, four));
+    std::cout << "\n 4^3 = " << ToInt(Exp(four, three));
+    std::cout << "\n 0^0 = " << ToInt(Exp(Zero, Zero));
+    std::cout << "\n 4 - 3 = " << ToInt(Subtract(four, three));
+    std::cout << "\n 3 - 4 = " << ToInt(Subtract(three, four));
+    std::cout << "\n 6 / 3 = " << ToInt(Divide(six, three));
+    std::cout << "\n 3 / 6 = " << ToInt(Divide(three, six));
+    auto looloolooo = Add(Exp(thousand, three), Add(Exp(ten, six), thousand));
+    auto looloolool = Successor(looloolooo);
+    std::cout << "\n 10^9 + 10^6 + 10^3 + 1 = " << ToInt(looloolool);
+
+    
+    
+    std::cout << "\n golden ratio = " <<
+        thousand([](double x){ return 1.0 + 1.0 / x; })(1.0) << "\n";
+}

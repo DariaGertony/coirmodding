@@ -213,7 +213,7 @@ private:
 	RECT rc = { 0, 0, BMP_WID, BMP_HEI };
 	AdjustWindowRect( &rc, WS_SYSMENU | WS_CAPTION, FALSE );
 	int w = rc.right - rc.left, h = rc.bottom - rc.top;
-	return CreateWindow( "_MY_NOISE_", ".: Noise image -- PJorente :.", WS_SYSMENU, CW_USEDEFAULT, 0, w, h, NULL, NULL, _hInst, NULL );
+	return CreateWindow( "_MY_NOISE_", ".: Noise image -- PJorenteÂ :.", WS_SYSMENU, CW_USEDEFAULT, 0, w, h, NULL, NULL, _hInst, NULL );
     }
 
     static wnd* _inst;

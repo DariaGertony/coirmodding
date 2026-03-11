@@ -1,0 +1,17 @@
+#include <string>
+using std::string;
+
+
+extern "C" int
+Query (char *Data, size_t *Length)
+{
+   const string Message = "Here am I";
+
+   
+   if (*Length < Message.length())
+      return false;  
+
+   *Length = Message.length();
+   Message.copy(Data, *Length);
+   return true;
+}

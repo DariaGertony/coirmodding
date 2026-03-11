@@ -1,0 +1,20 @@
+#include <fstream>
+#include <iostream>
+#include <locale>
+
+using namespace std;
+ 
+int main(void)
+{
+    
+    std::locale::global(std::locale("")); 
+    std::cout.imbue(std::locale());
+    ifstream in("input.txt");
+ 
+    wchar_t c;
+    while ((c = in.get()) != in.eof())
+        wcout<<c;
+    in.close();
+ 
+    return EXIT_SUCCESS;
+}

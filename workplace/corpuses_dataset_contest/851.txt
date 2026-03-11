@@ -1,0 +1,19 @@
+#include <iostream>
+#include <complex>
+using std::complex;
+
+void complex_operations() {
+  complex<double> a(1.0, 1.0);
+  complex<double> b(3.14159, 1.25);
+
+  
+  std::cout << a + b << std::endl;
+  
+  std::cout << a * b << std::endl;
+  
+  std::cout << 1.0 / a << std::endl;
+  
+  std::cout << -a << std::endl;
+  
+  std::cout << std::conj(a) << std::endl;
+}

@@ -1,0 +1,122 @@
+#include <iostream>
+#include <optional>
+
+using namespace std;
+
+class TropicalAlgebra
+{
+    
+    optional<double> m_value;
+    
+public:
+    friend std::ostream& operator<<(std::ostream&, const TropicalAlgebra&);
+    friend TropicalAlgebra pow(const TropicalAlgebra& base, unsigned int exponent) noexcept;
+    
+    
+    TropicalAlgebra() = default;
+
+    
+    explicit TropicalAlgebra(double value) noexcept
+        : m_value{value} {}
+
+    
+    
+    TropicalAlgebra& operator+=(const TropicalAlgebra& rhs) noexcept
+    {
+        if(!m_value)
+        {
+            
+            *this = rhs;
+        }
+        else if (!rhs.m_value)
+        {
+            
+        }
+        else
+        {
+            
+            *m_value = max(*rhs.m_value, *m_value);
+        }
+
+        return *this;
+    }
+    
+    
+    TropicalAlgebra& operator*=(const TropicalAlgebra& rhs) noexcept
+    {
+        if(!m_value)
+        {
+            
+            
+        }
+        else if (!rhs.m_value)
+        {
+            
+            *this = rhs;
+        }
+        else
+        {
+            *m_value += *rhs.m_value;
+        }
+
+        return *this;
+    }
+};
+
+
+inline TropicalAlgebra operator+(TropicalAlgebra lhs, const TropicalAlgebra& rhs) noexcept
+{
+    
+    lhs += rhs;
+    return lhs;
+}
+
+
+inline TropicalAlgebra operator*(TropicalAlgebra lhs, const TropicalAlgebra&  rhs) noexcept
+{
+    lhs *= rhs;
+    return lhs;
+}
+
+
+inline TropicalAlgebra pow(const TropicalAlgebra& base, unsigned int exponent) noexcept
+{
+    auto result = base;
+    for(unsigned int i = 1; i < exponent; i++)
+    {
+        
+        result *= base;
+    }
+    return result;
+}
+
+
+ostream& operator<<(ostream& os, const TropicalAlgebra& pt)
+{
+    if(!pt.m_value) cout << "-Inf\n";
+    else cout << *pt.m_value << "\n";
+    return os;
+}
+
+int main(void) {
+    const TropicalAlgebra a(-2);
+    const TropicalAlgebra b(-1);
+    const TropicalAlgebra c(-0.5);
+    const TropicalAlgebra d(-0.001);
+    const TropicalAlgebra e(0);
+    const TropicalAlgebra h(1.5);
+    const TropicalAlgebra i(2);
+    const TropicalAlgebra j(5);
+    const TropicalAlgebra k(7);
+    const TropicalAlgebra l(8);
+    const TropicalAlgebra m; 
+    
+    cout << "2 * -2 == " << i * a;
+    cout << "-0.001 + -Inf == " << d + m;
+    cout << "0 * -Inf == " << e * m;
+    cout << "1.5 + -1 == " << h + b;
+    cout << "-0.5 * 0 == " << c * e;
+    cout << "pow(5, 7) == " << pow(j, 7);
+    cout << "5 * (8 + 7)) == " << j * (l + k);
+    cout << "5 * 8 + 5 * 7 == " << j * l + j * k;
+}

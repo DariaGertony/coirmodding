@@ -1,0 +1,22 @@
+#include <iostream>
+
+class MyOtherClass
+{
+public:
+  const int m_x;
+  MyOtherClass(const int initX = 0) : m_x(initX) { }
+
+};
+
+int main()
+{
+  MyOtherClass mocA, mocB(7);
+
+  std::cout << mocA.m_x << std::endl; 
+  std::cout << mocB.m_x << std::endl; 
+
+  
+  
+
+  return 0;
+}

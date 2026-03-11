@@ -1,0 +1,76 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+typedef unsigned long ulong;
+
+int ith_digit_finder(long long n, long b, long i){
+ 
+    while(i>0){
+        n/=b;
+        i--;
+    }
+    return (n%b);
+}
+
+long eeuclid(long m, long b, long *inverse){        
+    
+    long A1 = 1, A2 = 0, A3 = m,
+         B1 = 0, B2 = 1, B3 = b,
+         T1, T2, T3, Q;
+
+         cout<<endl<<"eeuclid() started"<<endl;
+
+        while(1){
+            if(B3 == 0){
+                *inverse = 0;
+                return A3;      
+            }
+
+            if(B3 == 1){
+                *inverse = B2; 
+                return B3;      
+            }
+
+            Q = A3/B3;
+
+            T1 = A1 - Q*B1;
+            T2 = A2 - Q*B2;
+            T3 = A3 - Q*B3;
+
+            A1 = B1; A2 = B2; A3 = B3;
+            B1 = T1; B2 = T2; B3 = T3;
+
+       }
+    cout<<endl<<"ending eeuclid() "<<endl;
+}
+
+long long mon_red(long m, long m_dash, long T, int n, long b = 2){
+
+    long long A,ui, temp, Ai;       
+    if( m_dash < 0 ) m_dash = m_dash + b;
+    A = T;
+    for(int i = 0; i<n; i++){
+    
+        Ai = ith_digit_finder(A, b, i);
+        ui = ( ( Ai % b) * m_dash ) % b;
+        temp  = ui*m*power(b, i);
+        A = A + temp;
+    }
+    A = A/power(b, n);
+    if(A >= m) A = A - m;
+    return A;
+}
+
+int main(){
+    long a, b, c, d=0, e, inverse = 0;
+    cout<<"m >> ";
+    cin >> a;
+    cout<<"T >> ";
+    cin>>b;
+    cout<<"Radix b >> ";
+    cin>>c;
+    eeuclid(c, a, &d);      
+    e = mon_red(a, -d, b, length_finder(a, c), c);
+    cout<<"Montgomery domain representation = "<<e;
+    return 0;
+}

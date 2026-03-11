@@ -1,0 +1,31 @@
+#include <iomanip>
+#include <iostream>
+
+
+unsigned int divisor_count(unsigned int n) {
+    unsigned int total = 1;
+    
+    for (; (n & 1) == 0; n >>= 1)
+        ++total;
+    
+    for (unsigned int p = 3; p * p <= n; p += 2) {
+        unsigned int count = 1;
+        for (; n % p == 0; n /= p)
+            ++count;
+        total *= count;
+    }
+    
+    if (n > 1)
+        total *= 2;
+    return total;
+}
+
+int main() {
+    const unsigned int limit = 100;
+    std::cout << "Count of divisors for the first " << limit << " positive integers:\n";
+    for (unsigned int n = 1; n <= limit; ++n) {
+        std::cout << std::setw(3) << divisor_count(n);
+        if (n % 20 == 0)
+            std::cout << '\n';
+    }
+}

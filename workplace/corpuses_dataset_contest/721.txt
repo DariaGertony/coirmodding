@@ -1,0 +1,43 @@
+#include <istream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+
+
+template<class OutIt>
+void read_words(std::istream& is, OutIt dest)
+{
+  std::string word;
+  while (is >> word)
+  {
+    
+    *dest = word;
+  }
+}
+
+
+template<class OutIt>
+void read_lines(std::istream& is, OutIt dest)
+{
+  std::string line;
+  while (std::getline(is, line))
+  {
+    
+    *dest = line;
+  }
+}
+
+int main()
+{
+  
+  read_words(std::cin, 
+             std::ostream_iterator<std::string>(std::cout, " "));
+
+  
+  std::vector<std::string> v;
+  read_lines(std::cin, std::back_inserter(v));
+  
+  return 0;
+}

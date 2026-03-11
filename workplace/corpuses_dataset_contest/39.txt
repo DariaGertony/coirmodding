@@ -1,0 +1,189 @@
+#include <cassert>
+#include <cstdlib>
+#include <iostream>
+#include <stdexcept>
+#include <utility>
+#include <vector>
+
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+#include <libxml/xmlerror.h>
+#include <libxml/xmlstring.h>
+#include <libxml/xmlversion.h>
+#include <libxml/xpath.h>
+
+#ifndef LIBXML_XPATH_ENABLED
+#   error libxml was not configured with XPath support
+#endif
+
+
+
+
+
+
+
+template <typename F>
+class [[nodiscard]] scope_exit
+{
+public:
+    
+     constexpr explicit scope_exit(F&& f) :
+        f_{std::move(f)}
+    {}
+
+    ~scope_exit()
+    {
+        f_();
+    }
+
+    
+    scope_exit(scope_exit const&) = delete;
+    scope_exit(scope_exit&&) = delete;
+    auto operator=(scope_exit const&) -> scope_exit& = delete;
+    auto operator=(scope_exit&&) -> scope_exit& = delete;
+
+private:
+    F f_;
+};
+
+
+class libxml_error : public std::runtime_error
+{
+public:
+    libxml_error() : libxml_error(std::string{}) {}
+
+    explicit libxml_error(std::string message) :
+        std::runtime_error{make_message_(std::move(message))}
+    {}
+
+private:
+    static auto make_message_(std::string message) -> std::string
+    {
+        if (auto const last_error = ::xmlGetLastError(); last_error)
+        {
+            if (not message.empty())
+                message += ": ";
+            message += last_error->message;
+        }
+
+        return message;
+    }
+};
+
+auto main() -> int
+{
+    try
+    {
+        
+        ::xmlInitParser();
+        LIBXML_TEST_VERSION
+        auto const libxml_cleanup = scope_exit{[] { ::xmlCleanupParser(); }};
+
+        
+        auto const doc = ::xmlParseFile("test.xml");
+        if (not doc)
+            throw libxml_error{"failed to load document"};
+        auto const doc_cleanup = scope_exit{[doc] { ::xmlFreeDoc(doc); }};
+
+        
+        auto const xpath_context = ::xmlXPathNewContext(doc);
+        if (not xpath_context)
+            throw libxml_error{"failed to create XPath context"};
+        auto const xpath_context_cleanup = scope_exit{[xpath_context]
+            { ::xmlXPathFreeContext(xpath_context); }};
+
+        
+        {
+            std::cout << "Task 1:\n";
+
+            auto const xpath =
+                reinterpret_cast<::xmlChar const*>(u8"
+
+            
+            auto xpath_obj = ::xmlXPathEvalExpression(xpath, xpath_context);
+            if (not xpath_obj)
+                throw libxml_error{"failed to evaluate XPath"};
+            auto const xpath_obj_cleanup = scope_exit{[xpath_obj]
+                { ::xmlXPathFreeObject(xpath_obj); }};
+
+            
+            
+            auto const result = xmlXPathNodeSetItem(xpath_obj->nodesetval, 0);
+            if (result)
+                std::cout << '\t' << "node found" << '\n';
+            else
+                std::cout << '\t' << "node not found" << '\n';
+        }
+
+        
+        {
+            std::cout << "Task 2:\n";
+
+            auto const xpath =
+                reinterpret_cast<::xmlChar const*>(u8"
+
+            
+            auto xpath_obj = ::xmlXPathEvalExpression(xpath, xpath_context);
+            if (not xpath_obj)
+                throw libxml_error{"failed to evaluate XPath"};
+            auto const xpath_obj_cleanup = scope_exit{[xpath_obj]
+                { ::xmlXPathFreeObject(xpath_obj); }};
+
+            
+            auto const count =
+                xmlXPathNodeSetGetLength(xpath_obj->nodesetval);
+            for (auto i = decltype(count){0}; i < count; ++i)
+            {
+                auto const node =
+                    xmlXPathNodeSetItem(xpath_obj->nodesetval, i);
+                assert(node);
+
+                auto const content = XML_GET_CONTENT(node);
+                assert(content);
+
+                
+                
+                
+                
+                
+                
+                
+                std::cout << "\n\t" << reinterpret_cast<char const*>(content);
+            }
+
+            std::cout << '\n';
+        }
+
+        
+        {
+            std::cout << "Task 3:\n";
+
+            auto const xpath =
+                reinterpret_cast<::xmlChar const*>(u8"
+
+            
+            auto xpath_obj = ::xmlXPathEvalExpression(xpath, xpath_context);
+            if (not xpath_obj)
+                throw libxml_error{"failed to evaluate XPath"};
+            auto const xpath_obj_cleanup = scope_exit{[xpath_obj]
+                { ::xmlXPathFreeObject(xpath_obj); }};
+
+            
+            
+            auto const results = [ns=xpath_obj->nodesetval]()
+            {
+                auto v = std::vector<::xmlNode*>{};
+                if (ns && ns->nodeTab)
+                    v.assign(ns->nodeTab, ns->nodeTab + ns->nodeNr);
+                return v;
+            }();
+            std::cout << '\t' << "set of " << results.size()
+                << " node(s) found" << '\n';
+        }
+    }
+    catch (std::exception const& x)
+    {
+        std::cerr << "ERROR: " << x.what() << '\n';
+        return EXIT_FAILURE;
+    }
+}

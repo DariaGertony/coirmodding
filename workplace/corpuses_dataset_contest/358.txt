@@ -1,0 +1,89 @@
+#include <utility>   
+#include <iterator>  
+#include <iostream>  
+#include <ostream>   
+#include <algorithm> 
+#include <iterator>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+template<typename ForwardIterator>
+ std::pair<ForwardIterator, ForwardIterator>
+ max_subseq(ForwardIterator begin, ForwardIterator end)
+{
+  typedef typename std::iterator_traits<ForwardIterator>::value_type
+    value_type;
+
+  ForwardIterator seq_begin = begin, seq_end = seq_begin;
+  value_type seq_sum = value_type();
+  ForwardIterator current_begin = begin;
+  value_type current_sum = value_type();
+
+  value_type zero = value_type();
+
+  for (ForwardIterator iter = begin; iter != end; ++iter)
+  {
+    value_type value = *iter;
+    if (zero < value)
+    {
+      if (current_sum < zero)
+      {
+        current_sum = zero;
+        current_begin = iter;
+      }
+    }
+    else
+    {
+      if (seq_sum < current_sum)
+      {
+        seq_begin = current_begin;
+        seq_end = iter;
+        seq_sum = current_sum;
+      }
+    }
+    current_sum += value;
+  }
+
+  if (seq_sum < current_sum)
+  {
+    seq_begin = current_begin;
+    seq_end = end;
+    seq_sum = current_sum;
+  }
+
+  return std::make_pair(seq_begin, seq_end);
+}
+
+
+int array[] = { -1, -2, 3, 5, 6, -2, -1, 4, -4, 2, -1 };
+
+
+template<typename T, int N> int* end(T (&arr)[N]) { return arr+N; }
+
+int main()
+{
+  
+  std::pair<int*, int*> seq = max_subseq(array, end(array));
+
+  
+  std::copy(seq.first, seq.second, std::ostream_iterator<int>(std::cout, " "));
+  std::cout << std::endl;
+
+  return 0;
+}

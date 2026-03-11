@@ -1,0 +1,25 @@
+#include <iostream>
+
+struct SpecialVariables
+{
+    int i = 0;
+
+    SpecialVariables& operator++()
+    {
+        
+        
+        
+        this->i++;  
+
+        
+        return *this;
+    }
+
+};
+
+int main()
+{
+    SpecialVariables sv;
+    auto sv2 = ++sv;     
+    std::cout << " sv :" << sv.i << "\n sv2:" << sv2.i << "\n";
+}

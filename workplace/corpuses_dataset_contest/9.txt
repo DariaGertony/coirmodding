@@ -282,7 +282,7 @@ private:
 
 	RegisterClassEx( &wcex );
 
-	return CreateWindow( "_LANGTONS_ANT_", ".: Langton's Ant -- PJorente :.", WS_SYSMENU, CW_USEDEFAULT, 0, BMP_SIZE, BMP_SIZE, NULL, NULL, _hInst, NULL );
+	return CreateWindow( "_LANGTONS_ANT_", ".: Langton's Ant -- PJorenteÂ :.", WS_SYSMENU, CW_USEDEFAULT, 0, BMP_SIZE, BMP_SIZE, NULL, NULL, _hInst, NULL );
     }
 
     HINSTANCE _hInst;

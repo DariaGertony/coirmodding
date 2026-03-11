@@ -1,0 +1,14 @@
+#include <iostream>
+#include <list>
+
+int main ()
+{
+    std::list<int> numbers {1, 5, 7, 0, 3, 2};
+    numbers.insert(numbers.begin(), 9); 
+    numbers.insert(numbers.end(), 4); 
+    auto it = std::next(numbers.begin(), numbers.size() / 2); 
+    numbers.insert(it, 6); 
+    for(const auto& i: numbers)
+        std::cout << i << ' ';
+    std::cout << '\n';
+}

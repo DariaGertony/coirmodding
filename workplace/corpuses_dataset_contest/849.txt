@@ -1,0 +1,23 @@
+#include <iostream>
+
+int main()
+{
+  int a, b;
+
+  if (!(std::cin >> a >> b)) {
+    std::cerr << "could not read the numbers\n";
+    return 1;
+  }
+
+  
+  if (a < b)
+    std::cout << a << " is less than " << b << "\n";
+
+  
+  if (a == b)
+    std::cout << a << " is equal to " << b << "\n";
+
+  
+  if (a > b)
+    std::cout << a << " is greater than " << b << "\n";
+}

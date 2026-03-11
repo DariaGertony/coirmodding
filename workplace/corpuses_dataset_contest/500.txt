@@ -1,0 +1,64 @@
+#include <iomanip>
+#include <iostream>
+
+using namespace std;
+
+string replaceFirst(string &s, const string &target, const string &replace) {
+    auto pos = s.find(target);
+    if (pos == string::npos) return s;
+    return s.replace(pos, target.length(), replace);
+}
+
+int main() {
+
+    
+    string x = "hello world";
+
+    
+    x = "";
+
+    
+    x = "ab\0";
+    cout << x << '\n';
+    cout << x.length() << '\n';
+
+    
+    if (x == "hello") {
+        cout << "equal\n";
+    } else {
+        cout << "not equal\n";
+    }
+    if (x < "bc") {
+        cout << "x is lexigraphically less than 'bc'\n";
+    }
+
+    
+    auto y = x;
+    cout << boolalpha << (x == y) << '\n';
+    cout << boolalpha << (&x == &y) << '\n';
+
+    
+    string empty = "";
+    if (empty.empty()) {
+        cout << "String is empty\n";
+    }
+
+    
+    x = "helloworld";
+    x += (char)83;
+    cout << x << '\n';
+
+    
+    auto slice = x.substr(5, 5);
+    cout << slice << '\n';
+
+    
+    auto greeting = replaceFirst(x, "worldS", "");
+    cout << greeting << '\n';
+
+    
+    auto join = greeting + ' ' + slice;
+    cout << join << '\n';
+
+    return 0;
+}

@@ -1,0 +1,23 @@
+#include <iostream>
+
+void bitwise(int a, int b)
+{
+  std::cout << "a and b: " << (a & b)  << '\n'; 
+  std::cout << "a or b:  " << (a | b)  << '\n';
+  std::cout << "a xor b: " << (a ^ b)  << '\n';
+  std::cout << "not a:   " << ~a       << '\n';
+
+  
+  
+  std::cout << "a shl b: " << (a << b) << '\n'; 
+  std::cout << "a shr b: " << (a >> b) << '\n'; 
+  unsigned int ua = a;
+  std::cout << "a lsr b: " << (ua >> b) << '\n'; 
+
+  
+  
+  
+  std::cout << "a rol b: " << std::rotl(ua, b) << '\n';
+  std::cout << "a ror b: " << std::rotr(ua, b) << '\n';
+  
+}

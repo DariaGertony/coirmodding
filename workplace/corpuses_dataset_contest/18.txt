@@ -85,7 +85,7 @@ public:
   void mult(const Matrix& a, const Matrix& b) {
 
     if (a.n != b.m) {
-      std::cerr << "Matrix multiplication not possible, sizes don't match !\n";
+      std::cerr << "Matrix multiplication not possible, sizes don't matchÂ !\n";
       return;
     }
 
@@ -387,7 +387,7 @@ int main()
   double l2 = matrix_compare(A,A_check);
 
   
-  matrix_show(A_check, l2 < 1e-12 ? "A == Q * R ? yes" : "A == Q * R ? no");
+  matrix_show(A_check, l2 < 1e-12 ? "A == Q * RÂ ? yes" : "A == Q * RÂ ? no");
  
   return EXIT_SUCCESS;
 }

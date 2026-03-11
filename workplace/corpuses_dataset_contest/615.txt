@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string.h>
+ 
+int main()
+{
+    std::string longLine, longestLines, newLine;
+
+    while (std::cin >> newLine)
+    {
+        auto isNewLineShorter = longLine.c_str();
+        auto isLongLineShorter = newLine.c_str(); 
+        while (*isNewLineShorter && *isLongLineShorter)
+        {
+            
+            
+            
+            isNewLineShorter = &isNewLineShorter[1];
+            isLongLineShorter = &isLongLineShorter[1];
+        }
+
+        if(*isNewLineShorter) continue; 
+        if(*isLongLineShorter)
+        {
+            
+            longLine = newLine;
+            longestLines = newLine;
+        }
+        else
+        {
+            
+            longestLines+=newLine; 
+        }
+        longestLines+="\n"; 
+    }
+
+    std::cout << "\nLongest string:\n" << longestLines;
+}

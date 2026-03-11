@@ -1,0 +1,28 @@
+#include <fstream>
+#include <iostream>
+#include <set>
+#include <string>
+
+int main() {
+    std::ifstream input("unixdict.txt");
+    if (input) {
+        std::set<std::string> words; 
+        std::string word; 
+        size_t count = 0; 
+
+        while (input >> word) {
+            std::string drow(word.rbegin(), word.rend()); 
+            if (words.find(drow) == words.end()) {
+                
+                words.insert(word);
+            } else {
+                
+                if (count++ < 5)
+                    std::cout << word << ' ' << drow << '\n';
+            }
+        }
+        std::cout << "\nSemordnilap pairs: " << count << '\n';
+        return 0;
+    } else
+        return 1; 
+}

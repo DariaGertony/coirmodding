@@ -1,0 +1,50 @@
+#include <iostream>
+
+class T
+{
+public:
+  virtual void identify() { std::cout << "I am a genuine T" << std::endl; }
+  virtual T* clone() { return new T(*this); }
+  virtual ~T() {}
+};
+
+class S: public T
+{
+public:
+  virtual void identify() { std::cout << "I am an S" << std::endl; }
+  virtual S* clone() { return new S(*this); }
+};
+
+class X 
+{
+public:
+  
+  X(T* t): member(t) {}
+
+  
+  X(X const& other): member(other.member->clone()) {}
+
+  
+  X& operator=(X const& other)
+  {
+    T* new_member = other.member->clone();
+    delete member;
+    member = new_member;
+  }
+
+  
+  ~X() { delete member; }
+
+  
+  void identify_member() { member->identify(); }
+
+private:
+  T* member;
+};
+
+int main()
+{
+  X original(new S);      
+  X copy = original;      
+  copy.identify_member(); 
+}

@@ -1,0 +1,67 @@
+#include <string>
+#include <iostream>
+#include <boost/date_time/local_time/local_time.hpp>
+#include <sstream>
+#include <boost/date_time/gregorian/gregorian.hpp>
+#include <vector>
+#include <boost/algorithm/string.hpp>
+#include <cstdlib>
+#include <locale>
+
+
+int main( ) {
+   std::string datestring ("March 7 2009 7:30pm EST" ) ;
+   
+   
+   
+   std::vector<std::string> elements ;
+   
+   boost::split( elements , datestring , boost::is_any_of( " " ) ) ;
+   std::string datepart = elements[ 0 ] + " " + "0" + elements[ 1 ] + " " +
+      elements[ 2 ] ; 
+   std::string timepart = elements[ 3 ] ;
+   std::string timezone = elements[ 4 ] ;
+   const char meridians[ ] = { 'a' , 'p' } ;
+   
+   std::string::size_type found = timepart.find_first_of( meridians, 0 ) ;
+   std::string twelve_hour ( timepart.substr( found , 1 ) ) ;
+   timepart = timepart.substr( 0 , found ) ; 
+   elements.clear( ) ;
+   boost::split( elements , timepart , boost::is_any_of ( ":" ) ) ;
+   long hour = std::atol( (elements.begin( ))->c_str( ) ) ;
+   if ( twelve_hour == "p" ) 
+      hour += 12 ;
+   long minute = std::atol( ( elements.begin( ) + 1)->c_str( ) ) ; 
+   boost::local_time::tz_database tz_db ;
+   tz_db.load_from_file( "/home/ulrich/internetpages/date_time_zonespec.csv" ) ;
+   
+   boost::local_time::time_zone_ptr dyc = tz_db.time_zone_from_region( "America/New_York" ) ;
+   
+   boost::gregorian::date_input_facet *f =
+      new boost::gregorian::date_input_facet( "%B %d %Y"  ) ;
+   std::stringstream ss ;
+   ss << datepart ;
+   ss.imbue( std::locale( std::locale::classic( ) , f ) ) ;
+   boost::gregorian::date d ;
+   ss >> d ;
+   boost::posix_time::time_duration td (  hour , minute , 0  ) ;
+   
+   
+   boost::local_time::local_date_time lt ( d , td ,  dyc ,
+	 boost::local_time::local_date_time::NOT_DATE_TIME_ON_ERROR ) ;
+   std::cout << "local time: " << lt << '\n' ;
+   ss.str( "" ) ;
+   ss << lt ;
+   
+   boost::posix_time::time_duration td2 (12 , 0 , 0 , 0 ) ;
+   boost::local_time::local_date_time ltlater = lt + td2 ; 
+   boost::gregorian::date_facet *f2 =
+      new boost::gregorian::date_facet( "%B %d %Y , %R %Z" ) ;
+   std::cout.imbue( std::locale( std::locale::classic( ) , f2 ) ) ;
+   std::cout << "12 hours after " << ss.str( )  << " it is " << ltlater << " !\n" ;
+   
+   boost::local_time::time_zone_ptr bt = tz_db.time_zone_from_region( "Europe/Berlin" ) ;
+   std::cout.imbue( std::locale( "de_DE.UTF-8" ) ) ; 
+   std::cout << "This corresponds to " << ltlater.local_time_in( bt ) << " in Berlin!\n" ;
+   return 0 ;
+}

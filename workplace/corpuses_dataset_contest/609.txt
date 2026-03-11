@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+void print_vector(const std::vector<int> &pos,
+                  const std::vector<std::string> &str) {
+  for (size_t i = 1; i < pos.size(); ++i) 
+    printf("%s\t", str[pos[i]].c_str());  
+  printf("\n");
+}
+
+
+void combination_with_repetiton(int n, int k,
+                                const std::vector<std::string> &str) {
+  std::vector<int> pos(k + 1, 0);
+  while (true) {
+    for (int i = k; i > 0; i -= 1) {
+      if (pos[i] > n - 1) 
+      {
+        pos[i - 1] += 1; 
+        for (int j = i; j <= k; j += 1)
+          pos[j] = pos[j - 1]; 
+      }
+    }
+    if (pos[0] > 0) 
+      break;
+    print_vector(pos, str);
+    pos[k] += 1; 
+  }
+}
+
+int main() {
+  std::vector<std::string> str{"iced", "jam", "plain"};
+  combination_with_repetiton(3, 2, str);
+  return 0;
+}

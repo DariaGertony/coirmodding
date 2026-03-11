@@ -1,0 +1,243 @@
+
+
+ 
+#include <iostream>
+#include <fstream>
+#include <queue>
+#include <string>
+#include <algorithm>
+#include <cstdio>
+
+
+
+
+int main(int argc, char* argv[]);
+void write_vals(int* const, const size_t, const size_t);
+std::string mergeFiles(size_t); 
+
+
+
+
+struct Compare
+{
+  
+  bool operator() ( std::pair<int, int>& p1,  std::pair<int, int>& p2 )
+  {
+    return p1.first >= p2.first; 
+  }
+};
+
+
+ 
+
+
+ 
+using ipair = std::pair<int,int>;
+
+using pairvector = std::vector<ipair>;
+
+using MinHeap = std::priority_queue< ipair, pairvector, Compare >;
+
+
+
+
+
+
+const size_t memsize = 32;                        
+
+const size_t chunksize = memsize / sizeof(int);   
+
+const std::string tmp_prefix{"tmp_out_"};  
+
+const std::string tmp_suffix{".txt"};      
+
+const std::string merged_file{"merged.txt"}; 
+
+
+
+
+
+
+void write_vals( int* const values, const size_t size, const size_t chunk )
+{
+ 
+  
+  std::string output_file = (tmp_prefix + std::to_string(chunk) + tmp_suffix);
+    
+  std::ofstream ofs(output_file.c_str()); 
+
+  for (int i=0; i<size; i++)  
+    ofs << values[i] << '\t';
+  
+    ofs << '\n';
+
+  ofs.close();
+}
+
+
+
+
+
+std::string mergeFiles(size_t chunks, const std::string& merge_file ) 
+{
+
+  std::ofstream ofs( merge_file.c_str() );
+    
+  MinHeap  minHeap;
+
+  
+  std::ifstream* ifs_tempfiles = new std::ifstream[chunks];
+ 
+  for (size_t i = 1; i<=chunks; i++) 
+    {
+      int topval = 0;	
+
+      
+      std::string sorted_file = (tmp_prefix + std::to_string(i) + tmp_suffix);
+       
+      
+      ifs_tempfiles[i-1].open( sorted_file.c_str() ); 
+
+      
+      if (ifs_tempfiles[i-1].is_open()) 
+	{
+	  ifs_tempfiles[i-1] >> topval; 
+
+	  ipair top(topval, (i-1)); 
+			      
+	  minHeap.push( top );   
+	}
+    }
+  
+
+  while (minHeap.size() > 0) 
+    {
+      int next_val = 0;
+
+      ipair min_pair = minHeap.top(); 
+
+      minHeap.pop();
+
+      ofs << min_pair.first << ' ';  
+  
+      std::flush(ofs);
+
+      if ( ifs_tempfiles[min_pair.second] >> next_val) 
+	{
+
+	  ipair np( next_val, min_pair.second );
+
+	  minHeap.push( np );
+	}
+
+    }
+ 
+
+  
+  for (int i = 1; i <= chunks; i++) 
+    {
+      ifs_tempfiles[i-1].close();
+    }
+
+  ofs << '\n';
+  ofs.close();
+    
+  delete[] ifs_tempfiles; 
+ 
+  return merged_file;  
+}
+ 
+
+
+
+int main(int argc, char* argv[] ) 
+{
+
+  if (argc < 2)
+    {
+      std::cerr << "usage:  ExternalSort <filename> \n";
+      return 1;
+    }
+
+  
+
+  std::ifstream ifs( argv[1] );  
+  
+  if ( ifs.fail() )
+    {
+      std::cerr << "error opening " << argv[1] << "\n";
+      return 2;
+    }
+
+
+  
+  int* inputValues = new int[chunksize];
+ 
+  int chunk = 1;    
+
+  int val = 0;      
+
+  int count = 0;    
+
+  bool done = false; 
+
+  std::cout << "internal buffer is " << memsize << " bytes" << "\n"; 
+
+  
+  while (ifs >> val) 
+    {
+      done = false;
+
+      inputValues[count] = val;
+	
+      count++;
+
+      if (count == chunksize) 
+	{
+
+	  std::sort(inputValues, inputValues + count);
+
+	  write_vals(inputValues, count, chunk); 
+
+	  chunk ++;
+
+	  count = 0;
+
+	  done = true;
+	}
+
+    } 
+
+
+  if (! done)  
+    {
+      std::sort(inputValues, inputValues + count);
+    
+      write_vals(inputValues, count, chunk); 
+    }
+  else 
+    {
+      chunk --;  
+    }
+
+ 
+
+  ifs.close();   
+    
+
+  delete[] inputValues; 
+    
+
+  
+  if ( chunk == 0 ) 
+    std::cout << "no data found\n";
+  else
+    std::cout << "Sorted output is in file: " << mergeFiles(chunk, merged_file ) << "\n";
+     
+
+  return EXIT_SUCCESS;
+}
+
+
+
+

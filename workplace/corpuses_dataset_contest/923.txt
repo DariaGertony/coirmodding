@@ -1,0 +1,7 @@
+void print_logic(bool a, bool b)
+{
+  std::cout << std::boolalpha; 
+  std::cout << "a and b is " << (a && b) << "\n";
+  std::cout << "a or b is " << (a || b) << "\n";
+  std::cout << "not a is " << (!a) << "\n";
+}

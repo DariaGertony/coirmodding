@@ -1,0 +1,12 @@
+#include <iostream>
+#include <ranges>
+
+int main()
+{
+    const int maxSquareDiff = 1000;
+    auto squareCheck = [maxSquareDiff](int i){return 2 * i - 1 > maxSquareDiff;};
+    auto answer = std::views::iota(1) |  
+      std::views::filter(squareCheck) |  
+      std::views::take(1);               
+    std::cout << answer.front() << '\n';
+}

@@ -1,0 +1,11 @@
+#include <Windows.h>
+int main()
+{
+  bool showCursor = false;
+  
+  HANDLE std_out = GetStdHandle(STD_OUTPUT_HANDLE); 
+  CONSOLE_CURSOR_INFO cursorInfo;                   
+  GetConsoleCursorInfo(out, &cursorInfo);           
+  cursorInfo.bVisible = showCursor;                 
+  SetConsoleCursorInfo(out, &cursorInfo);           
+}

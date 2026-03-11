@@ -1,0 +1,23 @@
+#include <string>
+
+int main()
+{
+  int* p;
+
+  p = new int;    
+  delete p;       
+
+  p = new int(2); 
+  delete p;       
+
+  std::string* p2;
+
+  p2 = new std::string; 
+  delete p2;            
+
+  p = new int[10]; 
+  delete[] p;      
+
+  p2 = new std::string[10]; 
+  delete[] p2;              
+}

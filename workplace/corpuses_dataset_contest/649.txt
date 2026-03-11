@@ -1,0 +1,44 @@
+#include <array>
+#include <vector>
+
+
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <string>
+
+
+template <typename Array>
+void demonstrate(Array& array)
+{
+  
+  array[2] = "Three";  
+                       
+  array.at(1) = "Two"; 
+                       
+  
+  
+  std::reverse(begin(array), end(array));
+  std::for_each(begin(array), end(array),
+    [](typename Array::value_type const& element) 
+    {
+      std::cout << element << ' ';
+    });
+  
+  std::cout << '\n';
+}
+
+int main()
+{
+  
+  auto fixed_size_array = std::array<std::string, 3>{ "One", "Four", "Eight" };
+  
+  
+  
+  auto dynamic_array = std::vector<std::string>{ "One", "Four" };
+  dynamic_array.push_back("Eight"); 
+  
+  
+  demonstrate(fixed_size_array);
+  demonstrate(dynamic_array);
+}

@@ -1,0 +1,17 @@
+template<bool Condition, typename ThenType, typename Elsetype> struct ifthenelse;
+
+template<typename ThenType, typename ElseType> struct ifthenelse<true, ThenType, ElseType>
+{
+  typedef ThenType type;
+};
+
+template<typename ThenType, typename ElseType> struct ifthenelse<false, ThenType, ElseType>
+{
+  typedef ElseType type;
+};
+
+
+ifthenelse<INT_MAX == 32767, 
+           long int,         
+           int>              
+  ::type myvar;              

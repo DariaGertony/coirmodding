@@ -1,0 +1,46 @@
+#include <queue>
+#include <cassert> 
+
+int main()
+{
+  std::queue<int> q;
+  assert( q.empty() );        
+
+  q.push(1);                  
+  assert( !q.empty() );       
+  assert( q.front() == 1 );   
+
+  q.push(2);                  
+  assert( !q.empty() );       
+  assert( q.front() == 1 );   
+
+  q.push(3);                  
+  assert( !q.empty() );       
+  assert( q.front() == 1 );   
+
+  q.pop();                    
+  assert( !q.empty() );       
+  assert( q.front() == 2);    
+
+  q.pop();
+  assert( !q.empty() );
+  assert( q.front() == 3);
+
+  q.push(4);
+  assert( !q.empty() );
+  assert( q.front() == 3);
+
+  q.pop();
+  assert( !q.empty() );
+  assert( q.front() == 4);
+
+  q.pop();
+  assert( q.empty() );
+
+  q.push(5);
+  assert( !q.empty() );
+  assert( q.front() == 5);
+
+  q.pop();
+  assert( q.empty() );
+}

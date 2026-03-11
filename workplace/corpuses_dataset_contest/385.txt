@@ -1,0 +1,101 @@
+#include <iostream>
+#include <stddef.h>
+#include <assert.h>
+
+using std::cout;
+using std::endl;
+
+class SMA {
+public:
+	SMA(unsigned int period) :
+		period(period), window(new double[period]), head(NULL), tail(NULL),
+				total(0) {
+		assert(period >= 1);
+	}
+	~SMA() {
+		delete[] window;
+	}
+
+	
+	void add(double val) {
+		
+		if (head == NULL) {
+			head = window;
+			*head = val;
+			tail = head;
+			inc(tail);
+			total = val;
+			return;
+		}
+
+		
+		if (head == tail) {
+			
+			total -= *head;
+			
+			inc(head);
+		}
+
+		
+		*tail = val;
+		inc(tail);
+
+		
+		total += val;
+	}
+
+	
+	
+	double avg() const {
+		ptrdiff_t size = this->size();
+		if (size == 0) {
+			return 0; 
+		}
+		return total / (double) size; 
+	}
+
+private:
+	unsigned int period;
+	double * window; 
+
+	
+	double * head; 
+	double * tail; 
+
+	double total; 
+
+	
+	
+	void inc(double * & p) {
+		if (++p >= window + period) {
+			p = window;
+		}
+	}
+
+	
+	ptrdiff_t size() const {
+		if (head == NULL)
+			return 0;
+		if (head == tail)
+			return period;
+		return (period + tail - head) % period;
+	}
+};
+
+int main(int argc, char * * argv) {
+	SMA foo(3);
+	SMA bar(5);
+
+	int data[] = { 1, 2, 3, 4, 5, 5, 4, 3, 2, 1 };
+	for (int * itr = data; itr < data + 10; itr++) {
+		foo.add(*itr);
+		cout << "Added " << *itr << " avg: " << foo.avg() << endl;
+	}
+	cout << endl;
+	for (int * itr = data; itr < data + 10; itr++) {
+		bar.add(*itr);
+		cout << "Added " << *itr << " avg: " << bar.avg() << endl;
+	}
+
+	return 0;
+}

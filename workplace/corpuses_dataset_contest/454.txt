@@ -1,0 +1,76 @@
+#include <iostream>
+#include <cmath>
+#include <optional>
+#include <vector>
+
+using namespace std;
+
+
+template <typename T>
+auto operator>>(const optional<T>& monad, auto f)
+{
+    if(!monad.has_value())
+    {
+        
+        
+        return optional<remove_reference_t<decltype(*f(*monad))>>();
+    }
+
+    return f(*monad);
+}
+
+
+auto Pure(auto t)
+{
+    return optional{t};
+}
+
+
+auto SafeInverse(double v)
+{
+    if (v == 0)
+    {
+        return optional<decltype(v)>();
+    }
+    else
+    {
+        return optional(1/v);
+    }
+}
+
+
+auto SafeAcos(double v)
+{
+    if(v < -1 || v > 1)
+    {
+        
+        return optional<decltype(acos(v))>();
+    }
+    else
+    {
+        return optional(acos(v));
+    }
+}
+
+
+template<typename T>
+ostream& operator<<(ostream& s, optional<T> v)
+{
+    s << (v ? to_string(*v) : "nothing");
+    return s;
+}
+
+int main()
+{
+    
+    vector<double> tests {-2.5, -1, -0.5, 0, 0.5, 1, 2.5};
+    
+    cout << "x -> acos(1/x) , 1/(acos(x)\n";
+    for(auto v : tests)
+    {
+        auto maybeMonad = Pure(v);
+        auto inverseAcos = maybeMonad >> SafeInverse >> SafeAcos;
+        auto acosInverse = maybeMonad >> SafeAcos >> SafeInverse;
+        cout << v << " -> " << inverseAcos << ", " << acosInverse << "\n";
+    }
+}

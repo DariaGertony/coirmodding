@@ -1,0 +1,16 @@
+#include <iostream> 
+#include <algorithm> 
+
+
+void print_square(int i) {
+  std::cout << i*i << " ";
+}
+
+int main() {
+  
+  int ary[]={1,2,3,4,5};
+  
+  std::for_each(ary,ary+5,print_square);
+  return 0;
+}
+

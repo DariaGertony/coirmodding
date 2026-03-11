@@ -263,7 +263,7 @@ private:
 
 	RegisterClassEx( &wcex );
  
-	return CreateWindow( "_FOREST_FIRE_", ".: Forest Fire -- PJorente :.", WS_SYSMENU, CW_USEDEFAULT, 0, MAX_SIDE, MAX_SIDE, NULL, NULL, _hInst, NULL );
+	return CreateWindow( "_FOREST_FIRE_", ".: Forest Fire -- PJorenteÂ :.", WS_SYSMENU, CW_USEDEFAULT, 0, MAX_SIDE, MAX_SIDE, NULL, NULL, _hInst, NULL );
     }
 
     HINSTANCE _hInst;

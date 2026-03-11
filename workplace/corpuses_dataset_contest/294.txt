@@ -1,0 +1,106 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+template <typename T>
+auto operator>>(const vector<T>& monad, auto f)
+{
+    
+    vector<remove_reference_t<decltype(f(monad.front()).front())>> result;
+    for(auto& item : monad)
+    {
+        
+        
+        const auto r = f(item);
+        
+        result.insert(result.end(), begin(r), end(r));
+    }
+    
+    return result;
+}
+
+
+auto Pure(auto t)
+{
+    return vector{t};
+}
+
+
+auto Double(int i)
+{
+    return Pure(2 * i);
+}
+
+
+auto Increment(int i)
+{
+    return Pure(i + 1);
+}
+
+
+auto NiceNumber(int i)
+{
+    return Pure(to_string(i) + " is a nice number\n");
+}
+
+
+
+auto UpperSequence = [](auto startingVal)
+{
+    const int MaxValue = 500;
+    vector<decltype(startingVal)> sequence;
+    while(startingVal <= MaxValue) 
+        sequence.push_back(startingVal++);
+    return sequence;
+};
+
+
+void PrintVector(const auto& vec)
+{
+    cout << " ";
+    for(auto value : vec)
+    {
+        cout << value << " ";
+    }
+    cout << "\n";
+}
+
+
+void PrintTriples(const auto& vec)
+{
+    cout << "Pythagorean triples:\n";
+    for(auto it = vec.begin(); it != vec.end();)
+    {
+        auto x = *it++;
+        auto y = *it++;
+        auto z = *it++;
+        
+        cout << x << ", " << y << ", " << z << "\n";
+    }
+    cout << "\n";
+}
+
+int main()
+{
+    
+    auto listMonad = 
+        vector<int> {2, 3, 4} >> 
+        Increment >> 
+        Double >>
+        NiceNumber;
+        
+    PrintVector(listMonad);
+    
+    
+    
+    
+    
+    auto pythagoreanTriples = UpperSequence(1) >> 
+        [](int x){return UpperSequence(x) >>
+        [x](int y){return UpperSequence(y) >>
+        [x, y](int z){return (x*x + y*y == z*z) ? vector{x, y, z} : vector<int>{};};};};
+    
+    PrintTriples(pythagoreanTriples);
+}

@@ -1,0 +1,8 @@
+
+MyClass::method(someParameter);
+
+
+myInstance.method(someParameter);
+
+
+MyPointer->method(someParameter);

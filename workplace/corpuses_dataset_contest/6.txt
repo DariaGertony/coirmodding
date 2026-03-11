@@ -205,7 +205,7 @@ private:
         RECT rc;
         SetRect( &rc, 0, 0, BMP_WID, BMP_HEI );
         AdjustWindowRect( &rc, WS_CAPTION, FALSE );
-        return CreateWindow( "_GALTON_", ".: Galton Box -- PJorente :.", WS_SYSMENU, CW_USEDEFAULT, 0, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, _hInst, NULL );
+        return CreateWindow( "_GALTON_", ".: Galton Box -- PJorenteÂ :.", WS_SYSMENU, CW_USEDEFAULT, 0, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, _hInst, NULL );
     }
     HINSTANCE _hInst;
     HWND      _hwnd;

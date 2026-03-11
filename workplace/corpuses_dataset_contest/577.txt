@@ -1,0 +1,40 @@
+
+
+
+#include <cstdint>
+#include <cstdlib>
+#include <cstdio>
+
+static constexpr int32_t bct_low_bits = 0x55555555;
+
+static int32_t bct_decrement(int32_t v) {
+    --v;            
+    return v ^ (v & (v>>1) & bct_low_bits);     
+}
+
+int main (int argc, char *argv[])
+{
+    
+    const int32_t n = (1 < argc) ? std::atoi(argv[1]) : 3;
+    
+    if (n < 0 || 9 < n) {                       
+        std::printf("N out of range (use 0..9): %ld\n", long(n));
+        return 1;
+    }
+
+    const int32_t size_bct = 1<<(n*2);          
+    
+    int32_t y = size_bct;
+    do {                                        
+        y = bct_decrement(y);                   
+        int32_t x = size_bct;
+        do {                                    
+            x = bct_decrement(x);               
+            
+            std::putchar((x & y & bct_low_bits) ? ' ' : '#');
+        } while (0 < x);
+        std::putchar('\n');
+    } while (0 < y);
+
+    return 0;
+}

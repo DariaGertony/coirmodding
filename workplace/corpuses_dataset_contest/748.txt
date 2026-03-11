@@ -1,0 +1,38 @@
+#include <string>
+
+
+
+
+                     
+std::string str;     
+std::string str();   
+std::string str{};   
+std::string str(""); 
+std::string str{""}; 
+
+
+
+if (str.empty()) { ... } 
+
+
+if (str.length() == 0) { ... }
+if (str == "") { ... }
+
+
+str.clear();          
+str = "";             
+str = {};             
+
+                       
+std::string tmp{};     
+str.swap(tmp);         
+std::swap(str, tmp);   
+
+
+
+std::string  s_array[100];           
+std::array<std::string, 100>  arr;   
+std::vector<std::string>(100,"");    
+
+
+void func( std::string& s = {} ); 

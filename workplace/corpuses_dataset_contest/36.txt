@@ -1,0 +1,283 @@
+ 
+
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <fstream>
+#include <sys/stat.h>   
+#include <ftplib.h>     
+#include <ftp++.hpp>    
+
+
+
+
+
+
+
+
+int stat(const char *pathname, struct stat *buf); 
+char *strerror(int errnum);  
+char *basename(char *path);  
+
+
+
+namespace stl
+{
+  using std::cout;           
+  using std::cerr;           
+  using std::string;         
+  using std::ifstream;       
+  using std::remove;         
+};
+
+using namespace stl;
+
+
+
+using Mode = ftp::Connection::Mode;
+Mode PASV  = Mode::PASSIVE;
+Mode PORT  = Mode::PORT;
+
+
+using TransferMode  = ftp::Connection::TransferMode;
+TransferMode BINARY = TransferMode::BINARY;
+TransferMode TEXT   = TransferMode::TEXT;
+
+
+ 
+
+struct session
+{
+  const string server;  
+  const string port;    
+  const string user;    
+  const string pass;    
+  Mode  mode;           
+  TransferMode txmode;  
+  string dir;           
+};
+
+ 
+
+
+ftp::Connection connect_ftp( const session& sess);
+size_t get_ftp( ftp::Connection& conn, string const& path);
+string readFile( const string& filename);
+string login_ftp(ftp::Connection& conn, const session& sess);
+string dir_listing( ftp::Connection& conn, const string& path);
+
+
+ 
+
+
+string readFile( const string& filename)
+{
+  struct stat stat_buf;  
+  string contents;
+  
+  errno = 0;
+  if (stat(filename.c_str() , &stat_buf) != -1) 
+    {  
+      size_t len = stat_buf.st_size;            
+  
+      string bytes(len+1, '\0');                
+      
+      ifstream ifs(filename); 
+
+      ifs.read(&bytes[0], len);  
+
+      if (! ifs.fail() ) contents.swap(bytes);  
+
+      ifs.close();
+   }
+  else
+    {
+      cerr << "stat error: " << strerror(errno);
+    }
+
+  return contents;     
+}
+
+ 
+
+
+ftp::Connection connect_ftp( const session& sess)
+  try
+    {
+      string constr = sess.server + ":" + sess.port;
+      
+      cerr << "connecting to " << constr << " ...\n";
+
+      ftp::Connection conn{ constr.c_str() };
+      
+      cerr << "connected to " << constr << "\n";
+      conn.setConnectionMode(sess.mode);
+
+      return conn; 
+   }
+  catch (ftp::ConnectException e) 
+    {
+      cerr << "FTP error: could not connect to server" << "\n";
+    }
+
+  
+
+
+string login_ftp(ftp::Connection& conn, const session& sess)
+{
+  conn.login(sess.user.c_str() , sess.pass.c_str() );
+
+  return conn.getLastResponse();
+}
+
+ 
+
+
+    
+    
+
+string dir_listing( ftp::Connection& conn, const string& path)
+try
+  {
+      
+      const char* dirdata = "/dev/shm/dirdata";
+      
+      conn.getList(dirdata, path.c_str() ); 
+      
+      
+      
+      string dir_string = readFile(dirdata);
+
+      cerr << conn.getLastResponse() << "\n";
+      
+      errno = 0;
+      if ( remove(dirdata) != 0 ) 
+      	{
+	  cerr << "error: " <<  strerror(errno) << "\n";
+      	}
+      
+      return dir_string;
+  }
+ catch (...) {
+    cerr << "error: getting dir contents: \n" 
+	 << strerror(errno) << "\n";
+  }
+
+ 
+
+
+size_t get_ftp( ftp::Connection& conn, const string& r_path)
+{
+  size_t received = 0;
+
+  const char* path = r_path.c_str();
+
+  unsigned remotefile_size = conn.size(path , BINARY);
+ 
+  const char* localfile = basename(path);
+  
+  conn.get(localfile, path, BINARY);  
+
+  cerr << conn.getLastResponse() << "\n";
+
+  
+  struct stat stat_buf;
+
+  errno = 0;
+  if (stat(localfile, &stat_buf) != -1)
+     received = stat_buf.st_size;   
+  else
+    cerr << strerror(errno);
+
+  return received;
+}
+
+ 
+
+const session sonic
+{ 
+    "mirrors.sonic.net", 
+    "21" ,
+    "anonymous", 
+    "xxxx@nohost.org",
+    PASV, 
+    BINARY,
+    "/pub/OpenBSD" 
+    };
+
+
+
+
+int main(int argc, char* argv[], char * env[] )
+{
+  const session remote = sonic;  
+
+  try
+    {
+           
+      
+      ftp::Connection conn = connect_ftp(remote);
+
+      
+      cerr << login_ftp(conn, remote);
+
+      
+      cout << "System type: " << conn.getSystemType() << "\n";
+      cerr << conn.getLastResponse() << "\n";
+
+      
+      conn.cd(remote.dir.c_str());  
+      cerr << conn.getLastResponse() << "\n";
+
+      
+      string pwdstr = conn.getDirectory();
+      cout << "PWD: " << pwdstr << "\n";
+      cerr << conn.getLastResponse() << "\n";
+
+
+      
+      string dirlist = dir_listing(conn, pwdstr.c_str() );
+      cout << dirlist << "\n";
+      
+      string filename = "ftplist";       
+
+      auto pos = dirlist.find(filename); 
+
+      auto notfound = string::npos;   
+
+      if (pos != notfound)  
+	{
+	  
+	  size_t received = get_ftp(conn, filename.c_str() );
+
+	  if (received == 0) 
+	    cerr << "got 0 bytes\n";
+	  else
+	    cerr << "got " << filename  
+		 << " ("   << received << " bytes)\n";
+	}
+      else
+	{
+	  cerr << "file " << filename 
+	       << "not found on server. \n"; 
+	}
+      
+    }
+    catch (ftp::ConnectException e) 
+      {
+        cerr << "FTP error: could not connect to server" << "\n";
+      }
+    catch (ftp::Exception e) 
+      {
+        cerr << "FTP error: " << e << "\n";
+      }
+    catch (...) 
+      {
+        cerr << "error: " <<  strerror(errno) << "\n";
+      }
+
+  
+
+  return 0;
+}
+

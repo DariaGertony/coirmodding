@@ -1,0 +1,43 @@
+#include <cmath>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+struct LoggingMonad
+{
+    double Value;
+    string Log;
+};
+
+
+auto operator>>(const LoggingMonad& monad, auto f)
+{
+    auto result = f(monad.Value);
+    return LoggingMonad{result.Value, monad.Log + "\n" + result.Log};
+}
+
+
+auto Root = [](double x){ return sqrt(x); };
+auto AddOne = [](double x){ return x + 1; };
+auto Half = [](double x){ return x / 2.0; };
+
+
+auto MakeWriter = [](auto f, string message)
+{
+    return [=](double x){return LoggingMonad(f(x), message);};
+};
+
+
+auto writerRoot = MakeWriter(Root, "Taking square root");
+auto writerAddOne = MakeWriter(AddOne, "Adding 1");
+auto writerHalf = MakeWriter(Half, "Dividing by 2");
+
+
+int main()
+{
+    
+    auto result = LoggingMonad{5, "Starting with 5"} >> writerRoot >> writerAddOne >> writerHalf;
+    cout << result.Log << "\nResult: " << result.Value;
+}

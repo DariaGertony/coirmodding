@@ -1,0 +1,67 @@
+#include <iostream>
+
+class CWidget; 
+
+class CFactory
+{
+  friend class CWidget;
+private:
+  unsigned int m_uiCount;
+public:
+  CFactory();
+  ~CFactory();
+  CWidget* GetWidget();
+};
+
+class CWidget
+{
+private:
+  CFactory& m_parent;
+
+private:
+  CWidget(); 
+  CWidget(const CWidget&); 
+  CWidget& operator=(const CWidget&); 
+public:
+  CWidget(CFactory& parent);
+  ~CWidget();
+};
+
+
+CFactory::CFactory() : m_uiCount(0) {}
+CFactory::~CFactory() {}
+
+
+CWidget* CFactory::GetWidget()
+{
+  
+  return new CWidget(*this);
+}
+
+
+CWidget::CWidget(CFactory& parent) : m_parent(parent)
+{
+  ++m_parent.m_uiCount;
+
+  std::cout << "Widget spawning. There are now " << m_parent.m_uiCount << " Widgets instanciated." << std::endl;
+}
+
+CWidget::~CWidget()
+{
+  --m_parent.m_uiCount;
+
+  std::cout << "Widget dieing. There are now " << m_parent.m_uiCount << " Widgets instanciated." << std::endl;
+}
+
+int main()
+{
+  CFactory factory;
+
+  CWidget* pWidget1 = factory.GetWidget();
+  CWidget* pWidget2 = factory.GetWidget();
+  delete pWidget1;
+
+  CWidget* pWidget3 = factory.GetWidget();
+  delete pWidget3;
+  delete pWidget2;
+}

@@ -1,0 +1,104 @@
+#include <iostream>
+#include <map>
+#include <utility>
+
+using namespace std;
+
+template<typename T>
+class FixedMap : private T
+{
+    
+    
+    
+    
+    
+    T m_defaultValues;
+    
+public:
+    FixedMap(T map)
+    : T(map), m_defaultValues(move(map)){}
+    
+    
+    using T::cbegin;
+    using T::cend;
+    using T::empty;
+    using T::find;
+    using T::size;
+
+    
+    using T::at;
+    using T::begin;
+    using T::end;
+    
+    
+    
+    auto& operator[](typename T::key_type&& key)
+    {
+        
+        return this->at(forward<typename T::key_type>(key));
+    }
+    
+    
+    
+    void erase(typename T::key_type&& key)
+    {
+        T::operator[](key) = m_defaultValues.at(key);
+    }
+
+    
+    void clear()
+    {
+        
+        T::operator=(m_defaultValues);
+    }
+    
+};
+
+
+auto PrintMap = [](const auto &map)
+{
+    for(auto &[key, value] : map)
+    {
+        cout << "{" << key << " : " << value << "} ";
+    }
+    cout << "\n\n";
+};
+
+int main(void) 
+{
+    
+    cout << "Map intialized with values\n";
+    FixedMap<map<string, int>> fixedMap ({
+        {"a", 1},
+        {"b", 2}});
+    PrintMap(fixedMap);
+    
+    cout << "Change the values of the keys\n";
+    fixedMap["a"] = 55;
+    fixedMap["b"] = 56;
+    PrintMap(fixedMap);
+    
+    cout << "Reset the 'a' key\n";
+    fixedMap.erase("a");
+    PrintMap(fixedMap);
+    
+    cout << "Change the values the again\n";
+    fixedMap["a"] = 88;
+    fixedMap["b"] = 99;
+    PrintMap(fixedMap);
+    
+    cout << "Reset all keys\n";
+    fixedMap.clear();
+    PrintMap(fixedMap);
+  
+    try
+    {
+        
+        cout << "Try to add a new key\n";
+        fixedMap["newKey"] = 99;
+    }
+    catch (exception &ex)
+    {
+        cout << "error: " << ex.what();
+    }
+}

@@ -1,0 +1,20 @@
+#include <algorithm>  
+#include <iterator>   
+#include <functional> 
+
+template<class It, class Comp = std::less<>>
+    
+constexpr auto max_value(It first, It last, Comp compare = std::less{})
+{
+    
+    return *std::max_element(first, last, compare);
+}
+
+template<class C, class Comp = std::less<>>
+    
+constexpr auto max_value(const C& container, Comp compare = std::less{})
+{
+    
+    using std::begin; using std::end;
+    return max_value(begin(container), end(container), compare);
+}

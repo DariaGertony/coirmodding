@@ -1,0 +1,23 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iterator>
+
+int main( ) 
+{
+    if (std::ifstream infile("sample.txt"))
+    {
+        
+        std::string fileData(std::istreambuf_iterator<char>(infile), std::istreambuf_iterator<char>());
+
+        cout << "File has " << fileData.size() << "chars\n";
+
+        
+        return 0;
+   }
+   else 
+   {
+      std::cout << "file not found!\n";
+      return 1;
+   }
+}

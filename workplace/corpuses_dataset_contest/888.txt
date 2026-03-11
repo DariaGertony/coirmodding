@@ -1,0 +1,9 @@
+#include <algorithm>
+#include <string>
+
+
+std::all_of( ++(strings.begin()), strings.end(),
+             [&](std::string a){ return a == strings.front(); } )  
+
+std::is_sorted( strings.begin(), strings.end(),
+                [](std::string a, std::string b){ return !(b < a); }) )  

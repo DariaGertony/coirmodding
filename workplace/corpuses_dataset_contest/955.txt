@@ -1,0 +1,8 @@
+int a[5]; 
+a[0] = 1; 
+
+int primes[10] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 }; 
+
+#include <string>
+std::string strings[4]; 
+                        

@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+  string story, input;
+
+  
+  while(true)
+  {
+    
+    getline(cin, input);
+
+    
+    if(input == "\r")
+      break;
+
+    
+    story += input;
+  }
+
+  
+  int begin;
+  while((begin = story.find("<")) != string::npos)
+  {
+    
+    int end = story.find(">");
+    string cat = story.substr(begin + 1, end - begin - 1);
+
+    
+    cout << "Give me a " << cat << ": ";
+    cin >> input;
+
+    
+    
+    while((begin = story.find("<" + cat + ">")) != string::npos)
+    {
+      
+      story.replace(begin, cat.length()+2, input);
+    }
+  }
+
+  
+  cout << endl << story;
+
+  return 0;
+}

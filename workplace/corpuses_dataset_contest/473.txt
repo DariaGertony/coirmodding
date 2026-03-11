@@ -1,0 +1,73 @@
+#include <tr1/memory>
+#include <string>
+#include <iostream>
+#include <tr1/functional>
+
+using namespace std;
+using namespace std::tr1;
+using std::tr1::function;
+
+
+class IDelegate
+{
+public:
+    virtual ~IDelegate() {}
+};
+
+
+class IThing
+{
+public:
+    virtual ~IThing() {}
+    virtual std::string Thing() = 0;
+};
+
+
+class DelegateA : virtual public IDelegate
+{
+};
+ 
+
+class DelegateB : public IThing, public IDelegate
+{
+    std::string Thing()
+    {
+        return "delegate implementation";
+    }
+};
+ 
+class Delegator
+{
+public:
+    std::string Operation()
+    {
+        if(Delegate) 
+           if (IThing * pThing = dynamic_cast<IThing*>(Delegate.get()))
+            
+            return pThing->Thing();
+        
+        return "default implementation";
+    }
+ 
+    shared_ptr<IDelegate> Delegate;
+};
+ 
+int main()
+{
+    shared_ptr<DelegateA> delegateA(new DelegateA());
+    shared_ptr<DelegateB> delegateB(new DelegateB());
+    Delegator delegator;
+ 
+    
+    std::cout << delegator.Operation() << std::endl;
+ 
+    
+    delegator.Delegate = delegateA;
+    std::cout << delegator.Operation() << std::endl;
+ 
+    
+    delegator.Delegate = delegateB;
+    std::cout << delegator.Operation() << std::endl;
+
+
+}

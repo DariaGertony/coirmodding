@@ -1,0 +1,161 @@
+#include <stdint.h>
+#include <string>
+#include <memory>                       
+#include <iostream>
+#include <deque>
+#include <unordered_map>                
+#include <algorithm>                    
+#include <iterator>                     
+
+using namespace std;
+
+class LCS {
+protected:
+  
+  class Pair {
+  public:
+    uint32_t index1;
+    uint32_t index2;
+    shared_ptr<Pair> next;
+
+    Pair(uint32_t index1, uint32_t index2, shared_ptr<Pair> next = nullptr)
+      : index1(index1), index2(index2), next(next) {
+    }
+
+    static shared_ptr<Pair> Reverse(const shared_ptr<Pair> pairs) {
+      shared_ptr<Pair> head = nullptr;
+      for (auto next = pairs; next != nullptr; next = next->next)
+        head = make_shared<Pair>(next->index1, next->index2, head);
+      return head;
+    }
+  };
+
+  typedef deque<shared_ptr<Pair>> PAIRS;
+  typedef deque<uint32_t> THRESHOLD;
+  typedef deque<uint32_t> INDEXES;
+  typedef unordered_map<char, INDEXES> CHAR_TO_INDEXES_MAP;
+  typedef deque<INDEXES*> MATCHES;
+
+  uint32_t FindLCS(MATCHES& indexesOf2MatchedByIndex1, shared_ptr<Pair>* pairs) {
+    auto traceLCS = pairs != nullptr;
+    PAIRS chains;
+    THRESHOLD threshold;
+
+    
+    
+    
+    
+    uint32_t index1 = 0;
+    for (const auto& it1 : indexesOf2MatchedByIndex1) {
+      if (!it1->empty()) {
+        auto dq2 = *it1;
+        auto limit = threshold.end();
+        for (auto it2 = dq2.rbegin(); it2 != dq2.rend(); it2++) {
+          
+          auto index2 = *it2;
+
+          
+          
+          
+          
+          
+          limit = lower_bound(threshold.begin(), limit, index2);
+          auto index3 = distance(threshold.begin(), limit);
+
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          auto preferNextIndex2 = next(it2) != dq2.rend() &&
+            (limit == threshold.begin() || *prev(limit) < *next(it2));
+
+          
+          
+          
+          
+          if (preferNextIndex2) continue;
+
+          if (limit == threshold.end()) {
+            
+            threshold.push_back(index2);
+            
+            limit = prev(threshold.end());
+            if (traceLCS) {
+              auto prefix = index3 > 0 ? chains[index3 - 1] : nullptr;
+              auto last = make_shared<Pair>(index1, index2, prefix);
+              chains.push_back(last);
+            }
+          }
+          else if (index2 < *limit) {
+            
+            
+            *limit = index2;
+            if (traceLCS) {
+              auto prefix = index3 > 0 ? chains[index3 - 1] : nullptr;
+              auto last = make_shared<Pair>(index1, index2, prefix);
+              chains[index3] = last;
+            }
+          }
+        }                                 
+      }
+
+      index1++;
+    }                                     
+
+    if (traceLCS) {
+      
+      auto last = chains.size() > 0 ? chains.back() : nullptr;
+      
+      *pairs = Pair::Reverse(last);
+    }
+
+    auto length = threshold.size();
+    return length;
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  void Match(CHAR_TO_INDEXES_MAP& indexesOf2MatchedByChar, MATCHES& indexesOf2MatchedByIndex1,
+    const string& s1, const string& s2) {
+    uint32_t index = 0;
+    for (const auto& it : s2)
+      indexesOf2MatchedByChar[it].push_back(index++);
+
+    for (const auto& it : s1) {
+      auto& dq2 = indexesOf2MatchedByChar[it];
+      indexesOf2MatchedByIndex1.push_back(&dq2);
+    }
+  }
+
+  string Select(shared_ptr<Pair> pairs, uint32_t length,
+    bool right, const string& s1, const string& s2) {
+    string buffer;
+    buffer.reserve(length);
+    for (auto next = pairs; next != nullptr; next = next->next) {
+      auto c = right ? s2[next->index2] : s1[next->index1];
+      buffer.push_back(c);
+    }
+    return buffer;
+  }
+
+public:
+  string Correspondence(const string& s1, const string& s2) {
+    CHAR_TO_INDEXES_MAP indexesOf2MatchedByChar;
+    MATCHES indexesOf2MatchedByIndex1;  
+    Match(indexesOf2MatchedByChar, indexesOf2MatchedByIndex1, s1, s2);
+    shared_ptr<Pair> pairs;             
+    auto length = FindLCS(indexesOf2MatchedByIndex1, &pairs);
+    return Select(pairs, length, false, s1, s2);
+  }
+};

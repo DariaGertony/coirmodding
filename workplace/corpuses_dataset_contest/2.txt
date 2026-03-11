@@ -312,7 +312,7 @@ private:
 	RECT rc = { 0, 0, BMP_SIZE, BMP_SIZE };
 	AdjustWindowRect( &rc, WS_SYSMENU | WS_CAPTION, FALSE );
 	int w = rc.right - rc.left, h = rc.bottom - rc.top;
-	return CreateWindow( "_MY_CLOCK_", ".: Clock -- PJorente :.", WS_SYSMENU, CW_USEDEFAULT, 0, w, h, NULL, NULL, _hInst, NULL );
+	return CreateWindow( "_MY_CLOCK_", ".: Clock -- PJorenteÂ :.", WS_SYSMENU, CW_USEDEFAULT, 0, w, h, NULL, NULL, _hInst, NULL );
     }
 
     static wnd* _inst;

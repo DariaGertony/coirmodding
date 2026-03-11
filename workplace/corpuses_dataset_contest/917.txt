@@ -1,0 +1,13 @@
+#include <iostream>
+
+
+#define DEBUG(msg,...) fprintf(stderr, "[DEBUG %s@%d] " msg "\n", __FILE__, __LINE__, __VA_ARGS__)
+
+
+
+int main() {
+    DEBUG("Hello world");
+    DEBUG("Some %d Things", 42);
+
+    return 0;
+}

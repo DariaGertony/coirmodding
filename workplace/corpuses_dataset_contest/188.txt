@@ -1,0 +1,111 @@
+#include <vector>
+#include <iterator>
+#include <algorithm>
+
+
+
+
+
+
+
+
+
+template<typename InputIterator, typename OutputIterator>
+ OutputIterator forward_difference(InputIterator first, InputIterator last,
+                                   OutputIterator dest)
+{
+  
+  if (first == last)
+    return dest;
+
+  typedef typename std::iterator_traits<InputIterator>::value_type value_type;
+
+  value_type temp = *first++;
+  while (first != last)
+  {
+    value_type temp2 = *first++;
+    *dest++ = temp2 - temp;
+    temp = temp2;
+  }
+
+  return dest;
+}
+
+
+
+
+
+
+
+
+
+
+
+template<typename InputIterator, typename OutputIterator>
+ OutputIterator nth_forward_difference(int order,
+                                       InputIterator first, InputIterator last,
+                                       OutputIterator dest)
+{
+  
+  if (order == 0)
+    return std::copy(first, last, dest);
+
+  
+  if (order == 1)
+    return forward_difference(first, last, dest);
+
+  
+  typedef typename std::iterator_traits<InputIterator>::value_type value_type;
+  std::vector<value_type> temp_storage;
+
+  
+  forward_difference(first, last, std::back_inserter(temp_storage));
+
+  
+  typename std::vector<value_type>::iterator begin = temp_storage.begin(),
+                                             end = temp_storage.end();
+  for (int i = 1; i < order-1; ++i)
+    end = forward_difference(begin, end, begin);
+
+  
+  return forward_difference(begin, end, dest);
+}
+
+
+#include <iostream>
+
+int main()
+{
+  double array[10] = { 90.0, 47.0, 58.0, 29.0, 22.0, 32.0, 55.0, 5.0, 55.0, 73.0 };
+
+  
+  std::vector<double> dest;
+  nth_forward_difference(1, array, array+10, std::back_inserter(dest));
+
+  
+  std::copy(dest.begin(), dest.end(), std::ostream_iterator<double>(std::cout, " "));
+  std::cout << std::endl;
+
+  
+  nth_forward_difference(2, array, array+10, std::ostream_iterator<double>(std::cout, " "));
+  std::cout << std::endl;
+
+  nth_forward_difference(9, array, array+10, std::ostream_iterator<double>(std::cout, " "));
+  std::cout << std::endl;
+
+  nth_forward_difference(10, array, array+10, std::ostream_iterator<double>(std::cout, " "));
+  std::cout << std::endl;
+
+  nth_forward_difference(0, array, array+10, std::ostream_iterator<double>(std::cout, " "));
+  std::cout << std::endl;
+
+  
+  
+  double* end = nth_forward_difference(3, array, array+10, array);
+
+  for (double* p = array; p < end; ++p)
+    std::cout << *p << " ";
+  std::cout << std::endl;
+
+  return 0;
+}

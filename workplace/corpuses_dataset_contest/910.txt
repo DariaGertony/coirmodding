@@ -1,0 +1,11 @@
+#include <string> 
+using std::string;
+
+int main()
+{
+  string s = "Hello, world!";
+  string::size_type length = s.length(); 
+  string::size_type size = s.size();     
+  
+  string::size_type bytes = s.length() * sizeof(string::value_type); 
+}

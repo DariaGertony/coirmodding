@@ -1,0 +1,96 @@
+{
+  "language": {
+    "language": "python"
+  },
+  "imports": [
+    [
+      {
+        "type": "import",
+        "modules": {
+          "module": "warnings"
+        },
+        "names": []
+      }
+    ],
+    {
+      "type": "import_from",
+      "modules": {
+        "module": "d2l"
+      },
+      "names": [
+        {
+          "name": "paddle",
+          "alias": "d2l"
+        }
+      ]
+    },
+    [
+      {
+        "type": "import",
+        "modules": {
+          "module": "paddle"
+        },
+        "names": []
+      }
+    ],
+    {
+      "type": "import_from",
+      "modules": {
+        "module": "paddle"
+      },
+      "names": [
+        {
+          "name": "nn",
+          "alias": ""
+        }
+      ]
+    }
+  ],
+  "classes": [
+    {
+      "name": "NWKernelRegression",
+      "superclasses": [],
+      "functions": [
+        {
+          "decorators": [],
+          "name": "__init__",
+          "parameters": [
+            {
+              "name": "self"
+            },
+            {}
+          ]
+        },
+        {
+          "decorators": [],
+          "name": "forward",
+          "parameters": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "queries"
+            },
+            {
+              "name": "keys"
+            },
+            {
+              "name": "values"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "decorators": [],
+      "name": "f",
+      "parameters": [
+        {
+          "name": "x"
+        }
+      ]
+    }
+  ]
+}

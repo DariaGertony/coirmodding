@@ -33,11 +33,12 @@ all_task = ["codetrans-dl","stackoverflow-qa","apps","codefeedback-mt","codefeed
 req_tasks = ["apps","stackoverflow-qa"]
 types = ["bm25_hybrid_combMNZ", "bm25_hybrid_interpolation", "bm25_hybrid_rrf", "bm25_hybrid_weighted", "bm25_lexical", "jaccard_lexical", "default_semantic", "jaccard_hybrid"]
 
-tasks = get_tasks(tasks=["codetrans-dl"])
+tasks = get_tasks(tasks=["apps"])
 
 evaluation = COIR(tasks=tasks,batch_size=64, type ="default_semantic")
 evaluation.llm_init("meta-llama/llama-4-scout-17b-16e-instruct", 'Give description of this query to improve understanding', kee)
-results = evaluation.run(model, output_folder="results", useLLm=False, expanded=True)
+
+results = evaluation.run(model, output_folder="results", useLLm=False, expanded=False, local_data=False)
 
 
 """

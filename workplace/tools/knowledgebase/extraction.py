@@ -25,5 +25,11 @@ def create_knowledgebase_from_dataset_corpus(corpuses_number: int):
 
     storage.save_chunks_to_json(storage.chunks)
 
+    print(storage.get_filtered_chunks("python", ["paddle", "warnings", "torch"]))
 
-create_knowledgebase_from_dataset_corpus(100)
+
+def test():
+    
+    create_knowledgebase_from_dataset_corpus(100)
+
+

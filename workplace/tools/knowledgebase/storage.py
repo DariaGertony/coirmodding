@@ -53,6 +53,6 @@ class Storage:
         # classes и functions — игнорируются (мягкие фильтры)
 
         for x in filtered:
-            indexes.append(x.chunk_id)
+            indexes.append(int(x.chunk_id))
 
         return set(indexes)

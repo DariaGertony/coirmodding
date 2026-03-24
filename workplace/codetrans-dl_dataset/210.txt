@@ -1,0 +1,42 @@
+import warnings
+from d2l import paddle as d2l
+warnings.filterwarnings("ignore")
+import paddle
+from paddle import nn
+from paddle.nn import functional as F
+batch_size, num_steps = 32, 35
+train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
+num_hiddens = 256
+rnn_layer = nn.SimpleRNN(len(vocab), num_hiddens, time_major=True)
+state = paddle.zeros(shape=[1, batch_size, num_hiddens])
+state.shape
+X = paddle.rand(shape=[num_steps, batch_size, len(vocab)])
+Y, state_new = rnn_layer(X, state)
+Y.shape, state_new.shape
+    def __init__(self, rnn_layer, vocab_size, **kwargs):
+        super(RNNModel, self).__init__(**kwargs)
+        self.rnn = rnn_layer
+        self.vocab_size = vocab_size
+        self.num_hiddens = self.rnn.hidden_size
+        if self.rnn.num_directions==1:
+            self.num_directions = 1
+            self.linear = nn.Linear(self.num_hiddens, self.vocab_size)
+        else:
+            self.num_directions = 2
+            self.linear = nn.Linear(self.num_hiddens * 2, self.vocab_size)
+    def forward(self, inputs, state):
+        X = F.one_hot(inputs.T, self.vocab_size)
+        Y, state = self.rnn(X, state)
+        output = self.linear(Y.reshape((-1, Y.shape[-1])))
+        return output, state
+    def begin_state(self, batch_size=1):
+        if not isinstance(self.rnn, nn.LSTM):
+            return  paddle.zeros(shape=[self.num_directions * self.rnn.num_layers, batch_size, self.num_hiddens])
+        else:
+            return (paddle.zeros(shape=[self.num_directions * self.rnn.num_layers, batch_size, self.num_hiddens]),
+                    paddle.zeros(shape=[self.num_directions * self.rnn.num_layers, batch_size, self.num_hiddens]))
+device = d2l.try_gpu()
+net = RNNModel(rnn_layer, vocab_size=len(vocab))
+d2l.predict_ch8('time traveller', 10, net, vocab, device)
+num_epochs, lr = 500, 1.0
+d2l.train_ch8(net, train_iter, vocab, lr, num_epochs, device)

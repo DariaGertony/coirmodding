@@ -1,0 +1,215 @@
+## Solution ##
+
+We will start by importing the necessary libraries:
+
+```python
+import os
+import random
+from PIL import Image, ImageEnhance, ImageOps
+```
+
+### Setting Up ###
+
+First, we need to define the input and output paths. The `input_path` variable should contain the path to the directory containing the original images, and `output_path` should contain the path where we will save the augmented images.
+
+```python
+input_path = "original_images/"
+output_path = "augmented_images/"
+```
+
+We can also define the number of images we want to generate using the `num_images` variable:
+
+```python
+num_images = 10
+```
+
+### Image Processing ###
+
+#### Upsized and Downsized Images ####
+
+We will start by creating a function to create upsized and downsized versions of the original images. This function will take an image object and a scaling factor as inputs, and return the upsized or downsized image object:
+
+```python
+def resize_image(image, scale):
+    width, height = image.size
+    new_width = int(width * scale)
+    new_height = int(height * scale)
+    return image.resize((new_width, new_height))
+```
+
+Now we can loop through the original images, randomly select an upsizing or downsizing factor, and call the `resize_image()` function to create the modified version of the image:
+
+```python
+for i in range(num_images):
+    # Select a random image from the input folder
+    filename = random.choice(os.listdir(input_path))
+    # Open the image using PIL
+    image = Image.open(os.path.join(input_path, filename))
+    # Randomly select an upsizing or downsizing factor between 0.5 and 1.5
+    scale = random.uniform(0.5, 1.5)
+    # Resize the image using the scale factor
+    resized_image = resize_image(image, scale)
+    # Save the resized image to the output folder with a modified filename
+    new_filename = "resized_" + str(i) + "_" + filename
+    resized_image.save(os.path.join(output_path, new_filename))
+```
+
+#### Rotated Images ####
+
+We will now create a function to create rotated versions of the original images. This function will take an image object and an angle in degrees as inputs, and return the rotated image object:
+
+```python
+def rotate_image(image, angle):
+    return image.rotate(angle, expand=True)
+```
+
+Now we can loop through the original images, randomly select a rotation angle, and call the `rotate_image()` function to create the modified version of the image:
+
+```python
+for i in range(num_images):
+    # Select a random image from the input folder
+    filename = random.choice(os.listdir(input_path))
+    # Open the image using PIL
+    image = Image.open(os.path.join(input_path, filename))
+    # Randomly select a rotation angle between -45 and 45 degrees
+    angle = random.randint(-45, 45)
+    # Rotate the image using the angle
+    rotated_image = rotate_image(image, angle)
+    # Save the rotated image to the output folder with a modified filename
+    new_filename = "rotated_" + str(i) + "_" + filename
+    rotated_image.save(os.path.join(output_path, new_filename))
+```
+
+#### Flipped Images ####
+
+We will now create functions to create horizontally and vertically flipped versions of the original images. These functions will take an image object as input, and return the flipped image object:
+
+```python
+def flip_horizontally(image):
+    return image.transpose(Image.FLIP_LEFT_RIGHT)
+
+def flip_vertically(image):
+    return image.transpose(Image.FLIP_TOP_BOTTOM)
+```
+
+Now we can loop through the original images, randomly select a flip type, and call the corresponding function to create the modified version of the image:
+
+```python
+for i in range(num_images):
+    # Select a random image from the input folder
+    filename = random.choice(os.listdir(input_path))
+    # Open the image using PIL
+    image = Image.open(os.path.join(input_path, filename))
+    # Randomly select a flip type (horizontal or vertical)
+    flip_type = random.randint(0, 1)
+    if flip_type == 0:
+        # Flip the image horizontally
+        flipped_image = flip_horizontally(image)
+        # Save the flipped image to the output folder with a modified filename
+        new_filename = "flipped_h_" + str(i) + "_" + filename
+    else:
+        # Flip the image vertically
+        flipped_image = flip_vertically(image)
+        # Save the flipped image to the output folder with a modified filename
+        new_filename = "flipped_v_" + str(i) + "_" + filename
+    flipped_image.save(os.path.join(output_path, new_filename))
+```
+
+#### Low Hue and High Hue Images ####
+
+We will now create functions to create low and high hue versions of the original images. These functions will take an image object and a hue factor as input, and return the modified image object:
+
+```python
+def adjust_hue(image, factor):
+    hsv_image = image.convert('HSV')
+    hue, saturation, value = hsv_image.split()
+    hue = ImageEnhance.Contrast(hue).enhance(factor)
+    return Image.merge('HSV', (hue, saturation, value)).convert('RGB')
+```
+
+Now we can loop through the original images, randomly select a hue factor, and call the `adjust_hue()` function to create the modified version of the image:
+
+```python
+for i in range(num_images):
+    # Select a random image from the input folder
+    filename = random.choice(os.listdir(input_path))
+    # Open the image using PIL
+    image = Image.open(os.path.join(input_path, filename))
+    # Randomly select a hue factor between 0.5 and 1.5
+    hue_factor = random.uniform(0.5, 1.5)
+    # Adjust the hue of the image using the factor
+    hue_adjusted_image = adjust_hue(image, hue_factor)
+    # Save the hue adjusted image to the output folder with a modified filename
+    new_filename = "hue_" + str(i) + "_" + filename
+    hue_adjusted_image.save(os.path.join(output_path, new_filename))
+```
+
+#### Low Brightness and High Brightness Images ####
+
+We will now create functions to create low and high brightness versions of the original images. These functions will take an image object and a brightness factor as input, and return the modified image object:
+
+```python
+def adjust_brightness(image, factor):
+    return ImageEnhance.Brightness(image).enhance(factor)
+```
+
+Now we can loop through the original images, randomly select a brightness factor, and call the `adjust_brightness()` function to create the modified version of the image:
+
+```python
+for i in range(num_images):
+    # Select a random image from the input folder
+    filename = random.choice(os.listdir(input_path))
+    # Open the image using PIL
+    image = Image.open(os.path.join(input_path, filename))
+    # Randomly select a brightness factor between 0.5 and 1.5
+    brightness_factor = random.uniform(0.5, 1.5)
+    # Adjust the brightness of the image using the factor
+    brightness_adjusted_image = adjust_brightness(image, brightness_factor)
+    # Save the brightness adjusted image to the output folder with a modified filename
+    new_filename = "brightness_" + str(i) + "_" + filename
+    brightness_adjusted_image.save(os.path.join(output_path, new_filename))
+```
+
+#### Low Contrast and High Contrast Images ####
+
+We will now create functions to create low and high contrast versions of the original images. These functions will take an image object and a contrast factor as input, and return the modified image object:
+
+```python
+def adjust_contrast(image, factor):
+    return ImageEnhance.Contrast(image).enhance(factor)
+```
+
+Now we can loop through the original images, randomly select a contrast factor, and call the `adjust_contrast()` function to create the modified version of the image:
+
+```python
+for i in range(num_images):
+    # Select a random image from the input folder
+    filename = random.choice(os.listdir(input_path))
+    # Open the image using PIL
+    image = Image.open(os.path.join(input_path, filename))
+    # Randomly select a contrast factor between 0.5 and 1.5
+    contrast_factor = random.uniform(0.5, 1.5)
+    # Adjust the contrast of the image using the factor
+    contrast_adjusted_image = adjust_contrast(image, contrast_factor)
+    # Save the contrast adjusted image to the output folder with a modified filename
+    new_filename = "contrast_" + str(i) + "_" + filename
+    contrast_adjusted_image.save(os.path.join(output_path, new_filename))
+```
+
+#### Strong Sharpening and Low Sharpening Images ####
+
+We will now create functions to create strong sharpening and low sharpening versions of the original images. These functions will take an image object and a sharpening factor as input, and return the modified image object:
+
+```python
+def sharpen_image(image, factor):
+    return ImageEnhance.Sharpness(image).enhance(factor)
+```
+
+Now we can loop through the original images, randomly select a sharpening factor, and call the `sharpen_image()` function to create the modified version of the image:
+
+```python
+for i in range(num_images):
+    # Select a random image from the input folder
+    filename = random.choice(os.listdir(input_path))
+    # Open the image using PIL
+    image = Image.open(os.path.join

@@ -1,0 +1,9 @@
+file,model,folder,weighted_score,average_score,main_metrics_avg,rank_sum
+stackoverflow-qa_default_semantic.json,intfloat/e5-base-v2,./pipelines_results/stackoverflow-qa\intfloat\e5-base-v2,0.8322192229729729,0.7187033333333334,0.7252195,300.0
+stackoverflow-qa_jaccard_hybrid_without-rerank.json,hybrid(intfloat/e5-base-v2),./pipelines_results/stackoverflow-qa\intfloat\e5-base-v2,0.8322047972972972,0.7185412499999999,0.7252195,300.0
+stackoverflow-qa_bm25_hybrid_without-rerank_weighted-fusion.json,,./pipelines_results/stackoverflow-qa\intfloat\e5-base-v2\bm25_hybrid_without-rerank,0.8010555743243245,0.6919333333333334,0.6964695000000001,300.0
+stackoverflow-qa_bm25_hybrid_without-rerank_combMNZ-fusion.json,,./pipelines_results/stackoverflow-qa\intfloat\e5-base-v2\bm25_hybrid_without-rerank,0.7980583108108107,0.6897033333333332,0.694103,300.0
+stackoverflow-qa_bm25_hybrid_without-rerank_rrf-fusion.json,,./pipelines_results/stackoverflow-qa\intfloat\e5-base-v2\bm25_hybrid_without-rerank,0.7675627027027025,0.6642308333333333,0.6665599999999999,300.0
+stackoverflow-qa_bm25_hybrid_without-rerank_interpolation-fusion.json,,./pipelines_results/stackoverflow-qa\intfloat\e5-base-v2\bm25_hybrid_without-rerank,0.6662118581081082,0.5794208333333333,0.5774250000000001,300.0
+stackoverflow-qa_bm25_lexical.json,,./pipelines_results/stackoverflow-qa\intfloat\e5-base-v2,0.663764222972973,0.57750125,0.5753655,300.0
+stackoverflow-qa_jaccard_lexical.json,lexical,./pipelines_results/stackoverflow-qa\intfloat\e5-base-v2,0.29152831081081076,0.26231125,0.24980199999999994,300.0

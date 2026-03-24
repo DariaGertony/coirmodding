@@ -1,0 +1,57 @@
+c = paddle.to_tensor(0.15 * np.pi)
+def f(x):
+    return x * paddle.cos(c * x)
+def f_grad(x):
+    return paddle.cos(c * x) - c * x * paddle.sin(c * x)
+show_trace(gd(2, f_grad), f)
+def show_trace_2d(f, results):
+    d2l.set_figsize()
+    d2l.plt.plot(*zip(*results), '-o', color='
+    x1, x2 = paddle.meshgrid(paddle.arange(-5.5, 1.0, 0.1, dtype='float32'), paddle.arange(-3.0, 1.0, 0.1, dtype='float32'))
+    d2l.plt.contour(x1, x2, f(x1, x2), colors='
+    d2l.plt.xlabel('x1')
+    d2l.plt.ylabel('x2')
+c = paddle.to_tensor(0.5)
+def f(x):
+    return paddle.cosh(c * x)
+def f_grad(x):
+    return c * paddle.sinh(c * x)
+def f_hess(x):
+    return c**2 * paddle.cosh(c * x)
+def newton(eta=1):
+    x = 10.0
+    results = [x]
+    for i in range(10):
+        x -= eta * f_grad(x) / f_hess(x)
+        results.append(float(x))
+    return results
+show_trace(newton(), f)
+c = paddle.to_tensor(0.15 * np.pi)
+def f(x):
+    return x * paddle.cos(c * x)
+def f_grad(x):
+    return paddle.cos(c * x) - c * x * paddle.sin(c * x)
+def f_hess(x):
+    return - 2 * c * paddle.sin(c * x) - x * c**2 * paddle.cos(c * x)
+show_trace(newton(), f)
+%matplotlib inline
+import warnings
+from d2l import paddle as d2l
+warnings.filterwarnings("ignore")
+import math
+import paddle
+def f(x1, x2):
+    return x1 ** 2 + 2 * x2 ** 2
+def f_grad(x1, x2):
+    return 2 * x1, 4 * x2
+def sgd(x1, x2, s1, s2, f_grad):
+    g1, g2 = f_grad(x1, x2)
+    g1 += paddle.normal(0.0, 1, (1,))
+    g2 += paddle.normal(0.0, 1, (1,))
+    eta_t = eta * lr()
+    return (x1 - eta_t * g1, x2 - eta_t * g2, 0, 0)
+def constant_lr():
+    return 1
+eta = 0.1
+lr = constant_lr
+d2l.show_trace_2d(f, d2l.train_2d(sgd, steps=50, f_grad=f_grad))

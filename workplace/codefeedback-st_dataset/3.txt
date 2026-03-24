@@ -1,0 +1,240 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+public class LibrarySystem {
+    private Map<String, Book> books;
+
+    public LibrarySystem() {
+        books = new HashMap<>();
+    }
+
+    public void addBook(Book book) {
+        books.put(book.getTitle(), book);
+    }
+
+    public void updateBook(Book book) {
+        if (books.containsKey(book.getTitle())) {
+            books.put(book.getTitle(), book);
+        } else {
+            System.out.println("Book does not exist in the library.");
+        }
+    }
+
+    public void removeBook(String title) {
+        if (books.containsKey(title)) {
+            books.remove(title);
+        } else {
+            System.out.println("Book does not exist in the library.");
+        }
+    }
+
+    public List<Book> searchBooks(String keyword, String field) {
+        List<Book> searchResults = new ArrayList<>();
+        for (Book book : books.values()) {
+            switch (field.toLowerCase()) {
+                case "title":
+                    if (book.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
+                        searchResults.add(book);
+                    }
+                    break;
+                case "author":
+                    if (book.getAuthor().toLowerCase().contains(keyword.toLowerCase())) {
+                        searchResults.add(book);
+                    }
+                    break;
+                case "genre":
+                    if (book.getGenre().toLowerCase().contains(keyword.toLowerCase())) {
+                        searchResults.add(book);
+                    }
+                    break;
+                case "publication year":
+                    if (book.getPublicationYear() == Integer.parseInt(keyword)) {
+                        searchResults.add(book);
+                    }
+                    break;
+                case "availability status":
+                    if (book.isAvailable() == Boolean.parseBoolean(keyword)) {
+                        searchResults.add(book);
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid search field.");
+                    return searchResults;
+            }
+        }
+        return searchResults;
+    }
+
+    public void sortBooks(List<Book> books, String field, boolean ascending) {
+        Comparator<Book> comparator = null;
+        switch (field.toLowerCase()) {
+            case "title":
+                comparator = Comparator.comparing(Book::getTitle);
+                break;
+            case "author":
+                comparator = Comparator.comparing(Book::getAuthor);
+                break;
+            case "publication year":
+                comparator = Comparator.comparingInt(Book::getPublicationYear);
+                break;
+            case "availability status":
+                comparator = Comparator.comparing(Book::isAvailable);
+                break;
+            default:
+                System.out.println("Invalid sort field.");
+                return;
+        }
+        if (!ascending) {
+            comparator = comparator.reversed();
+        }
+        Collections.sort(books, comparator);
+    }
+
+    public void borrowBook(String title) {
+        if (books.containsKey(title)) {
+            Book book = books.get(title);
+            if (book.isAvailable()) {
+                book.setAvailable(false);
+                System.out.println("Book successfully borrowed.");
+            } else {
+                System.out.println("Book is not available.");
+            }
+        } else {
+            System.out.println("Book does not exist in the library.");
+        }
+    }
+
+    public void returnBook(String title) {
+        if (books.containsKey(title)) {
+            Book book = books.get(title);
+            if (!book.isAvailable()) {
+                book.setAvailable(true);
+                System.out.println("Book successfully returned.");
+            } else {
+                System.out.println("Book is already available.");
+            }
+        } else {
+            System.out.println("Book does not exist in the library.");
+        }
+    }
+
+    public static void main(String[] args) {
+        LibrarySystem librarySystem = new LibrarySystem();
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("1. Add book");
+            System.out.println("2. Update book");
+            System.out.println("3. Remove book");
+            System.out.println("4. Search books");
+            System.out.println("5. Sort books");
+            System.out.println("6. Borrow book");
+            System.out.println("7. Return book");
+            System.out.println("8. Quit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline character
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter book title: ");
+                    String title = scanner.nextLine();
+                    System.out.print("Enter book author: ");
+                    String author = scanner.nextLine();
+                    System.out.print("Enter book genre: ");
+                    String genre = scanner.nextLine();
+                    System.out.print("Enter book publication year: ");
+                    int publicationYear = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline character
+                    System.out.print("Enter book availability status (true/false): ");
+                    boolean availability = scanner.nextBoolean();
+                    scanner.nextLine(); // Consume newline character
+
+                    Book newBook = new Book(title, author, genre, publicationYear, availability);
+                    librarySystem.addBook(newBook);
+                    System.out.println("Book added to the library.");
+                    break;
+                case 2:
+                    System.out.print("Enter book title to update: ");
+                    String updateTitle = scanner.nextLine();
+                    if (librarySystem.searchBooks(updateTitle, "title").isEmpty()) {
+                        System.out.println("Book does not exist in the library.");
+                    } else {
+                        System.out.print("Enter updated book title: ");
+                        String updatedTitle = scanner.nextLine();
+                        System.out.print("Enter updated book author: ");
+                        String updatedAuthor = scanner.nextLine();
+                        System.out.print("Enter updated book genre: ");
+                        String updatedGenre = scanner.nextLine();
+                        System.out.print("Enter updated book publication year: ");
+                        int updatedPublicationYear = scanner.nextInt();
+                        scanner.nextLine(); // Consume newline character
+                        System.out.print("Enter updated book availability status (true/false): ");
+                        boolean updatedAvailability = scanner.nextBoolean();
+                        scanner.nextLine(); // Consume newline character
+
+                        Book updatedBook = new Book(updatedTitle, updatedAuthor, updatedGenre, updatedPublicationYear, updatedAvailability);
+                        librarySystem.updateBook(updatedBook);
+                        System.out.println("Book updated in the library.");
+                    }
+                    break;
+                case 3:
+                    System.out.print("Enter book title to remove: ");
+                    String removeTitle = scanner.nextLine();
+                    librarySystem.removeBook(removeTitle);
+                    System.out.println("Book removed from the library.");
+                    break;
+                case 4:
+                    System.out.print("Enter search keyword: ");
+                    String keyword = scanner.nextLine();
+                    System.out.print("Enter search field (title/author/genre/publication year/availability status): ");
+                    String field = scanner.nextLine();
+                    List<Book> searchResults = librarySystem.searchBooks(keyword, field);
+                    if (searchResults.isEmpty()) {
+                        System.out.println("No books found.");
+                    } else {
+                        System.out.println("Search results:");
+                        for (Book book : searchResults) {
+                            System.out.println(book);
+                        }
+                    }
+                    break;
+                case 5:
+                    System.out.print("Enter sort field (title/author/publication year/availability status): ");
+                    String sortField = scanner.nextLine();
+                    System.out.print("Sort in ascending order? (true/false): ");
+                    boolean ascending = scanner.nextBoolean();
+                    scanner.nextLine(); // Consume newline character
+
+                    List<Book> allBooks = new ArrayList<>(librarySystem.books.values());
+                    librarySystem.sortBooks(allBooks, sortField, ascending);
+                    System.out.println("Sorted books:");
+                    for (Book book : allBooks) {
+                        System.out.println(book);
+                    }
+                    break;
+                case 6:
+                    System.out.print("Enter book title to borrow: ");
+                    String borrowTitle = scanner.nextLine();
+                    librarySystem.borrowBook(borrowTitle);
+                    break;
+                case 7:
+                    System.out.print("Enter book title to return: ");
+                    String returnTitle = scanner.nextLine();
+                    librarySystem.returnBook(returnTitle);
+                    break;
+                case 8:
+                    System.out.println("Exiting program...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+            System.out.println();
+        }
+    }
+}

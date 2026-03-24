@@ -1,297 +1,816 @@
-{"chunk_id": "chunk_1", "language": "python", "imports": ["math", "nn", "paddle", "pandas", "warnings"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_2", "language": "python", "imports": ["math", "nn", "paddle", "pandas", "warnings"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_3", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_4", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_5", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_6", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_7", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_8", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_9", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_10", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_11", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_12", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_13", "language": "python", "imports": ["collections", "math", "nn", "paddle", "warnings"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "sequence_mask", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_14", "language": "python", "imports": ["collections", "math", "nn", "paddle", "warnings"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "sequence_mask", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_15", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_16", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_17", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_18", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_19", "language": "python", "imports": ["functional", "math", "nn", "paddle", "warnings"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_20", "language": "python", "imports": ["functional", "math", "nn", "paddle", "warnings"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_21", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_22", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_23", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_24", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_25", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_26", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_27", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_28", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_29", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_30", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_31", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_32", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_33", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_34", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_35", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_36", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_37", "language": "python", "imports": ["lr", "math", "nn", "paddle", "warnings"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_38", "language": "python", "imports": ["lr", "math", "nn", "paddle", "warnings"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_39", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_40", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_41", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_42", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_43", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_44", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_45", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_46", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_47", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_48", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_49", "language": "python", "imports": ["nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_50", "language": "python", "imports": ["nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_51", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_52", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_53", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_54", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_55", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_56", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_57", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_58", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_59", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_60", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_61", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_62", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_63", "language": "python", "imports": ["nn", "numpy", "paddle", "pandas", "warnings"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_64", "language": "python", "imports": ["nn", "numpy", "paddle", "pandas", "warnings"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_65", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_66", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_67", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_68", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_69", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_70", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_71", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_72", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_73", "language": "python", "imports": ["math", "mxnet", "nn", "np", "npx"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_74", "language": "python", "imports": ["math", "mxnet", "nn", "np", "npx"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_75", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_76", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_77", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_78", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_79", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_80", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_81", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_82", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_83", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_84", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_85", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_86", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_87", "language": "python", "imports": ["display", "paddle", "warnings"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
-{"chunk_id": "chunk_88", "language": "python", "imports": ["display", "paddle", "warnings"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
-{"chunk_id": "chunk_89", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_90", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_91", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_92", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_93", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
-{"chunk_id": "chunk_94", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
-{"chunk_id": "chunk_95", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_96", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_97", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_98", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_99", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
-{"chunk_id": "chunk_1", "language": "python", "imports": ["math", "nn", "paddle", "pandas", "warnings"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_2", "language": "python", "imports": ["math", "nn", "paddle", "pandas", "warnings"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_3", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_4", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_5", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_6", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_7", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_8", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_9", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_10", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_11", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_12", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_13", "language": "python", "imports": ["collections", "math", "nn", "paddle", "warnings"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "sequence_mask", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_14", "language": "python", "imports": ["collections", "math", "nn", "paddle", "warnings"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "sequence_mask", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_15", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_16", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_17", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_18", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_19", "language": "python", "imports": ["functional", "math", "nn", "paddle", "warnings"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_20", "language": "python", "imports": ["functional", "math", "nn", "paddle", "warnings"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_21", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_22", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_23", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_24", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_25", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_26", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_27", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_28", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_29", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_30", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_31", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_32", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_33", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_34", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_35", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_36", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_37", "language": "python", "imports": ["lr", "math", "nn", "paddle", "warnings"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_38", "language": "python", "imports": ["lr", "math", "nn", "paddle", "warnings"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_39", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_40", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_41", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_42", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_43", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_44", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_45", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_46", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_47", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_48", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_49", "language": "python", "imports": ["nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_50", "language": "python", "imports": ["nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_51", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_52", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_53", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_54", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_55", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_56", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_57", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_58", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_59", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_60", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_61", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_62", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_63", "language": "python", "imports": ["nn", "numpy", "paddle", "pandas", "warnings"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_64", "language": "python", "imports": ["nn", "numpy", "paddle", "pandas", "warnings"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_65", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_66", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_67", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_68", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_69", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_70", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_71", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_72", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_73", "language": "python", "imports": ["math", "mxnet", "nn", "np", "npx"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_74", "language": "python", "imports": ["math", "mxnet", "nn", "np", "npx"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_75", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_76", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_77", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_78", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_79", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_80", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_81", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_82", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_83", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_84", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_85", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_86", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_87", "language": "python", "imports": ["display", "paddle", "warnings"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
-{"chunk_id": "chunk_88", "language": "python", "imports": ["display", "paddle", "warnings"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
-{"chunk_id": "chunk_89", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_90", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_91", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_92", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_93", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
-{"chunk_id": "chunk_94", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
-{"chunk_id": "chunk_95", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_96", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_97", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_98", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_99", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
-{"chunk_id": "chunk_1", "language": "python", "imports": ["math", "nn", "paddle", "pandas", "warnings"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_2", "language": "python", "imports": ["math", "nn", "paddle", "pandas", "warnings"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_3", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_4", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_5", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_6", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_7", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_8", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_9", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_10", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_11", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_12", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_13", "language": "python", "imports": ["collections", "math", "nn", "paddle", "warnings"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "sequence_mask", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_14", "language": "python", "imports": ["collections", "math", "nn", "paddle", "warnings"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "sequence_mask", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_15", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_16", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_17", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_18", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_19", "language": "python", "imports": ["functional", "math", "nn", "paddle", "warnings"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_20", "language": "python", "imports": ["functional", "math", "nn", "paddle", "warnings"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_21", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_22", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_23", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_24", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_25", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_26", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_27", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_28", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_29", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_30", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_31", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_32", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
-{"chunk_id": "chunk_33", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_34", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_35", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_36", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
-{"chunk_id": "chunk_37", "language": "python", "imports": ["lr", "math", "nn", "paddle", "warnings"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_38", "language": "python", "imports": ["lr", "math", "nn", "paddle", "warnings"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_39", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_40", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_41", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_42", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_43", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_44", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
-{"chunk_id": "chunk_45", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_46", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_47", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_48", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
-{"chunk_id": "chunk_49", "language": "python", "imports": ["nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_50", "language": "python", "imports": ["nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_51", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_52", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_53", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_54", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_55", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_56", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_57", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_58", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
-{"chunk_id": "chunk_59", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_60", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_61", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_62", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_63", "language": "python", "imports": ["nn", "numpy", "paddle", "pandas", "warnings"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_64", "language": "python", "imports": ["nn", "numpy", "paddle", "pandas", "warnings"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_65", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_66", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_67", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_68", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_69", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_70", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_71", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_72", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_73", "language": "python", "imports": ["math", "mxnet", "nn", "np", "npx"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_74", "language": "python", "imports": ["math", "mxnet", "nn", "np", "npx"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_75", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_76", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_77", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_78", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_79", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_80", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_81", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_82", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
-{"chunk_id": "chunk_83", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_84", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
-{"chunk_id": "chunk_85", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_86", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_87", "language": "python", "imports": ["display", "paddle", "warnings"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
-{"chunk_id": "chunk_88", "language": "python", "imports": ["display", "paddle", "warnings"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
-{"chunk_id": "chunk_89", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_90", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
-{"chunk_id": "chunk_91", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_92", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
-{"chunk_id": "chunk_93", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
-{"chunk_id": "chunk_94", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
-{"chunk_id": "chunk_95", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_96", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_97", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_98", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
-{"chunk_id": "chunk_99", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "0", "language": "python", "imports": ["math", "nn", "paddle", "pandas", "warnings"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "1", "language": "python", "imports": ["math", "nn", "paddle", "pandas", "warnings"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "2", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "3", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "4", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "5", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "6", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "7", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "8", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "9", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx", "pandas"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "10", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "11", "language": "python", "imports": ["math", "nn", "pandas", "torch"], "classes": ["PositionWiseFFN", "AddNorm", "EncoderBlock", "TransformerEncoder", "DecoderBlock", "TransformerDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "12", "language": "python", "imports": ["collections", "math", "nn", "paddle", "warnings"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "sequence_mask", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "13", "language": "python", "imports": ["collections", "math", "nn", "paddle", "warnings"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "sequence_mask", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "14", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "15", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "16", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "17", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "18", "language": "python", "imports": ["functional", "math", "nn", "paddle", "warnings"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "19", "language": "python", "imports": ["functional", "math", "nn", "paddle", "warnings"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "20", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "21", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "22", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "23", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "24", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "25", "language": "python", "imports": ["collections", "math", "nn", "torch"], "classes": ["Seq2SeqEncoder", "Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["sequence_mask", "train_seq2seq", "xavier_init_weights", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "26", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "27", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "28", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "29", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "30", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "31", "language": "python", "imports": ["autograd", "collections", "gluon", "init", "math", "mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqDecoder", "MaskedSoftmaxCELoss"], "functions": ["__init__", "forward", "train_seq2seq", "predict_seq2seq"], "content": "fs"}
+{"chunk_id": "32", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "33", "language": "python", "imports": ["autograd", "gluon", "math", "mxnet", "np", "npx"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "34", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "35", "language": "python", "imports": ["functional", "math", "nn", "torch"], "classes": ["RNNModelScratch"], "functions": ["get_params", "normal", "init_rnn_state", "rnn", "predict_ch8", "grad_clipping", "train_epoch_ch8", "train_ch8"], "content": "fs"}
+{"chunk_id": "36", "language": "python", "imports": ["lr", "math", "nn", "paddle", "warnings"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
+{"chunk_id": "37", "language": "python", "imports": ["lr", "math", "nn", "paddle", "warnings"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
+{"chunk_id": "38", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
+{"chunk_id": "39", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
+{"chunk_id": "40", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
+{"chunk_id": "41", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
+{"chunk_id": "42", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
+{"chunk_id": "43", "language": "python", "imports": ["lr_scheduler", "math", "nn", "torch"], "classes": ["FactorScheduler"], "functions": ["net_fn", "train", "get_lr"], "content": "fs"}
+{"chunk_id": "44", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
+{"chunk_id": "45", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
+{"chunk_id": "46", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
+{"chunk_id": "47", "language": "python", "imports": ["autograd", "gluon", "init", "lr_scheduler", "mxnet", "nn", "np", "npx"], "classes": ["FactorScheduler"], "functions": ["train"], "content": "fs"}
+{"chunk_id": "48", "language": "python", "imports": ["nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
+{"chunk_id": "49", "language": "python", "imports": ["nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
+{"chunk_id": "50", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "51", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "52", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
+{"chunk_id": "53", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
+{"chunk_id": "54", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
+{"chunk_id": "55", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
+{"chunk_id": "56", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
+{"chunk_id": "57", "language": "python", "imports": ["nn", "numpy", "torch"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11", "init_weights"], "content": "fs"}
+{"chunk_id": "58", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
+{"chunk_id": "59", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_data_ch11", "sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
+{"chunk_id": "60", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "61", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "62", "language": "python", "imports": ["nn", "numpy", "paddle", "pandas", "warnings"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
+{"chunk_id": "63", "language": "python", "imports": ["nn", "numpy", "paddle", "pandas", "warnings"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
+{"chunk_id": "64", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "65", "language": "python", "imports": ["autograd", "init", "mxnet", "nn", "np", "npx"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "66", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "67", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "68", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "69", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "70", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "71", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "72", "language": "python", "imports": ["math", "mxnet", "nn", "np", "npx"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "73", "language": "python", "imports": ["math", "mxnet", "nn", "np", "npx"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "74", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
+{"chunk_id": "75", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
+{"chunk_id": "76", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
+{"chunk_id": "77", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx", "pandas"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
+{"chunk_id": "78", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
+{"chunk_id": "79", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
+{"chunk_id": "80", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
+{"chunk_id": "81", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["get_net", "log_rmse", "train", "get_k_fold_data", "train_and_pred"], "content": "fs"}
+{"chunk_id": "82", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "83", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "84", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "85", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "86", "language": "python", "imports": ["display", "paddle", "warnings"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
+{"chunk_id": "87", "language": "python", "imports": ["display", "paddle", "warnings"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
+{"chunk_id": "88", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "89", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "90", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
+{"chunk_id": "91", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["sgd", "train_ch11", "train_concise_ch11"], "content": "fs"}
+{"chunk_id": "92", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
+{"chunk_id": "93", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
+{"chunk_id": "94", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "95", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "96", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "97", "language": "python", "imports": ["nn", "torch"], "classes": ["BatchNorm"], "functions": ["batch_norm"], "content": "fs"}
+{"chunk_id": "98", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "99", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "100", "language": "python", "imports": ["paddle", "paddle.nn", "paddle.nn.functional", "warnings"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "101", "language": "python", "imports": ["paddle", "paddle.nn", "paddle.nn.functional", "warnings"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "102", "language": "python", "imports": ["math", "mxnet", "nn", "np", "npx"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "103", "language": "python", "imports": ["math", "mxnet", "nn", "np", "npx"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "104", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "105", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "106", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "107", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["AdditiveAttention", "DotProductAttention"], "functions": ["masked_softmax"], "content": "fs"}
+{"chunk_id": "108", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "109", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "110", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "111", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "112", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "113", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "114", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
+{"chunk_id": "115", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
+{"chunk_id": "116", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
+{"chunk_id": "117", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
+{"chunk_id": "118", "language": "python", "imports": ["autograd", "gluon", "mxnet", "nn", "np", "npx"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "119", "language": "python", "imports": ["autograd", "gluon", "mxnet", "nn", "np", "npx"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "120", "language": "python", "imports": ["autograd", "gluon", "mxnet", "nn", "np", "npx"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "121", "language": "python", "imports": ["autograd", "gluon", "mxnet", "nn", "np", "npx"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "122", "language": "python", "imports": ["display", "torch"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
+{"chunk_id": "123", "language": "python", "imports": ["display", "torch"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
+{"chunk_id": "124", "language": "python", "imports": ["nn", "torch"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "125", "language": "python", "imports": ["nn", "torch"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "126", "language": "python", "imports": ["nn", "torch"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "127", "language": "python", "imports": ["nn", "torch"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "128", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_net", "train"], "content": "fs"}
+{"chunk_id": "129", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_net", "train"], "content": "fs"}
+{"chunk_id": "130", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_net", "train"], "content": "fs"}
+{"chunk_id": "131", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_net", "train"], "content": "fs"}
+{"chunk_id": "132", "language": "python", "imports": ["nn", "paddle", "random", "warnings"], "classes": ["Net"], "functions": ["dropout_layer"], "content": "fs"}
+{"chunk_id": "133", "language": "python", "imports": ["nn", "paddle", "random", "warnings"], "classes": ["Net"], "functions": ["dropout_layer"], "content": "fs"}
+{"chunk_id": "134", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "135", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "136", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "137", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "138", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "139", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "140", "language": "python", "imports": ["nn", "torch"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "141", "language": "python", "imports": ["nn", "torch"], "classes": ["NWKernelRegression"], "functions": ["f"], "content": "fs"}
+{"chunk_id": "142", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "143", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "144", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "145", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["Inception"], "functions": [], "content": "fs"}
+{"chunk_id": "146", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
+{"chunk_id": "147", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights", "get_net", "train"], "content": "fs"}
+{"chunk_id": "148", "language": "python", "imports": ["functional", "paddle", "paddle.nn", "warnings"], "classes": ["Residual"], "functions": ["resnet_block"], "content": "fs"}
+{"chunk_id": "149", "language": "python", "imports": ["functional", "paddle", "paddle.nn", "warnings"], "classes": ["Residual"], "functions": ["resnet_block"], "content": "fs"}
+{"chunk_id": "150", "language": "python", "imports": ["autograd", "display", "gluon", "mxnet", "np", "npx"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
+{"chunk_id": "151", "language": "python", "imports": ["autograd", "display", "gluon", "mxnet", "np", "npx"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3", "updater", "predict_ch3"], "content": "fs"}
+{"chunk_id": "152", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "153", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "154", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "155", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "156", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "157", "language": "python", "imports": ["nn", "torch"], "classes": ["Seq2SeqAttentionDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "158", "language": "python", "imports": ["nn", "paddle", "paddle.nn.functional", "warnings"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "159", "language": "python", "imports": ["nn", "paddle", "paddle.nn.functional", "warnings"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "160", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "161", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "162", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "163", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "164", "language": "python", "imports": ["mxnet", "np", "npx", "rnn"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "165", "language": "python", "imports": ["mxnet", "np", "npx", "rnn"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "166", "language": "python", "imports": ["mxnet", "np", "npx", "rnn"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "167", "language": "python", "imports": ["mxnet", "np", "npx", "rnn"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "168", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "169", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "170", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "171", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "172", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "173", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_params", "l2_penalty", "train", "train_concise"], "content": "fs"}
+{"chunk_id": "174", "language": "python", "imports": ["nn", "optimizer", "paddle", "warnings"], "classes": [], "functions": ["train_ch6", "init_weights"], "content": "fs"}
+{"chunk_id": "175", "language": "python", "imports": ["nn", "optimizer", "paddle", "warnings"], "classes": [], "functions": ["train_ch6", "init_weights"], "content": "fs"}
+{"chunk_id": "176", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Residual"], "functions": ["resnet_block"], "content": "fs"}
+{"chunk_id": "177", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Residual"], "functions": ["resnet_block"], "content": "fs"}
+{"chunk_id": "178", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Residual"], "functions": ["resnet_block"], "content": "fs"}
+{"chunk_id": "179", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Residual"], "functions": ["resnet_block"], "content": "fs"}
+{"chunk_id": "180", "language": "python", "imports": ["nn", "torch"], "classes": ["Net"], "functions": ["dropout_layer", "init_weights"], "content": "fs"}
+{"chunk_id": "181", "language": "python", "imports": ["nn", "torch"], "classes": ["Net"], "functions": ["dropout_layer", "init_weights"], "content": "fs"}
+{"chunk_id": "182", "language": "python", "imports": ["nn", "torch"], "classes": ["Net"], "functions": ["dropout_layer", "init_weights"], "content": "fs"}
+{"chunk_id": "183", "language": "python", "imports": ["nn", "torch"], "classes": ["Net"], "functions": ["dropout_layer", "init_weights"], "content": "fs"}
+{"chunk_id": "184", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "185", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "186", "language": "python", "imports": ["nn", "torch"], "classes": ["Net"], "functions": ["dropout_layer", "init_weights"], "content": "fs"}
+{"chunk_id": "187", "language": "python", "imports": ["nn", "torch"], "classes": ["Net"], "functions": ["dropout_layer", "init_weights"], "content": "fs"}
+{"chunk_id": "188", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["RNNModel"], "functions": [], "content": "fs"}
+{"chunk_id": "189", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["RNNModel"], "functions": [], "content": "fs"}
+{"chunk_id": "190", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["RNNModel"], "functions": [], "content": "fs"}
+{"chunk_id": "191", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["RNNModel"], "functions": [], "content": "fs"}
+{"chunk_id": "192", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["train_ch6", "init_weights"], "content": "fs"}
+{"chunk_id": "193", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["train_ch6", "init_weights"], "content": "fs"}
+{"chunk_id": "194", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["train_ch6", "init_weights"], "content": "fs"}
+{"chunk_id": "195", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["train_ch6", "init_weights"], "content": "fs"}
+{"chunk_id": "196", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["train_ch6", "init_weights"], "content": "fs"}
+{"chunk_id": "197", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["train_ch6", "init_weights"], "content": "fs"}
+{"chunk_id": "198", "language": "python", "imports": ["display", "torch"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3"], "content": "fs"}
+{"chunk_id": "199", "language": "python", "imports": ["display", "torch"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3"], "content": "fs"}
+{"chunk_id": "200", "language": "python", "imports": ["display", "torch"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3"], "content": "fs"}
+{"chunk_id": "201", "language": "python", "imports": ["display", "torch"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3"], "content": "fs"}
+{"chunk_id": "202", "language": "python", "imports": ["data", "torch", "torchvision", "transforms"], "classes": [], "functions": ["show_images", "load_data_fashion_mnist"], "content": "fs"}
+{"chunk_id": "203", "language": "python", "imports": ["data", "torch", "torchvision", "transforms"], "classes": [], "functions": ["show_images", "load_data_fashion_mnist"], "content": "fs"}
+{"chunk_id": "204", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["train_ch6"], "content": "fs"}
+{"chunk_id": "205", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["train_ch6"], "content": "fs"}
+{"chunk_id": "206", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["train_ch6"], "content": "fs"}
+{"chunk_id": "207", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["train_ch6"], "content": "fs"}
+{"chunk_id": "208", "language": "python", "imports": ["functional", "nn", "paddle", "warnings"], "classes": [], "functions": ["__init__", "forward", "begin_state"], "content": "fs"}
+{"chunk_id": "209", "language": "python", "imports": ["functional", "nn", "paddle", "warnings"], "classes": [], "functions": ["__init__", "forward", "begin_state"], "content": "fs"}
+{"chunk_id": "210", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "211", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "212", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "213", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "214", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "215", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "216", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["log_rmse", "train", "get_k_fold_data"], "content": "fs"}
+{"chunk_id": "217", "language": "python", "imports": ["nn", "numpy", "pandas", "torch"], "classes": [], "functions": ["log_rmse", "train", "get_k_fold_data"], "content": "fs"}
+{"chunk_id": "218", "language": "python", "imports": ["paddle", "sys", "transforms", "warnings"], "classes": [], "functions": ["show_images"], "content": "fs"}
+{"chunk_id": "219", "language": "python", "imports": ["paddle", "sys", "transforms", "warnings"], "classes": [], "functions": ["show_images"], "content": "fs"}
+{"chunk_id": "220", "language": "python", "imports": ["nn", "paddle", "paddle.nn.functional", "warnings"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "221", "language": "python", "imports": ["nn", "paddle", "paddle.nn.functional", "warnings"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "222", "language": "python", "imports": ["data", "torch", "torchvision", "transforms"], "classes": [], "functions": ["show_images", "load_data_fashion_mnist"], "content": "fs"}
+{"chunk_id": "223", "language": "python", "imports": ["data", "torch", "torchvision", "transforms"], "classes": [], "functions": ["show_images", "load_data_fashion_mnist"], "content": "fs"}
+{"chunk_id": "224", "language": "python", "imports": ["data", "torch", "torchvision", "transforms"], "classes": [], "functions": ["show_images", "load_data_fashion_mnist"], "content": "fs"}
+{"chunk_id": "225", "language": "python", "imports": ["data", "torch", "torchvision", "transforms"], "classes": [], "functions": ["show_images", "load_data_fashion_mnist"], "content": "fs"}
+{"chunk_id": "226", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "227", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "228", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "229", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "230", "language": "python", "imports": ["mxnet", "np", "npx", "rnn"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "231", "language": "python", "imports": ["mxnet", "np", "npx", "rnn"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "232", "language": "python", "imports": ["mxnet", "np", "npx", "rnn"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "233", "language": "python", "imports": ["mxnet", "np", "npx", "rnn"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "234", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["RNNModel"], "functions": [], "content": "fs"}
+{"chunk_id": "235", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["RNNModel"], "functions": [], "content": "fs"}
+{"chunk_id": "236", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "237", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_lstm_params", "normal", "three", "init_lstm_state", "lstm"], "content": "fs"}
+{"chunk_id": "238", "language": "python", "imports": ["nn", "torch"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "239", "language": "python", "imports": ["nn", "torch"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "240", "language": "python", "imports": ["nn", "torch"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "241", "language": "python", "imports": ["nn", "torch"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "242", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["dropout_layer", "net"], "content": "fs"}
+{"chunk_id": "243", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["dropout_layer", "net"], "content": "fs"}
+{"chunk_id": "244", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["dropout_layer", "net"], "content": "fs"}
+{"chunk_id": "245", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["dropout_layer", "net"], "content": "fs"}
+{"chunk_id": "246", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["Residual"], "functions": ["resnet_block"], "content": "fs"}
+{"chunk_id": "247", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["Residual"], "functions": ["resnet_block"], "content": "fs"}
+{"chunk_id": "248", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["Residual"], "functions": ["resnet_block"], "content": "fs"}
+{"chunk_id": "249", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["Residual"], "functions": ["resnet_block"], "content": "fs"}
+{"chunk_id": "250", "language": "python", "imports": ["functional", "nn", "paddle", "warnings"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "251", "language": "python", "imports": ["functional", "nn", "paddle", "warnings"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "252", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "253", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "254", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "255", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "256", "language": "python", "imports": ["math", "nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["evaluate_loss", "train"], "content": "fs"}
+{"chunk_id": "257", "language": "python", "imports": ["math", "nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["evaluate_loss", "train"], "content": "fs"}
+{"chunk_id": "258", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "259", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "260", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["block1", "block2", "init_normal", "init_constant", "xavier", "init_42", "my_init"], "content": "fs"}
+{"chunk_id": "261", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["block1", "block2", "init_normal", "init_constant", "xavier", "init_42", "my_init"], "content": "fs"}
+{"chunk_id": "262", "language": "python", "imports": ["paddle", "random", "warnings"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "squared_loss"], "content": "fs"}
+{"chunk_id": "263", "language": "python", "imports": ["paddle", "random", "warnings"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "squared_loss"], "content": "fs"}
+{"chunk_id": "264", "language": "python", "imports": ["autograd", "display", "gluon", "mxnet", "np", "npx"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3"], "content": "fs"}
+{"chunk_id": "265", "language": "python", "imports": ["autograd", "display", "gluon", "mxnet", "np", "npx"], "classes": [], "functions": ["softmax", "net", "cross_entropy", "accuracy", "evaluate_accuracy", "train_epoch_ch3"], "content": "fs"}
+{"chunk_id": "266", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "267", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "268", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "269", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "270", "language": "python", "imports": ["gluon", "mxnet", "sys"], "classes": [], "functions": ["show_images", "load_data_fashion_mnist"], "content": "fs"}
+{"chunk_id": "271", "language": "python", "imports": ["gluon", "mxnet", "sys"], "classes": [], "functions": ["show_images", "load_data_fashion_mnist"], "content": "fs"}
+{"chunk_id": "272", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "273", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "274", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "275", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "276", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "277", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["MultiHeadAttention"], "functions": ["transpose_qkv", "transpose_output"], "content": "fs"}
+{"chunk_id": "278", "language": "python", "imports": ["math", "paddle", "warnings"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "newton", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "279", "language": "python", "imports": ["math", "paddle", "warnings"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "newton", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "280", "language": "python", "imports": ["gluon", "mxnet", "sys"], "classes": [], "functions": ["show_images", "load_data_fashion_mnist"], "content": "fs"}
+{"chunk_id": "281", "language": "python", "imports": ["gluon", "mxnet", "sys"], "classes": [], "functions": ["show_images", "load_data_fashion_mnist"], "content": "fs"}
+{"chunk_id": "282", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "283", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_params", "normal", "three", "init_gru_state", "gru"], "content": "fs"}
+{"chunk_id": "284", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "285", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "286", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "287", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "288", "language": "python", "imports": ["math", "nn", "paddle", "warnings"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "289", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "290", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "291", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "292", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "293", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "294", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "295", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "296", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "297", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "298", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "299", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "300", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "sgd"], "content": "fs"}
+{"chunk_id": "301", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "sgd"], "content": "fs"}
+{"chunk_id": "302", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "303", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "304", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "305", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["f", "f_grad", "show_trace_2d", "f", "f_grad", "f_hess", "f", "f_grad", "sgd", "constant_lr"], "content": "fs"}
+{"chunk_id": "306", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "squared_loss", "sgd"], "content": "fs"}
+{"chunk_id": "307", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "squared_loss", "sgd"], "content": "fs"}
+{"chunk_id": "308", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "309", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "310", "language": "python", "imports": ["paddle", "random", "warnings"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "311", "language": "python", "imports": ["paddle", "random", "warnings"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "312", "language": "python", "imports": ["autograd", "mxnet", "np", "npx", "random"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "sgd"], "content": "fs"}
+{"chunk_id": "313", "language": "python", "imports": ["autograd", "mxnet", "np", "npx", "random"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "sgd"], "content": "fs"}
+{"chunk_id": "314", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Residual"], "functions": [], "content": "fs"}
+{"chunk_id": "315", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["Residual"], "functions": [], "content": "fs"}
+{"chunk_id": "316", "language": "python", "imports": ["autograd", "mxnet", "np", "npx", "random"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "squared_loss", "sgd"], "content": "fs"}
+{"chunk_id": "317", "language": "python", "imports": ["autograd", "mxnet", "np", "npx", "random"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "squared_loss", "sgd"], "content": "fs"}
+{"chunk_id": "318", "language": "python", "imports": ["mplot3d", "numpy", "paddle", "warnings"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "319", "language": "python", "imports": ["mplot3d", "numpy", "paddle", "warnings"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "320", "language": "python", "imports": ["gluon", "math", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["evaluate_loss", "train"], "content": "fs"}
+{"chunk_id": "321", "language": "python", "imports": ["gluon", "math", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["evaluate_loss", "train"], "content": "fs"}
+{"chunk_id": "322", "language": "python", "imports": ["mxnet", "np", "npx", "random"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "323", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "sgd"], "content": "fs"}
+{"chunk_id": "324", "language": "python", "imports": ["mxnet", "np", "npx", "random"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "325", "language": "python", "imports": ["mxnet", "np", "npx", "random"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "326", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["synthetic_data", "data_iter", "linreg", "sgd"], "content": "fs"}
+{"chunk_id": "327", "language": "python", "imports": ["mxnet", "np", "npx", "random"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "328", "language": "python", "imports": ["math", "nn", "numpy", "torch"], "classes": [], "functions": ["evaluate_loss", "train"], "content": "fs"}
+{"chunk_id": "329", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "330", "language": "python", "imports": ["math", "nn", "numpy", "torch"], "classes": [], "functions": ["evaluate_loss", "train"], "content": "fs"}
+{"chunk_id": "331", "language": "python", "imports": ["math", "nn", "numpy", "torch"], "classes": [], "functions": ["evaluate_loss", "train"], "content": "fs"}
+{"chunk_id": "332", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP", "MySequential", "FixedHiddenMLP", "NestMLP"], "functions": [], "content": "fs"}
+{"chunk_id": "333", "language": "python", "imports": ["math", "nn", "numpy", "torch"], "classes": [], "functions": ["evaluate_loss", "train"], "content": "fs"}
+{"chunk_id": "334", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "335", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "336", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "337", "language": "python", "imports": ["autograd", "math", "mxnet", "nn", "np", "npx"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "338", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "339", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "340", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "341", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "342", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "343", "language": "python", "imports": ["random", "torch"], "classes": [], "functions": ["seq_data_iter_random", "data", "seq_data_iter_sequential"], "content": "fs"}
+{"chunk_id": "344", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["block1", "block2", "init_normal", "init_constant", "init_xavier", "init_42", "my_init"], "content": "fs"}
+{"chunk_id": "345", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["block1", "block2", "init_normal", "init_constant", "init_xavier", "init_42", "my_init"], "content": "fs"}
+{"chunk_id": "346", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["block1", "block2", "init_normal", "init_constant", "init_xavier", "init_42", "my_init"], "content": "fs"}
+{"chunk_id": "347", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["block1", "block2", "init_normal", "init_constant", "init_xavier", "init_42", "my_init"], "content": "fs"}
+{"chunk_id": "348", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "349", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "350", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "351", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["init_adam_states", "adam", "yogi"], "content": "fs"}
+{"chunk_id": "352", "language": "python", "imports": ["math", "nn", "numpy", "torch"], "classes": [], "functions": ["train"], "content": "fs"}
+{"chunk_id": "353", "language": "python", "imports": ["math", "nn", "numpy", "torch"], "classes": [], "functions": ["train"], "content": "fs"}
+{"chunk_id": "354", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["block1", "block2", "init_normal", "init_constant", "init_xavier", "init_42", "my_init"], "content": "fs"}
+{"chunk_id": "355", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["block1", "block2", "init_normal", "init_constant", "init_xavier", "init_42", "my_init"], "content": "fs"}
+{"chunk_id": "356", "language": "python", "imports": ["nn", "torch"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "357", "language": "python", "imports": ["nn", "torch"], "classes": ["DenseBlock"], "functions": ["conv_block", "transition_block"], "content": "fs"}
+{"chunk_id": "358", "language": "python", "imports": ["mplot3d", "mxnet", "np", "npx"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "359", "language": "python", "imports": ["mplot3d", "mxnet", "np", "npx"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "360", "language": "python", "imports": ["mplot3d", "mxnet", "np", "npx"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "361", "language": "python", "imports": ["mplot3d", "mxnet", "np", "npx"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "362", "language": "python", "imports": ["init", "nn", "np", "npx"], "classes": ["MyInit"], "functions": ["block1", "block2"], "content": "fs"}
+{"chunk_id": "363", "language": "python", "imports": ["init", "nn", "np", "npx"], "classes": ["MyInit"], "functions": ["block1", "block2"], "content": "fs"}
+{"chunk_id": "364", "language": "python", "imports": ["init", "nn", "np", "npx"], "classes": ["MyInit"], "functions": ["block1", "block2"], "content": "fs"}
+{"chunk_id": "365", "language": "python", "imports": ["init", "nn", "np", "npx"], "classes": ["MyInit"], "functions": ["block1", "block2"], "content": "fs"}
+{"chunk_id": "366", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "367", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "368", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "369", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "370", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "371", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": ["f", "g", "annotate"], "content": "fs"}
+{"chunk_id": "372", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "373", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "374", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "375", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "376", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["RNNModel"], "functions": [], "content": "fs"}
+{"chunk_id": "377", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["RNNModel"], "functions": [], "content": "fs"}
+{"chunk_id": "378", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["RNNModel"], "functions": [], "content": "fs"}
+{"chunk_id": "379", "language": "python", "imports": ["mxnet", "nn", "np", "npx", "rnn"], "classes": ["RNNModel"], "functions": [], "content": "fs"}
+{"chunk_id": "380", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "381", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "382", "language": "python", "imports": ["gluon", "math", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["evaluate_loss", "train"], "content": "fs"}
+{"chunk_id": "383", "language": "python", "imports": ["gluon", "math", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["evaluate_loss", "train"], "content": "fs"}
+{"chunk_id": "384", "language": "python", "imports": ["autograd", "mxnet", "nn", "np", "npx"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "385", "language": "python", "imports": ["autograd", "mxnet", "nn", "np", "npx"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "386", "language": "python", "imports": ["autograd", "mxnet", "nn", "np", "npx"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "387", "language": "python", "imports": ["autograd", "mxnet", "nn", "np", "npx"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "388", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "389", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "390", "language": "python", "imports": ["nn", "paddle"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "391", "language": "python", "imports": ["nn", "paddle"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "392", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "393", "language": "python", "imports": ["math", "nn", "torch"], "classes": ["PositionalEncoding"], "functions": [], "content": "fs"}
+{"chunk_id": "394", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "395", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "396", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "397", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "398", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "399", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "400", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "401", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "402", "language": "python", "imports": ["nn", "torch"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "403", "language": "python", "imports": ["nn", "torch"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "404", "language": "python", "imports": ["nn", "torch"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "405", "language": "python", "imports": ["nn", "torch"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "406", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "407", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "408", "language": "python", "imports": ["nn", "torch"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "409", "language": "python", "imports": ["nn", "torch"], "classes": ["Conv2D"], "functions": ["corr2d"], "content": "fs"}
+{"chunk_id": "410", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "411", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "412", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "413", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["f_2d", "gd_2d", "init_momentum_states", "sgd_momentum"], "content": "fs"}
+{"chunk_id": "414", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "415", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "416", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "417", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "418", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "419", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "420", "language": "python", "imports": ["math", "paddle", "warnings"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "421", "language": "python", "imports": ["math", "paddle", "warnings"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "422", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "423", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "424", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "425", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "426", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "427", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "428", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "429", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "430", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "431", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "432", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "433", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["nin_block"], "content": "fs"}
+{"chunk_id": "434", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["show_heatmaps"], "content": "fs"}
+{"chunk_id": "435", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["show_heatmaps"], "content": "fs"}
+{"chunk_id": "436", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "437", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "438", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "439", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "440", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "441", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "442", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["relu", "net"], "content": "fs"}
+{"chunk_id": "443", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["relu", "net"], "content": "fs"}
+{"chunk_id": "444", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "445", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "446", "language": "python", "imports": ["math", "paddle", "warnings"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "447", "language": "python", "imports": ["math", "paddle", "warnings"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "448", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["show_heatmaps"], "content": "fs"}
+{"chunk_id": "449", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["show_heatmaps"], "content": "fs"}
+{"chunk_id": "450", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["show_heatmaps"], "content": "fs"}
+{"chunk_id": "451", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["show_heatmaps"], "content": "fs"}
+{"chunk_id": "452", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["CenteredLayer", "MyDense"], "functions": [], "content": "fs"}
+{"chunk_id": "453", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["CenteredLayer", "MyDense"], "functions": [], "content": "fs"}
+{"chunk_id": "454", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["CenteredLayer", "MyDense"], "functions": [], "content": "fs"}
+{"chunk_id": "455", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["CenteredLayer", "MyDense"], "functions": [], "content": "fs"}
+{"chunk_id": "456", "language": "python", "imports": ["nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "457", "language": "python", "imports": ["nn", "numpy", "paddle", "warnings"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "458", "language": "python", "imports": ["nn", "warnings"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "459", "language": "python", "imports": ["nn", "warnings"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "460", "language": "python", "imports": ["torch"], "classes": [], "functions": ["show_heatmaps"], "content": "fs"}
+{"chunk_id": "461", "language": "python", "imports": ["torch"], "classes": [], "functions": ["show_heatmaps"], "content": "fs"}
+{"chunk_id": "462", "language": "python", "imports": ["torch"], "classes": [], "functions": ["show_heatmaps"], "content": "fs"}
+{"chunk_id": "463", "language": "python", "imports": ["torch"], "classes": [], "functions": ["show_heatmaps"], "content": "fs"}
+{"chunk_id": "464", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "465", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "466", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "467", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "468", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "469", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "470", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "471", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "472", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "473", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "474", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "475", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "476", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "477", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "478", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "479", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "480", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "481", "language": "python", "imports": ["paddle", "paddle.nn", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "482", "language": "python", "imports": ["nn"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "483", "language": "python", "imports": ["nn"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "484", "language": "python", "imports": ["nn"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "485", "language": "python", "imports": ["nn"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "486", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["relu", "net"], "content": "fs"}
+{"chunk_id": "487", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["relu", "net"], "content": "fs"}
+{"chunk_id": "488", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["relu", "net"], "content": "fs"}
+{"chunk_id": "489", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["relu", "net"], "content": "fs"}
+{"chunk_id": "490", "language": "python", "imports": ["torch"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "491", "language": "python", "imports": ["torch"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "492", "language": "python", "imports": ["torch"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "493", "language": "python", "imports": ["torch"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "494", "language": "python", "imports": ["torch"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "495", "language": "python", "imports": ["torch"], "classes": [], "functions": ["corr2d_multi_in", "corr2d_multi_in_out", "corr2d_multi_in_out_1x1"], "content": "fs"}
+{"chunk_id": "496", "language": "python", "imports": ["nn"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "497", "language": "python", "imports": ["nn"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "498", "language": "python", "imports": ["nn"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "499", "language": "python", "imports": ["nn"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "500", "language": "python", "imports": ["nn"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "501", "language": "python", "imports": ["nn"], "classes": ["Encoder", "Decoder", "EncoderDecoder"], "functions": [], "content": "fs"}
+{"chunk_id": "502", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "503", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "504", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "505", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "506", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "507", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "508", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "509", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "510", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "511", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["pool2d"], "content": "fs"}
+{"chunk_id": "512", "language": "python", "imports": ["np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "513", "language": "python", "imports": ["np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "514", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "515", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "516", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "517", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "518", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "519", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "520", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "521", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "522", "language": "python", "imports": ["nn", "paddle", "paddle.nn.functional", "warnings"], "classes": ["CenteredLayer", "MyLinear"], "functions": [], "content": "fs"}
+{"chunk_id": "523", "language": "python", "imports": ["nn", "paddle", "paddle.nn.functional", "warnings"], "classes": ["CenteredLayer", "MyLinear"], "functions": [], "content": "fs"}
+{"chunk_id": "524", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "525", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["vgg_block", "vgg"], "content": "fs"}
+{"chunk_id": "526", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "527", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "528", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "529", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["adagrad_2d", "f_2d", "init_adagrad_states", "adagrad"], "content": "fs"}
+{"chunk_id": "530", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "531", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "532", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "533", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "534", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "535", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "536", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "537", "language": "python", "imports": ["math", "torch"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "538", "language": "python", "imports": ["gluon", "mxnet", "np", "npx"], "classes": [], "functions": ["relu", "net"], "content": "fs"}
+{"chunk_id": "539", "language": "python", "imports": ["gluon", "mxnet", "np", "npx"], "classes": [], "functions": ["relu", "net"], "content": "fs"}
+{"chunk_id": "540", "language": "python", "imports": ["gluon", "mxnet", "np", "npx"], "classes": [], "functions": ["relu", "net"], "content": "fs"}
+{"chunk_id": "541", "language": "python", "imports": ["gluon", "mxnet", "np", "npx"], "classes": [], "functions": ["relu", "net"], "content": "fs"}
+{"chunk_id": "542", "language": "python", "imports": ["functional", "nn", "paddle", "warnings"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "543", "language": "python", "imports": ["functional", "nn", "paddle", "warnings"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "544", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "545", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "546", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "547", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "548", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "549", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "550", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "551", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "552", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "553", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "554", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "555", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "556", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "557", "language": "python", "imports": ["torch"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "558", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "559", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "560", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "561", "language": "python", "imports": ["autograd", "gluon", "init", "mxnet", "nn", "np", "npx"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "562", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "563", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "564", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "565", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "566", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "567", "language": "python", "imports": ["math", "mxnet", "np", "npx"], "classes": [], "functions": ["init_rmsprop_states", "rmsprop"], "content": "fs"}
+{"chunk_id": "568", "language": "python", "imports": ["np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "569", "language": "python", "imports": ["np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "570", "language": "python", "imports": ["os", "paddle", "warnings"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "571", "language": "python", "imports": ["os", "paddle", "warnings"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "572", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "573", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "574", "language": "python", "imports": ["collections", "paddle", "re"], "classes": [], "functions": ["tokenize", "load_corpus_time_machine"], "content": "fs"}
+{"chunk_id": "575", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["relu"], "content": "fs"}
+{"chunk_id": "576", "language": "python", "imports": ["collections", "paddle", "re"], "classes": [], "functions": ["tokenize", "load_corpus_time_machine"], "content": "fs"}
+{"chunk_id": "577", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["relu"], "content": "fs"}
+{"chunk_id": "578", "language": "python", "imports": ["collections", "re", "torch"], "classes": [], "functions": ["tokenize", "load_corpus_time_machine"], "content": "fs"}
+{"chunk_id": "579", "language": "python", "imports": ["collections", "mxnet", "re"], "classes": [], "functions": ["tokenize", "load_corpus_time_machine"], "content": "fs"}
+{"chunk_id": "580", "language": "python", "imports": ["collections", "re", "torch"], "classes": [], "functions": ["tokenize", "load_corpus_time_machine"], "content": "fs"}
+{"chunk_id": "581", "language": "python", "imports": ["collections", "mxnet", "re"], "classes": [], "functions": ["tokenize", "load_corpus_time_machine"], "content": "fs"}
+{"chunk_id": "582", "language": "python", "imports": ["nn", "paddle"], "classes": [], "functions": ["try_all_gpus"], "content": "fs"}
+{"chunk_id": "583", "language": "python", "imports": ["nn", "paddle"], "classes": [], "functions": ["try_all_gpus"], "content": "fs"}
+{"chunk_id": "584", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "585", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "586", "language": "python", "imports": ["nn", "torch", "torch.nn.functional"], "classes": ["CenteredLayer", "MyLinear"], "functions": [], "content": "fs"}
+{"chunk_id": "587", "language": "python", "imports": ["nn", "torch", "torch.nn.functional"], "classes": ["CenteredLayer", "MyLinear"], "functions": [], "content": "fs"}
+{"chunk_id": "588", "language": "python", "imports": ["nn", "torch", "torch.nn.functional"], "classes": ["CenteredLayer", "MyLinear"], "functions": [], "content": "fs"}
+{"chunk_id": "589", "language": "python", "imports": ["nn", "torch", "torch.nn.functional"], "classes": ["CenteredLayer", "MyLinear"], "functions": [], "content": "fs"}
+{"chunk_id": "590", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "591", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "592", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "593", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "594", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "595", "language": "python", "imports": ["functional", "nn", "torch"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "596", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["try_gpu", "try_all_gpus"], "content": "fs"}
+{"chunk_id": "597", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["try_gpu", "try_all_gpus"], "content": "fs"}
+{"chunk_id": "598", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["try_gpu", "try_all_gpus"], "content": "fs"}
+{"chunk_id": "599", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["try_gpu", "try_all_gpus"], "content": "fs"}
+{"chunk_id": "600", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "601", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "602", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "603", "language": "python", "imports": ["nn", "np", "npx"], "classes": ["MLP"], "functions": [], "content": "fs"}
+{"chunk_id": "604", "language": "python", "imports": ["mxnet", "np", "npx", "os"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "605", "language": "python", "imports": ["mxnet", "np", "npx", "os"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "606", "language": "python", "imports": ["mxnet", "np", "npx", "os"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "607", "language": "python", "imports": ["mxnet", "np", "npx", "os"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "608", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "609", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "610", "language": "python", "imports": ["autograd", "np", "npx"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "611", "language": "python", "imports": ["autograd", "np", "npx"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "612", "language": "python", "imports": ["nn", "torch", "torch.nn.functional"], "classes": ["CenteredLayer", "MyLinear"], "functions": [], "content": "fs"}
+{"chunk_id": "613", "language": "python", "imports": ["nn", "torch", "torch.nn.functional"], "classes": ["CenteredLayer", "MyLinear"], "functions": [], "content": "fs"}
+{"chunk_id": "614", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["try_gpu", "try_all_gpus"], "content": "fs"}
+{"chunk_id": "615", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["try_gpu", "try_all_gpus"], "content": "fs"}
+{"chunk_id": "616", "language": "python", "imports": ["data", "nn", "numpy", "torch"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "617", "language": "python", "imports": ["data", "nn", "numpy", "torch"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "618", "language": "python", "imports": ["data", "nn", "numpy", "torch"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "619", "language": "python", "imports": ["data", "nn", "numpy", "torch"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "620", "language": "python", "imports": ["os", "torch"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "621", "language": "python", "imports": ["os", "torch"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "622", "language": "python", "imports": ["os", "torch"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "623", "language": "python", "imports": ["os", "torch"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "624", "language": "python", "imports": ["os", "torch"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "625", "language": "python", "imports": ["os", "torch"], "classes": [], "functions": ["build_array_nmt"], "content": "fs"}
+{"chunk_id": "626", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "627", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "628", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "629", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["init_adadelta_states", "adadelta"], "content": "fs"}
+{"chunk_id": "630", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "631", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "632", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "633", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "634", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "635", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "636", "language": "python", "imports": ["data", "nn", "numpy", "torch"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "637", "language": "python", "imports": ["data", "nn", "numpy", "torch"], "classes": [], "functions": ["load_array"], "content": "fs"}
+{"chunk_id": "638", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "639", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "640", "language": "python", "imports": ["autograd", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "641", "language": "python", "imports": ["autograd", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "642", "language": "python", "imports": ["autograd", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "643", "language": "python", "imports": ["autograd", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "644", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "645", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "646", "language": "python", "imports": ["nn", "np", "npx"], "classes": [], "functions": ["try_gpu", "try_all_gpus"], "content": "fs"}
+{"chunk_id": "647", "language": "python", "imports": ["nn", "np", "npx"], "classes": [], "functions": ["try_gpu", "try_all_gpus"], "content": "fs"}
+{"chunk_id": "648", "language": "python", "imports": ["nn", "np", "npx"], "classes": [], "functions": ["try_gpu", "try_all_gpus"], "content": "fs"}
+{"chunk_id": "649", "language": "python", "imports": ["nn", "np", "npx"], "classes": [], "functions": ["try_gpu", "try_all_gpus"], "content": "fs"}
+{"chunk_id": "650", "language": "python", "imports": ["autograd", "np", "npx"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "651", "language": "python", "imports": ["autograd", "np", "npx"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "652", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "653", "language": "python", "imports": [], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "654", "language": "python", "imports": ["nn", "np", "npx"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "655", "language": "python", "imports": ["nn", "np", "npx"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "656", "language": "python", "imports": ["nn", "np", "npx"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "657", "language": "python", "imports": ["nn", "np", "npx"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "658", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "659", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "660", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "661", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "662", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "663", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "664", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "665", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["comp_conv2d"], "content": "fs"}
+{"chunk_id": "666", "language": "python", "imports": ["np"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "667", "language": "python", "imports": ["np"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "668", "language": "python", "imports": ["np"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "669", "language": "python", "imports": ["np"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "670", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "671", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "672", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "673", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "674", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "675", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "676", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "677", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "678", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "679", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "680", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "681", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "682", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "683", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "684", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "685", "language": "python", "imports": ["torch"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "686", "language": "python", "imports": ["autograd", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "687", "language": "python", "imports": ["autograd", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "688", "language": "python", "imports": ["autograd", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "689", "language": "python", "imports": ["autograd", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "690", "language": "python", "imports": ["math", "numpy", "paddle", "time", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "691", "language": "python", "imports": ["math", "numpy", "paddle", "time", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "692", "language": "python", "imports": ["gluon", "init", "mxnet", "nn", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "693", "language": "python", "imports": ["gluon", "init", "mxnet", "nn", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "694", "language": "python", "imports": ["gluon", "init", "mxnet", "nn", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "695", "language": "python", "imports": ["gluon", "init", "mxnet", "nn", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "696", "language": "python", "imports": ["mplot3d", "numpy", "paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "697", "language": "python", "imports": ["mplot3d", "numpy", "paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "698", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "699", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "700", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "701", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "702", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "703", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "704", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "705", "language": "python", "imports": ["nn", "paddle", "warnings"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "706", "language": "python", "imports": ["numpy", "paddle", "warnings"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "707", "language": "python", "imports": ["numpy", "paddle", "warnings"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "708", "language": "python", "imports": ["InputSpec", "nn", "paddle", "to_static", "warnings"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "709", "language": "python", "imports": ["InputSpec", "nn", "paddle", "to_static", "warnings"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "710", "language": "python", "imports": ["math", "mxnet", "np", "time"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "711", "language": "python", "imports": ["math", "numpy", "time", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "712", "language": "python", "imports": ["math", "numpy", "time", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "713", "language": "python", "imports": ["math", "mxnet", "np", "time"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "714", "language": "python", "imports": ["math", "mxnet", "np", "time"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "715", "language": "python", "imports": ["math", "numpy", "time", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "716", "language": "python", "imports": ["math", "numpy", "time", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "717", "language": "python", "imports": ["math", "mxnet", "np", "time"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "718", "language": "python", "imports": ["numpy", "paddle", "random", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "719", "language": "python", "imports": ["numpy", "paddle", "random", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "720", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "721", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "722", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "723", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "724", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "725", "language": "python", "imports": ["mplot3d", "numpy", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "726", "language": "python", "imports": ["mplot3d", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "727", "language": "python", "imports": ["mplot3d", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "728", "language": "python", "imports": ["mplot3d", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "729", "language": "python", "imports": ["mplot3d", "mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "730", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "731", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "732", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "733", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "734", "language": "python", "imports": ["numpy", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "735", "language": "python", "imports": ["numpy", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "736", "language": "python", "imports": ["numpy", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "737", "language": "python", "imports": ["numpy", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "738", "language": "python", "imports": ["numpy", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "739", "language": "python", "imports": ["numpy", "torch"], "classes": [], "functions": ["f", "f_grad", "show_trace"], "content": "fs"}
+{"chunk_id": "740", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "741", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "742", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "743", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "744", "language": "python", "imports": ["gluon", "init", "mxnet", "nn", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "745", "language": "python", "imports": ["gluon", "init", "mxnet", "nn", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "746", "language": "python", "imports": ["gluon", "init", "mxnet", "nn", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "747", "language": "python", "imports": ["gluon", "init", "mxnet", "nn", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "748", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "749", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "750", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "751", "language": "python", "imports": ["mxnet", "nn", "np", "npx"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "752", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "753", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["init_weights"], "content": "fs"}
+{"chunk_id": "754", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "755", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "756", "language": "python", "imports": ["backend_inline", "mxnet", "np", "npx"], "classes": [], "functions": ["f", "numerical_lim"], "content": "fs"}
+{"chunk_id": "757", "language": "python", "imports": ["backend_inline", "mxnet", "np", "npx"], "classes": [], "functions": ["f", "numerical_lim"], "content": "fs"}
+{"chunk_id": "758", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "759", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "760", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "761", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "762", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "763", "language": "python", "imports": ["nn", "torch"], "classes": [], "functions": ["get_net"], "content": "fs"}
+{"chunk_id": "764", "language": "python", "imports": ["backend_inline", "numpy", "paddle"], "classes": [], "functions": ["f", "numerical_lim"], "content": "fs"}
+{"chunk_id": "765", "language": "python", "imports": ["backend_inline", "numpy", "paddle"], "classes": [], "functions": ["f", "numerical_lim"], "content": "fs"}
+{"chunk_id": "766", "language": "python", "imports": ["backend_inline", "numpy", "torch"], "classes": [], "functions": ["f", "numerical_lim"], "content": "fs"}
+{"chunk_id": "767", "language": "python", "imports": ["backend_inline", "numpy", "torch"], "classes": [], "functions": ["f", "numerical_lim"], "content": "fs"}
+{"chunk_id": "768", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "769", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "770", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "771", "language": "python", "imports": ["mxnet", "np", "npx"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "772", "language": "python", "imports": ["multinomial", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "773", "language": "python", "imports": ["multinomial", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "774", "language": "python", "imports": ["multinomial", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "775", "language": "python", "imports": ["multinomial", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "776", "language": "python", "imports": ["multinomial", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "777", "language": "python", "imports": ["multinomial", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "778", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "779", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "780", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "781", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "782", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "783", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "784", "language": "python", "imports": ["mxnet", "np", "npx", "random"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "785", "language": "python", "imports": ["mxnet", "np", "npx", "random"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "786", "language": "python", "imports": ["mxnet", "np", "npx", "random"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "787", "language": "python", "imports": ["mxnet", "np", "npx", "random"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "788", "language": "python", "imports": ["math", "numpy", "time", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "789", "language": "python", "imports": ["math", "numpy", "time", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "790", "language": "python", "imports": ["backend_inline", "mxnet", "np", "npx"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "791", "language": "python", "imports": ["backend_inline", "mxnet", "np", "npx"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "792", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "793", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "794", "language": "python", "imports": ["backend_inline", "numpy", "torch"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "795", "language": "python", "imports": ["backend_inline", "numpy", "torch"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "796", "language": "python", "imports": ["backend_inline", "numpy", "torch"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "797", "language": "python", "imports": ["backend_inline", "numpy", "torch"], "classes": [], "functions": ["f"], "content": "fs"}
+{"chunk_id": "798", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "799", "language": "python", "imports": ["paddle", "warnings"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "800", "language": "python", "imports": ["np"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "801", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "802", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "803", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "804", "language": "python", "imports": ["np"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "805", "language": "python", "imports": ["np"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "806", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "807", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "808", "language": "python", "imports": ["torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "809", "language": "python", "imports": ["np"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "810", "language": "python", "imports": ["collections", "mxnet", "re"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "811", "language": "python", "imports": ["collections", "re", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "812", "language": "python", "imports": ["collections", "re", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "813", "language": "python", "imports": ["collections", "mxnet", "re"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "814", "language": "python", "imports": ["collections", "re", "torch"], "classes": [], "functions": [], "content": "fs"}
+{"chunk_id": "815", "language": "python", "imports": ["collections", "re", "torch"], "classes": [], "functions": [], "content": "fs"}

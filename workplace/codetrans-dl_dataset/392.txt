@@ -1,0 +1,37 @@
+import warningsfrom d2l import paddle as d2l
+warnings.filterwarnings("ignore")
+import paddle
+from paddle import nn
+def corr2d(X, K):
+    h, w = K.shape
+    Y = paddle.zeros((X.shape[0] - h + 1, X.shape[1] - w + 1))
+    for i in range(Y.shape[0]):
+        for j in range(Y.shape[1]):
+            Y[i, j] = (X[i:i + h, j:j + w] * K).sum()
+    return Y
+X = paddle.to_tensor([[0.0, 1.0, 2.0], [3.0, 4.0, 5.0], [6.0, 7.0, 8.0]])
+K = paddle.to_tensor([[0.0, 1.0], [2.0, 3.0]])
+corr2d(X, K)
+class Conv2D(nn.Layer):
+    def __init__(self, kernel_size):
+        super().__init__()
+        self.weight = paddle.ParamAttr(paddle.rand(kernel_size))
+        self.bias = paddle.ParamAttr(paddle.zeros(1))
+    def forward(self, x):
+        return corr2d(x, self.weight) + self.bias
+X = paddle.ones((6, 8))
+X[:, 2:6] = 0
+K = paddle.to_tensor([[1.0, -1.0]])
+corr2d(X.t(), K)
+conv2d = nn.Conv2D(1, 1, kernel_size=(1, 2))
+X = X.reshape((1, 1, 6, 8))
+Y = Y.reshape((1, 1, 6, 7))
+lr = 3e-2
+for i in range(10):
+    Y_hat = conv2d(X)
+    l = (Y_hat - Y) ** 2
+    conv2d.clear_gradients()
+    l.sum().backward()
+    with paddle.no_grad():
+        conv2d.weight[:] -= lr * conv2d.weight.grad
+conv2d.weight.reshape((1, 2))

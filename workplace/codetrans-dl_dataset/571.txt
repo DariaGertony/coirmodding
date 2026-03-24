@@ -1,0 +1,18 @@
+import warnings
+from d2l import paddle as d2l
+warnings.filterwarnings("ignore")
+import os
+import paddle
+def build_array_nmt(lines, vocab, num_steps):
+    lines = [vocab[l] for l in lines]
+    lines = [l + [vocab['<eos>']] for l in lines]
+    array = paddle.to_tensor([truncate_pad(l, num_steps, vocab['<pad>']) for l in lines])
+    valid_len = (array != vocab['<pad>']).astype(paddle.int32).sum(1)
+    return array, valid_len
+train_iter, src_vocab, tgt_vocab = load_data_nmt(batch_size=2, num_steps=8)
+for X, X_valid_len, Y, Y_valid_len in train_iter:
+    print('X:', X.astype(paddle.int32))
+    print('Valid length of X:', X_valid_len)
+    print('Y:', Y..astype(paddle.int32))
+    print('Valid length of Y:', Y_valid_len)
+    break

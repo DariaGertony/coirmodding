@@ -1,0 +1,283 @@
+Certainly! Here are examples of each of the ten design patterns and how they can be used in practice, along with accompanying code examples:
+
+1. Adapter pattern:
+
+The Adapter pattern allows two incompatible interfaces to work together. It takes an existing class and makes it work with a different interface than it was originally designed for.
+
+Example: Imagine you have a MusicPlayer class that can play music from CDs, but you want it to be able to play music from your computer's MP3 library as well. You could use an adapter class that implements the MusicPlayer interface but uses the computer's MP3 library to play music instead of a physical CD.
+
+Code example:
+
+```python
+class MusicPlayer:
+    def play(self, cd):
+        pass
+    
+class MP3Player:
+    def play_music_file(self, filename):
+        pass
+    
+class MP3PlayerAdapter(MusicPlayer):
+    def __init__(self, mp3_player):
+        self.mp3_player = mp3_player
+    
+    def play(self, cd):
+        filename = cd.get_filename()
+        self.mp3_player.play_music_file(filename)
+```
+
+2. Decorator pattern:
+
+The Decorator pattern adds functionality to an existing class without changing its interface. It allows for a flexible way to add new behaviors to objects at runtime.
+
+Example: Imagine you have a House class that has a basic structure and features. You want to allow users to customize their houses by adding new features without modifying the House class. You could use a decorator pattern to add new features to a house object.
+
+Code example:
+
+```python
+class House:
+    def __init__(self, structure, features):
+        self.structure = structure
+        self.features = features
+        
+    def describe(self):
+        print(f"House with {self.structure} and {self.features}")
+        
+class FeatureDecorator(House):
+    def __init__(self, house, feature):
+        self.house = house
+        self.feature = feature
+        
+    def describe(self):
+        self.house.describe()
+        print(f"+ {self.feature}")
+        
+basic_house = House("brick walls", "two bedrooms, one bathroom")
+decorated_house = FeatureDecorator(basic_house, "swimming pool")
+decorated_house.describe()
+```
+
+3. Composite pattern:
+
+The Composite pattern allows you to treat a group of objects as if they were a single object. It creates a tree structure that lets you work with a group of objects in the same way as a single object.
+
+Example: Imagine you have a Tree class that can contain other Tree objects. You want to be able to traverse the entire tree and perform operations on each object in the tree. You could use a composite pattern to treat the entire tree as a single object.
+
+Code example:
+
+```python
+class Tree:
+    def __init__(self, name, branches=None):
+        self.name = name
+        self.branches = branches or []
+        
+    def add_branch(self, branch):
+        self.branches.append(branch)
+        
+    def describe(self):
+        print(self.name)
+        for branch in self.branches:
+            branch.describe()
+            
+tree1 = Tree("Main tree")
+tree1.add_branch(Tree("Branch 1"))
+tree1.add_branch(Tree("Branch 2"))
+tree1.describe()
+```
+
+4. Flyweight pattern:
+
+The Flyweight pattern minimizes memory usage by sharing as much data as possible between objects. It allows for efficient handling of large numbers of small objects.
+
+Example: Imagine you have a program that creates millions of small objects that are very similar. You want to minimize memory usage by sharing as much data between these objects as possible. You could use a flyweight pattern to share data between objects and reduce memory usage.
+
+Code example:
+
+```python
+class Flyweight:
+    def __init__(self, shared_data):
+        self.shared_data = shared_data
+        
+class FlyweightFactory:
+    def __init__(self):
+        self.flyweights = {}
+        
+    def get_flyweight(self, shared_data):
+        if shared_data not in self.flyweights:
+            self.flyweights[shared_data] = Flyweight(shared_data)
+        return self.flyweights[shared_data]
+        
+factory = FlyweightFactory()
+obj1 = factory.get_flyweight("data1")
+obj2 = factory.get_flyweight("data1")
+assert obj1 is obj2  # True
+```
+
+5. Interpreter pattern:
+
+The Interpreter pattern allows you to create a language or expression and interpret it at runtime. It is often used for domain-specific languages.
+
+Example: Imagine you have a program that needs to interpret mathematical expressions. You could use an interpreter pattern to create a language for mathematical expressions and interpret them at runtime.
+
+Code example:
+
+```python
+class Expression:
+    def interpret(self, context):
+        pass
+    
+class NumberExpression(Expression):
+    def __init__(self, value):
+        self.value = value
+        
+    def interpret(self, context):
+        return self.value
+    
+class PlusExpression(Expression):
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+        
+    def interpret(self, context):
+        return self.left.interpret(context) + self.right.interpret(context)
+    
+class MinusExpression(Expression):
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+        
+    def interpret(self, context):
+        return self.left.interpret(context) - self.right.interpret(context)
+    
+expr = MinusExpression(PlusExpression(NumberExpression(5), NumberExpression(2)), NumberExpression(3))
+print(expr.interpret(None))  # 4
+```
+
+6. Facade pattern:
+
+The Facade pattern provides a simplified interface to a complex system of classes. It allows for a simpler and more intuitive way of interacting with a complex system.
+
+Example: Imagine you have a complex API with dozens of classes and methods. You want to make it simpler for users to interact with the API by providing a simplified interface. You could use a facade pattern to provide a simplified interface to the API.
+
+Code example:
+
+```python
+class APIFacade:
+    def __init__(self):
+        self.class1 = Class1()
+        self.class2 = Class2()
+        self.class3 = Class3()
+        
+    def do_something(self):
+        self.class1.do_something()
+        self.class2.do_something()
+        self.class3.do_something()
+        
+facade = APIFacade()
+facade.do_something()
+```
+
+7. Proxy pattern:
+
+The Proxy pattern allows you to create a class that acts as a stand-in for another class. It can be used to control access to the original class or to add additional functionality.
+
+Example: Imagine you have a resource-intensive class that you want to use sparingly. You could create a proxy class that provides a lightweight version of the functionality until the full functionality is needed.
+
+Code example:
+
+```python
+class ResourceIntensiveClass:
+    def do_something(self):
+        # takes a long time to complete
+        pass
+    
+class LightweightProxy:
+    def __init__(self):
+        self.real_object = None
+        
+    def do_something(self):
+        if self.real_object is None:
+            self.real_object = ResourceIntensiveClass()
+            print("Creating real object")
+        return self.real_object.do_something()
+        
+proxy = LightweightProxy()
+proxy.do_something()  # Creating real object
+```
+
+8. Chain of Responsibility pattern:
+
+The Chain of Responsibility pattern allows you to create a chain of objects that can handle requests one after the other. It provides a way to handle requests without knowing in advance which object will handle the request.
+
+Example: Imagine you have a program that receives requests that need to be handled in a specific order. You could use a chain of responsibility pattern to create a chain of objects that handle the requests in the correct order.
+
+Code example:
+
+```python
+class Handler:
+    def __init__(self, successor=None):
+        self.successor = successor
+        
+    def handle_request(self, request):
+        if self.successor is not None:
+            self.successor.handle_request(request)
+            
+class ConcreteHandler1(Handler):
+    def handle_request(self, request):
+        if request == "request1":
+            print("Handled request 1")
+        else:
+            super().handle_request(request)
+            
+class ConcreteHandler2(Handler):
+    def handle_request(self, request):
+        if request == "request2":
+            print("Handled request 2")
+        else:
+            super().handle_request(request)
+            
+class ConcreteHandler3(Handler):
+    def handle_request(self, request):
+        if request == "request3":
+            print("Handled request 3")
+        else:
+            super().handle_request(request)
+            
+handler1 = ConcreteHandler1(ConcreteHandler2(ConcreteHandler3()))
+handler1.handle_request("request1")  # Handled request 1
+```
+
+9. Observer pattern:
+
+The Observer pattern allows you to define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
+
+Example: Imagine you have an object that changes state frequently and you want to notify other objects when its state changes. You could use an observer pattern to create a one-to-many dependency between the object and its dependents.
+
+Code example:
+
+```python
+class Subject:
+    def __init__(self):
+        self.observers = []
+        
+    def attach(self, observer):
+        self.observers.append(observer)
+        
+    def detach(self, observer):
+        self.observers.remove(observer)
+        
+    def notify(self):
+        for observer in self.observers:
+            observer.update(self)
+            
+class Observer:
+    def update(self, subject):
+        pass
+    
+class ConcreteSubject(Subject):
+    def __init__(self, state=None):
+        super().__init__()
+        self.state = state
+        
+    def set_state(self, state):
+        self.state

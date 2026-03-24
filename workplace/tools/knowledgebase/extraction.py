@@ -17,9 +17,9 @@ def create_knowledgebase_from_dataset_corpus(corpuses_number: int):
 
     storage = Storage()
 
-    i = 1
+    i = 0
     for x in filtered_code_info:
-        chunk = transfer_dict_to_chunk(x, f'chunk_{i}', "fs")
+        chunk = transfer_dict_to_chunk(x, f'{i}', "fs")
         storage.add_chunk(chunk=chunk)
         i += 1
 
@@ -30,6 +30,6 @@ def create_knowledgebase_from_dataset_corpus(corpuses_number: int):
 
 def test():
     
-    create_knowledgebase_from_dataset_corpus(100)
-
+    create_knowledgebase_from_dataset_corpus(817)
+    print("Done")
 

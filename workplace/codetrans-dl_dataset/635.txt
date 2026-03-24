@@ -1,0 +1,18 @@
+import warnings
+warnings.filterwarnings(action='ignore')
+import paddle
+from paddle import nn
+
+def comp_conv2d(conv2d, X):
+    X = paddle.reshape(X, [1, 1] + X.shape)
+    Y = conv2d(X)
+    return Y.reshape(Y.shape[2:])
+conv2d = nn.Conv2D(in_channels=1, out_channels=1, kernel_size=3, padding=1)
+X = paddle.rand((8, 8))
+comp_conv2d(conv2d, X).shape
+conv2d = nn.Conv2D(in_channels=1, out_channels=1, kernel_size=(5, 3), padding=(2, 1))
+comp_conv2d(conv2d, X).shape
+conv2d = nn.Conv2D(1, 1, kernel_size=3, padding=1, stride=2)
+comp_conv2d(conv2d, X).shape
+conv2d = nn.Conv2D(1, 1, kernel_size=(3, 5), padding=(0, 1), stride=(3, 4))
+comp_conv2d(conv2d, X).shape

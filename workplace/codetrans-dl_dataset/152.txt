@@ -1,0 +1,62 @@
+from IPython import display
+from mxnet import autograd, gluon, np, npx
+from d2l import mxnet as d2l
+npx.set_np()
+batch_size = 256
+train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
+num_inputs = 784
+num_outputs = 10
+W = np.random.normal(0, 0.01, (num_inputs, num_outputs))
+b = np.zeros(num_outputs)
+W.attach_grad()
+b.attach_grad()
+X = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
+X.sum(0, keepdims=True), X.sum(1, keepdims=True)
+def softmax(X):
+    X_exp = np.exp(X)
+    partition = X_exp.sum(1, keepdims=True)
+    return X_exp / partition
+X = np.random.normal(0, 1, (2, 5))
+X_prob = softmax(X)
+X_prob, X_prob.sum(1)
+def net(X):
+    return softmax(np.dot(X.reshape((-1, W.shape[0])), W) + b)
+y = np.array([0, 2])
+y_hat = np.array([[0.1, 0.3, 0.6], [0.3, 0.2, 0.5]])
+y_hat[[0, 1], y]
+def cross_entropy(y_hat, y):
+    return - np.log(y_hat[range(len(y_hat)), y])
+cross_entropy(y_hat, y)
+def accuracy(y_hat, y):
+    if len(y_hat.shape) > 1 and y_hat.shape[1] > 1:
+        y_hat = y_hat.argmax(axis=1)
+    cmp = y_hat.astype(y.dtype) == y
+    return float(cmp.astype(y.dtype).sum())
+def evaluate_accuracy(net, data_iter):
+    metric = Accumulator(2)
+    for X, y in data_iter:
+        metric.add(accuracy(net(X), y), d2l.size(y))
+    return metric[0] / metric[1]
+def train_epoch_ch3(net, train_iter, loss, updater):
+    metric = Accumulator(3)
+    if isinstance(updater, gluon.Trainer):
+        updater = updater.step
+    for X, y in train_iter:
+        with autograd.record():
+            y_hat = net(X)
+            l = loss(y_hat, y)
+        l.backward()
+        updater(X.shape[0])
+        metric.add(float(l.sum()), accuracy(y_hat, y), y.size)
+    return metric[0] / metric[2], metric[1] / metric[2]
+lr = 0.1
+def updater(batch_size):
+    return d2l.sgd([W, b], lr, batch_size)
+def predict_ch3(net, test_iter, n=6):
+    for X, y in test_iter:
+        break
+    trues = d2l.get_fashion_mnist_labels(y)
+    preds = d2l.get_fashion_mnist_labels(net(X).argmax(axis=1))
+    titles = [true +'\n' + pred for true, pred in zip(trues, preds)]
+    d2l.show_images(X[0:n].reshape((n, 28, 28)), 1, n, titles=titles[0:n])
+predict_ch3(net, test_iter)

@@ -1,0 +1,14 @@
+%matplotlib inline
+from mxnet import np, npx
+from d2l import mxnet as d2l
+npx.set_np()
+def f(x):
+    return x ** 2
+def f_grad(x):
+    return 2 * x
+def show_trace(results, f):
+    n = max(abs(min(results)), abs(max(results)))
+    f_line = np.arange(-n, n, 0.01)
+    d2l.set_figsize()
+    d2l.plot([f_line, results], [[f(x) for x in f_line], [f(x) for x in results]], 'x', 'f(x)', fmts=['-', '-o'])
+show_trace(results, f)

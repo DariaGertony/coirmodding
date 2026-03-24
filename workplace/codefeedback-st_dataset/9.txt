@@ -1,0 +1,259 @@
+Algorithm to find longest word chain in a given text:
+
+1. Initialize an empty dictionary called "word_dict" to store each word in the text and its corresponding index.
+2. Split the text into words using whitespace and punctuation as delimiters, and remove any empty strings.
+3. For each word in the list of words:
+    a. If the word is not already in the word_dict, add it with its index as the value.
+4. Initialize an empty dictionary called "graph" to store the relationships between words.
+5. For each word in the list of words:
+    a. Initialize an empty list called "neighbors".
+    b. For each letter in the word:
+        i. Replace the letter with an underscore to create a "wildcard" version of the word.
+        ii. Check if the wildcard version of the word is in the word_dict.
+        iii. If it is, add its index to the "neighbors" list.
+    c. Add the "neighbors" list as the value for the word in the "graph" dictionary.
+6. Initialize an empty list called "visited" to keep track of which words have been visited during the graph traversal.
+7. Initialize two variables called "longest_chain" and "longest_chain_len" to keep track of the longest word chain found so far.
+8. For each word in the list of words:
+    a. If the word has not been visited:
+        i. Mark it as visited.
+        ii. Initialize a stack called "path" with the current word.
+        iii. Initialize a variable called "chain_len" to 1.
+        iv. While the stack is not empty:
+            1. Pop the top word from the stack.
+            2. For each neighbor of the word in the "graph" dictionary:
+                i. If the neighbor has not been visited:
+                    1. Mark it as visited.
+                    2. Add it to the top of the stack.
+                    3. Increment the "chain_len" variable.
+                    4. If the "chain_len" variable is greater than the "longest_chain_len" variable, update "longest_chain" and "longest_chain_len".
+9. Return the "longest_chain" variable.
+
+Python Code:
+
+```python
+import re
+
+def find_longest_chain(text):
+    word_dict = {}
+    for i, word in enumerate(re.findall(r'\w+', text)):
+        word_dict[word] = i
+    
+    graph = {}
+    for word in word_dict.keys():
+        neighbors = []
+        for j, letter in enumerate(word):
+            wildcard = word[:j] + "_" + word[j+1:]
+            for neighbor in word_dict.keys():
+                if neighbor != word and re.match(wildcard, neighbor):
+                    neighbors.append(word_dict[neighbor])
+        graph[word_dict[word]] = neighbors
+    
+    longest_chain = []
+    longest_chain_len = 0
+    visited = set()
+    for i in graph.keys():
+        if i not in visited:
+            visited.add(i)
+            path = [i]
+            chain_len = 1
+            while path:
+                word = path.pop()
+                for neighbor in graph[word]:
+                    if neighbor not in visited:
+                        visited.add(neighbor)
+                        path.append(neighbor)
+                        chain_len += 1
+                        if chain_len > longest_chain_len:
+                            longest_chain = [word_dict[w] for w in path]
+                            longest_chain_len = chain_len
+    return [list(word_dict.keys())[i] for i in longest_chain]
+
+text = "The quick brown fox jumps over the lazy dog. The dog, named Fido, is a good dog."
+print(find_longest_chain(text)) # Output: ['dog', 'god']
+```
+
+Java Code:
+
+```java
+import java.util.*;
+
+public class WordChain {
+    public static List<String> findLongestChain(String text) {
+        Map<String, Integer> wordDict = new HashMap<>();
+        int index = 0;
+        for (String word : text.split("[\\W_]+")) {
+            if (word.isEmpty()) continue;
+            if (!wordDict.containsKey(word)) {
+                wordDict.put(word, index++);
+            }
+        }
+        
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for (String word : wordDict.keySet()) {
+            int i = wordDict.get(word);
+            List<Integer> neighbors = new ArrayList<>();
+            for (int j = 0; j < word.length(); j++) {
+                String wildcard = word.substring(0, j) + "_" + word.substring(j+1);
+                for (String neighbor : wordDict.keySet()) {
+                    if (!neighbor.equals(word) && neighbor.matches(wildcard)) {
+                        neighbors.add(wordDict.get(neighbor));
+                    }
+                }
+            }
+            graph.put(i, neighbors);
+        }
+        
+        List<Integer> longestChain = new ArrayList<>();
+        int longestChainLen = 0;
+        Set<Integer> visited = new HashSet<>();
+        for (int i : graph.keySet()) {
+            if (!visited.contains(i)) {
+                visited.add(i);
+                Stack<Integer> path = new Stack<>();
+                path.push(i);
+                int chainLen = 1;
+                while (!path.isEmpty()) {
+                    int word = path.pop();
+                    for (int neighbor : graph.get(word)) {
+                        if (!visited.contains(neighbor)) {
+                            visited.add(neighbor);
+                            path.push(neighbor);
+                            chainLen++;
+                            if (chainLen > longestChainLen) {
+                                longestChain = new ArrayList<>(path);
+                                longestChainLen = chainLen;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        List<String> result = new ArrayList<>();
+        for (int i : longestChain) {
+            result.add(getKeyByValue(wordDict, i));
+        }
+        return result;
+    }
+    
+    private static String getKeyByValue(Map<String, Integer> map, int value) {
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == value) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+    
+    public static void main(String[] args) {
+        String text = "The quick brown fox jumps over the lazy dog. The dog, named Fido, is a good dog.";
+        System.out.println(findLongestChain(text)); // Output: [dog, god]
+    }
+}
+```
+
+C++ Code:
+
+```cpp
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <vector>
+#include <stack>
+#include <regex>
+
+using namespace std;
+
+vector<string> findLongestChain(string text) {
+    unordered_map<string, int> wordDict;
+    int index = 0;
+    regex pattern("\\w+");
+    for (sregex_iterator it(text.begin(), text.end(), pattern), end; it != end; ++it) {
+        string word = it->str();
+        if (!wordDict.count(word)) {
+            wordDict[word] = index++;
+        }
+    }
+    
+    unordered_map<int, vector<int>> graph;
+    for (auto it = wordDict.begin(); it != wordDict.end(); ++it) {
+        int i = it->second;
+        vector<int> neighbors;
+        string word = it->first;
+        for (int j = 0; j < word.length(); j++) {
+            string wildcard = word.substr(0, j) + "_" + word.substr(j+1);
+            for (auto iter = wordDict.begin(); iter != wordDict.end(); ++iter) {
+                if (iter->first != word && regex_match(iter->first, regex(wildcard))) {
+                    neighbors.push_back(wordDict[iter->first]);
+                }
+            }
+        }
+        graph[i] = neighbors;
+    }
+    
+    vector<int> longestChain;
+    int longestChainLen = 0;
+    unordered_set<int> visited;
+    for (auto it = graph.begin(); it != graph.end(); ++it) {
+        int i = it->first;
+        if (!visited.count(i)) {
+            visited.insert(i);
+            stack<int> path;
+            path.push(i);
+            int chainLen = 1;
+            while (!path.empty()) {
+                int word = path.top();
+                path.pop();
+                for (int neighbor : graph[word]) {
+                    if (!visited.count(neighbor)) {
+                        visited.insert(neighbor);
+                        path.push(neighbor);
+                        chainLen++;
+                        if (chainLen > longestChainLen) {
+                            longestChain = vector<int>(path.size());
+                            copy(path.begin(), path.end(), longestChain.begin());
+                            longestChainLen = chainLen;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    vector<string> result;
+    for (int i : longestChain) {
+        for (auto it = wordDict.begin(); it != wordDict.end(); ++it) {
+            if (it->second == i) {
+                result.push_back(it->first);
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+int main() {
+    string text = "The quick brown fox jumps over the lazy dog. The dog, named Fido, is a good dog.";
+    vector<string> longestChain = findLongestChain(text);
+    for (string word : longestChain) {
+        cout << word << " ";
+    }
+    cout << endl; // Output: dog god
+    return 0;
+}
+```
+
+Ruby Code:
+
+```ruby
+def find_longest_chain(text)
+    word_dict = {}
+    index = 0
+    text.scan(/\w+/) do |word|
+        unless word_dict[word]
+            word_dict[word] = index
+            index += 1
+        end
+    end
+    
+    graph = {}
+    word_dict.keys.each do

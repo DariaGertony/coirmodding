@@ -1,0 +1,25 @@
+import warnings
+warnings.filterwarnings(action='ignore')
+import paddle
+import paddle.nn.functional as F
+from paddle import nn
+class CenteredLayer(nn.Layer):
+    def __init__(self):
+        super().__init__()
+    def forward(self, X):
+        return X - X.mean()
+Y = net(paddle.rand([4, 8]))
+Y.mean()
+class MyLinear(nn.Layer):
+    def __init__(self, in_units, units):
+        super().__init__()
+        self.weight = paddle.create_parameter(shape=(in_units, units), dtype='float32')
+        self.bias = paddle.create_parameter(shape=(units,), dtype='float32')
+    def forward(self, X):
+        linear = paddle.matmul(X, self.weight) + self.bias
+        return F.relu(linear)
+linear = MyLinear(5, 3)
+linear.weight
+linear(paddle.randn([2, 5]))
+net = nn.Sequential(MyLinear(64, 8), MyLinear(8, 1))
+net(paddle.rand([2, 64]))

@@ -25,7 +25,7 @@ model = YourCustomDEModel(model_name)
 
 # Get tasks
 all_task = ["codetrans-dl","stackoverflow-qa","apps","codefeedback-mt","codefeedback-st","codetrans-contest","synthetic-text2sql","cosqa","codesearchnet","codesearchnet-ccr"]
-req_tasks = ["codetrans-contest"]
+req_tasks = ["codetrans-dl"]
 
 ##flag for requeueing
 # Initialize evaluation
@@ -43,7 +43,7 @@ torch.backends.cudnn.allow_tf32 = False
 
 tasks = get_tasks(tasks=req_tasks)
 evaluation = COIR(tasks=tasks,batch_size=64, type =types[6]) # types[6] --> default semantic
-res = evaluation.run(model, output_folder="results", useLLm=useLLm, llmname='', prompt='', to_rerank=rerank)
+res = evaluation.run(model, output_folder="semi-structured-result", useLLm=useLLm, llmname='', prompt='', to_rerank=rerank)
 
     
 if useLLm and chos_LLMmodel:

@@ -1,0 +1,53 @@
+import math
+from mxnet import np, npx
+from mxnet.gluon import nn
+from d2l import mxnet as d2l
+npx.set_np()
+def masked_softmax(X, valid_lens):
+    if valid_lens is None:
+        return npx.softmax(X)
+    else:
+        shape = X.shape
+        if valid_lens.ndim == 1:
+            valid_lens = valid_lens.repeat(shape[1])
+        else:
+            valid_lens = valid_lens.reshape(-1)
+        X = npx.sequence_mask(X.reshape(-1, shape[-1]), valid_lens, True, value=-1e6, axis=1)
+        return npx.softmax(X).reshape(shape)
+masked_softmax(np.random.uniform(size=(2, 2, 4)), np.array([2, 3]))
+masked_softmax(np.random.uniform(size=(2, 2, 4)), np.array([[1, 3], [2, 4]]))
+class AdditiveAttention(nn.Block):
+    def __init__(self, num_hiddens, dropout, **kwargs):
+        super(AdditiveAttention, self).__init__(**kwargs)
+        self.W_k = nn.Dense(num_hiddens, use_bias=False, flatten=False)
+        self.W_q = nn.Dense(num_hiddens, use_bias=False, flatten=False)
+        self.w_v = nn.Dense(1, use_bias=False, flatten=False)
+        self.dropout = nn.Dropout(dropout)
+    def forward(self, queries, keys, values, valid_lens):
+        queries, keys = self.W_q(queries), self.W_k(keys)
+
+        features = np.expand_dims(queries, axis=2) + np.expand_dims(keys, axis=1)
+        features = np.tanh(features)
+        scores = np.squeeze(self.w_v(features), axis=-1)
+        self.attention_weights = masked_softmax(scores, valid_lens)
+        return npx.batch_dot(self.dropout(self.attention_weights), values)
+queries, keys = np.random.normal(0, 1, (2, 1, 20)), np.ones((2, 10, 2))
+values = np.arange(40).reshape(1, 10, 4).repeat(2, axis=0)
+valid_lens = np.array([2, 6])
+attention = AdditiveAttention(num_hiddens=8, dropout=0.1)
+attention.initialize()
+attention(queries, keys, values, valid_lens)
+class DotProductAttention(nn.Block):
+    def __init__(self, dropout, **kwargs):
+        super(DotProductAttention, self).__init__(**kwargs)
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, queries, keys, values, valid_lens=None):
+        d = queries.shape[-1]
+        scores = npx.batch_dot(queries, keys, transpose_b=True) / math.sqrt(d)
+        self.attention_weights = masked_softmax(scores, valid_lens)
+        return npx.batch_dot(self.dropout(self.attention_weights), values)
+queries = np.random.normal(0, 1, (2, 1, 2))
+attention = DotProductAttention(dropout=0.5)
+attention.initialize()
+attention(queries, keys, values, valid_lens)

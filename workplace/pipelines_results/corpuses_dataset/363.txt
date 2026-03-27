@@ -1,0 +1,45 @@
+from mxnet import init, np, npx
+from mxnet.gluon import nn
+npx.set_np()
+net = nn.Sequential()
+net.add(nn.Dense(8, activation='relu'))
+net.add(nn.Dense(1))
+net.initialize()
+X = np.random.uniform(size=(2, 4))
+net(X)
+net.collect_params()['dense1_bias'].data()
+def block1():
+    net = nn.Sequential()
+    net.add(nn.Dense(32, activation='relu'))
+    net.add(nn.Dense(16, activation='relu'))
+    return net
+def block2():
+    net = nn.Sequential()
+    for _ in range(4):
+        net.add(block1())
+    return net
+rgnet = nn.Sequential()
+rgnet.add(block2())
+rgnet.add(nn.Dense(10))
+rgnet.initialize()
+rgnet(X)
+net.initialize(init=init.Normal(sigma=0.01), force_reinit=True)
+net[0].weight.data()[0]
+net.initialize(init=init.Constant(1), force_reinit=True)
+net[0].weight.data()[0]
+net[0].weight.initialize(init=init.Xavier(), force_reinit=True)
+net[1].initialize(init=init.Constant(42), force_reinit=True)
+class MyInit(init.Initializer):
+    def _init_weight(self, name, data):
+        data[:] = np.random.uniform(-10, 10, data.shape)
+        data *= np.abs(data) >= 5
+net.initialize(MyInit(), force_reinit=True)
+net[0].weight.data()[:2]
+net[0].weight.data()[:] += 1
+net[0].weight.data()[0, 0] = 42
+net[0].weight.data()[0]
+layer = CenteredLayer()
+layer(np.array([1, 2, 3, 4, 5]))
+net = nn.Sequential()
+net.add(nn.Dense(128), CenteredLayer())
+net.initialize()

@@ -1,0 +1,29 @@
+x = paddle.arange(12)
+x.numel()
+X = paddle.reshape(x, (3, 4))
+paddle.zeros((2, 3, 4))
+paddle.ones((2, 3, 4))
+paddle.randn((3, 4),'float32')
+paddle.to_tensor([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
+x = paddle.to_tensor([1.0, 2, 4, 8])
+y = paddle.to_tensor([2, 2, 2, 2])
+x + y, x - y, x * y, x / y, x**y
+paddle.exp(x)
+X = paddle.arange(12, dtype='float32').reshape((3, 4))
+Y = paddle.to_tensor([[2.0, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
+paddle.concat((X, Y), axis=0), paddle.concat((X, Y), axis=1)
+X.sum()
+a = paddle.reshape(paddle.arange(3), (3, 1))
+b = paddle.reshape(paddle.arange(2), (1, 2))
+X[1, 2] = 9
+X[0:2, :] = 12
+Z = paddle.zeros_like(Y)
+Z = X + Y
+before = id(X)
+X += Y
+id(X) == before
+A = X.numpy()
+B = paddle.to_tensor(A)
+type(A), type(B)
+a = paddle.to_tensor([3.5])
+a, a.item(), float(a), int(a)

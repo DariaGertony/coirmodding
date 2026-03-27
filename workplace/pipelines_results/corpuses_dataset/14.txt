@@ -1,0 +1,116 @@
+import collections
+import warnings
+from d2l import paddle as d2l
+warnings.filterwarnings("ignore")
+import math
+import paddle
+from paddle import nn
+    def __init__(self, vocab_size, embed_size, num_hiddens, num_layers, dropout=0, **kwargs):
+        super(Seq2SeqEncoder, self).__init__(**kwargs)
+        weight_ih_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
+        weight_hh_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
+        self.embedding = nn.Embedding(vocab_size, embed_size)
+        self.rnn = nn.GRU(embed_size, num_hiddens, num_layers, dropout=dropout, time_major=True, weight_ih_attr=weight_ih_attr, weight_hh_attr=weight_hh_attr)
+    def forward(self, X, *args):
+        X = self.embedding(X)
+        X = X.transpose([1, 0, 2])
+        output, state = self.rnn(X)
+        return output, state
+encoder = Seq2SeqEncoder(vocab_size=10, embed_size=8, num_hiddens=16, num_layers=2)
+encoder.eval()
+X = paddle.zeros((4, 7), dtype=paddle.int64)
+output, state = encoder(X)
+output.shape
+state.shape
+class Seq2SeqDecoder(d2l.Decoder):
+    def __init__(self, vocab_size, embed_size, num_hiddens, num_layers, dropout=0, **kwargs):
+        super(Seq2SeqDecoder, self).__init__(**kwargs)
+        self.embedding = nn.Embedding(vocab_size, embed_size)
+        weight_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
+        weight_ih_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
+        weight_hh_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
+        self.rnn = nn.GRU(embed_size + num_hiddens, num_hiddens, num_layers, dropout=dropout, time_major=True, weight_ih_attr=weight_ih_attr,weight_hh_attr=weight_hh_attr)
+        self.dense = nn.Linear(num_hiddens, vocab_size,weight_attr=weight_attr)
+    def init_state(self, enc_outputs, *args):
+        return enc_outputs[1]
+    def forward(self, X, state):
+        X = self.embedding(X).transpose([1, 0, 2])
+        context = state[-1].tile([X.shape[0], 1, 1])
+        X_and_context = paddle.concat((X, context), 2)
+        output, state = self.rnn(X_and_context, state)
+        output = self.dense(output).transpose([1, 0, 2])
+        return output, state
+decoder = Seq2SeqDecoder(vocab_size=10, embed_size=8, num_hiddens=16, num_layers=2)
+decoder.eval()
+state = decoder.init_state(encoder(X))
+output, state = decoder(X, state)
+output.shape, state.shape
+def sequence_mask(X, valid_len, value=0):
+    maxlen = X.shape[1]
+    mask = paddle.arange((maxlen), dtype=paddle.float32)[None, :] < valid_len[:, None]
+    Xtype = X.dtype
+    X = X.astype(paddle.float32)
+    X[~mask] = float(value)
+    return X.astype(Xtype)
+X = paddle.to_tensor([[1, 2, 3], [4, 5, 6]])
+sequence_mask(X, paddle.to_tensor([1, 2]))
+X = paddle.ones([2, 3, 4])
+sequence_mask(X, paddle.to_tensor([1, 2]), value=-1)
+class MaskedSoftmaxCELoss(nn.CrossEntropyLoss):
+    def forward(self, pred, label, valid_len):
+        weights = paddle.ones_like(label)
+        weights = sequence_mask(weights, valid_len)
+        self.reduction='none'
+        unweighted_loss = super(MaskedSoftmaxCELoss, self).forward(pred, label)
+        weighted_loss = (unweighted_loss * weights).mean(axis=1)
+        return weighted_loss
+loss = MaskedSoftmaxCELoss()
+loss(paddle.ones([3, 4, 10]), paddle.ones((3, 4), dtype=paddle.int64), paddle.to_tensor([4, 2, 0]))
+def train_seq2seq(net, data_iter, lr, num_epochs, tgt_vocab, device):
+    optimizer = paddle.optimizer.Adam(learning_rate=lr, parameters=net.parameters())
+    loss = MaskedSoftmaxCELoss()
+    net.train()
+    animator = d2l.Animator(xlabel='epoch', ylabel='loss', xlim=[10, num_epochs])
+    for epoch in range(num_epochs):
+        timer = d2l.Timer()
+        metric = d2l.Accumulator(2)
+        for batch in data_iter:
+            optimizer.clear_grad()
+            X, X_valid_len, Y, Y_valid_len = [paddle.to_tensor(x, place=device) for x in batch]
+            bos = paddle.to_tensor([tgt_vocab['<bos>']] * Y.shape[0]).reshape([-1, 1])
+            dec_input = paddle.concat([bos, Y[:, :-1]], 1)
+            Y_hat, _ = net(X, dec_input, X_valid_len.squeeze())
+            l = loss(Y_hat, Y, Y_valid_len.squeeze())
+            l.backward()
+            d2l.grad_clipping(net, 1)
+            num_tokens = Y_valid_len.sum()
+            optimizer.step()
+            with paddle.no_grad():
+                metric.add(l.sum(), num_tokens)
+        if (epoch + 1) % 10 == 0:
+            animator.add(epoch + 1, (metric[0] / metric[1],))
+def predict_seq2seq(net, src_sentence, src_vocab, tgt_vocab, num_steps, device, save_attention_weights=False):
+    net.eval()
+    src_tokens = src_vocab[src_sentence.lower().split(' ')] + [src_vocab['<eos>']]
+    enc_valid_len = paddle.to_tensor([len(src_tokens)], place=device)
+    src_tokens = d2l.truncate_pad(src_tokens, num_steps, src_vocab['<pad>'])
+    enc_X = paddle.unsqueeze(paddle.to_tensor(src_tokens, dtype=paddle.int64, place=device), axis=0)
+    enc_outputs = net.encoder(enc_X, enc_valid_len)
+    dec_state = net.decoder.init_state(enc_outputs, enc_valid_len)
+    dec_X = paddle.unsqueeze(paddle.to_tensor([tgt_vocab['<bos>']], dtype=paddle.int64, place=device), axis=0)
+    output_seq, attention_weight_seq = [], []
+    for _ in range(num_steps):
+        Y, dec_state = net.decoder(dec_X, dec_state)
+        dec_X = Y.argmax(axis=2)
+        pred = dec_X.squeeze(axis=0).astype(paddle.int32).item()
+        if save_attention_weights:
+            attention_weight_seq.append(net.decoder.attention_weights)
+        if pred == tgt_vocab['<eos>']:
+            break
+        output_seq.append(pred)
+    return ' '.join(tgt_vocab.to_tokens(output_seq)), attention_weight_seq
+engs = ['go .', "i lost .", 'he\'s calm .', 'i\'m home .']
+fras = ['va !', 'j\'ai perdu .', 'il est calme .', 'je suis chez moi .']
+for eng, fra in zip(engs, fras):
+    translation, attention_weight_seq = predict_seq2seq(net, eng, src_vocab, tgt_vocab, num_steps, device)
+    print(f'{eng} => {translation}, bleu {bleu(translation, fra, k=2):.3f}')

@@ -1,0 +1,9 @@
+%matplotlib inline
+import random
+from mxnet import np, npx
+from d2l import mxnet as d2l
+npx.set_np()
+fair_probs = [1.0 / 6] * 6
+np.random.multinomial(1, fair_probs)
+np.random.multinomial(10, fair_probs)
+counts = np.random.multinomial(1000, fair_probs).astype(np.float32)

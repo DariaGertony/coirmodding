@@ -1,0 +1,355 @@
+{
+  "query_1": "import numpy as np\nimport tensorflow as tf\nfrom d2l import tensorflow as d2l\nnum_hiddens, num_heads = 100, 5\nattention = d2l.MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens, num_hiddens, num_heads, 0.5)\nbatch_size, num_queries, valid_lens = 2, 4, tf.constant([3, 2])\nX = tf.ones((batch_size, num_queries, num_hiddens))\nattention(X, X, X, valid_lens, training=False).shape\nclass PositionalEncoding(tf.keras.layers.Layer):\n    def __init__(self, num_hiddens, dropout, max_len=1000):\n        super().__init__()\n        self.dropout = tf.keras.layers.Dropout(dropout)\n        self.P = np.zeros((1, max_len, num_hiddens))\n        X = np.arange(max_len, dtype=np.float32).reshape(-1,1)/np.power(10000, np.arange(0, num_hiddens, 2, dtype=np.float32) / num_hiddens)\n        self.P[:, :, 0::2] = np.sin(X)\n        self.P[:, :, 1::2] = np.cos(X)\n    def call(self, X, **kwargs):\n        X = X + self.P[:, :X.shape[1], :]\n        return self.dropout(X, **kwargs)\nencoding_dim, num_steps = 32, 60\npos_encoding = PositionalEncoding(encoding_dim, 0)\nX = pos_encoding(tf.zeros((1, num_steps, encoding_dim)), training=False)\nP = pos_encoding.P[:, :X.shape[1], :]\nd2l.plot(np.arange(num_steps), P[0, :, 6:10].T, xlabel='Row (position)', figsize=(6, 2.5), legend=[\"Col %d\" % d for d in np.arange(6, 10)])\nP = tf.expand_dims(tf.expand_dims(P[0, :, :], axis=0), axis=0)\nd2l.show_heatmaps(P, xlabel='Column (encoding dimension)', ylabel='Row (position)', figsize=(3.5, 4), cmap='Blues')",
+  "query_1_corpus_0": "%matplotlib inline\nimport numpy as np\nfrom matplotlib_inline import backend_inline\nfrom d2l import paddle as d2l\ndef f(x):\n    return 3 * x ** 2 - 4 * x\ndef numerical_lim(f, x, h):\n    return (f(x + h) - f(x)) / h\nh = 0.1\nfor i in range(5):\n    print(f'h={h:.5f}, numerical limit={numerical_lim(f, 1, h):.5f}')\n    h *= 0.1",
+  "query_1_corpus_1": "%matplotlib inline\nimport numpy as np\nfrom matplotlib_inline import backend_inline\nfrom d2l import paddle as d2l\ndef f(x):\n    return 3 * x ** 2 - 4 * x\ndef numerical_lim(f, x, h):\n    return (f(x + h) - f(x)) / h\nh = 0.1\nfor i in range(5):\n    print(f'h={h:.5f}, numerical limit={numerical_lim(f, 1, h):.5f}')\n    h *= 0.1",
+  "query_1_corpus_2": "%matplotlib inline\nimport warnings\nfrom d2l import paddle as d2l\nwarnings.filterwarnings(\"ignore\")\nimport numpy as np\nimport paddle\nfrom mpl_toolkits import mplot3d\nf = lambda x: 0.5 * x**2\ng = lambda x: paddle.cos(np.pi * x)\nh = lambda x: paddle.exp(0.5 * x)\nx, segment = paddle.arange(-2, 2, 0.01, dtype='float32'), paddle.to_tensor([-1.5, 1])\nd2l.use_svg_display()\n_, axes = d2l.plt.subplots(1, 3, figsize=(9, 3))\nfor ax, func in zip(axes, [f, g, h]):\n    d2l.plot([x, segment], [func(x), func(segment)], axes=ax)",
+  "query_1_corpus_3": "%matplotlib inline\nimport math\nimport time\nimport numpy as np\nimport torch\nfrom d2l import torch as d2l\nn = 10000\na = torch.ones(n)\nb = torch.ones(n)\nc = torch.zeros(n)\ntimer = Timer()\nfor i in range(n):\n    c[i] = a[i] + b[i]",
+  "query_1_corpus_4": "%matplotlib inline\nimport numpy as np\nimport torch\nfrom mpl_toolkits import mplot3d\nfrom d2l import torch as d2l\nf = lambda x: 0.5 * x**2\ng = lambda x: torch.cos(np.pi * x)\nh = lambda x: torch.exp(0.5 * x)\nx, segment = torch.arange(-2, 2, 0.01), torch.tensor([-1.5, 1])\nd2l.use_svg_display()\n_, axes = d2l.plt.subplots(1, 3, figsize=(9, 3))\nfor ax, func in zip(axes, [f, g, h]):\n    d2l.plot([x, segment], [func(x), func(segment)], axes=ax)",
+  "query_1_chunk": {
+    "language": "python",
+    "imports": [
+      "numpy",
+      "tensorflow"
+    ],
+    "classes": [
+      "PositionalEncoding"
+    ],
+    "functions": []
+  },
+  "query_1_corpuses_chunks": [
+    {
+      "language": "python",
+      "imports": [
+        "backend_inline",
+        "numpy",
+        "paddle"
+      ],
+      "classes": [],
+      "functions": [
+        "f",
+        "numerical_lim"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "backend_inline",
+        "numpy",
+        "paddle"
+      ],
+      "classes": [],
+      "functions": [
+        "f",
+        "numerical_lim"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "mplot3d",
+        "numpy",
+        "paddle",
+        "warnings"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "math",
+        "numpy",
+        "time",
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "mplot3d",
+        "numpy",
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    }
+  ],
+  "query_25": "import warnings\nfrom d2l import paddle as d2l\nwarnings.filterwarnings(\"ignore\")\nimport math\nimport paddle\nd2l.set_figsize()\ngammas = [0.95, 0.9, 0.8, 0.7]\nfor gamma in gammas:\n    x = paddle.arange(40).detach().numpy()\n    d2l.plt.plot(x, (1-gamma) * gamma ** x, label=f'gamma = {gamma:.2f}')\nd2l.plt.xlabel('time');\ndef init_rmsprop_states(feature_dim):\n    s_w = paddle.zeros((feature_dim, 1))\n    s_b = paddle.zeros([1])\n    return (s_w, s_b)\ndef rmsprop(params, states, hyperparams):\n    a = []\n    gamma, eps = hyperparams['gamma'], 1e-6\n    for p, s in zip(params, states):\n        with paddle.no_grad():\n            s[:] = gamma * s + (1 - gamma) * paddle.square(p.grad)\n            p[:] -= hyperparams['lr'] * p.grad / paddle.sqrt(s + eps)\n        p.grad.zero_()\n        a.append(p)\n    return a\ntrainer = paddle.optimizer.RMSProp\nd2l.train_concise_ch11(trainer, {'learning_rate': 0.01, 'rho': 0.9}, data_iter)",
+  "query_25_corpus_0": "%matplotlib inline\nimport math\nimport time\nimport numpy as np\nimport torch\nfrom d2l import torch as d2l\nn = 10000\na = torch.ones(n)\nb = torch.ones(n)\nc = torch.zeros(n)\ntimer = Timer()\nfor i in range(n):\n    c[i] = a[i] + b[i]",
+  "query_25_corpus_1": "%matplotlib inline\nimport math\nimport torch\nfrom torch import nn\nfrom torch.optim import lr_scheduler\nfrom d2l import torch as d2l\ndef net_fn():\n    model = nn.Sequential(\n        nn.Conv2d(1, 6, kernel_size=5, padding=2), nn.ReLU(),\n        nn.MaxPool2d(kernel_size=2, stride=2),\n        nn.Conv2d(6, 16, kernel_size=5), nn.ReLU(),\n        nn.MaxPool2d(kernel_size=2, stride=2),\n        nn.Flatten(),\n        nn.Linear(16 * 5 * 5, 120), nn.ReLU(),\n        nn.Linear(120, 84), nn.ReLU(),\n        nn.Linear(84, 10))\n    return model\nloss = nn.CrossEntropyLoss()\ndevice = d2l.try_gpu()\nbatch_size = 256\ntrain_iter, test_iter = d2l.load_data_fashion_mnist(batch_size=batch_size)\ndef train(net, train_iter, test_iter, num_epochs, loss, trainer, device, scheduler=None):\n    net.to(device)\n    animator = d2l.Animator(xlabel='epoch', xlim=[0, num_epochs], legend=['train loss', 'train acc', 'test acc'])\n    for epoch in range(num_epochs):\n        metric = d2l.Accumulator(3)\n        for i, (X, y) in enumerate(train_iter):\n            net.train()\n            trainer.zero_grad()\n            X, y = X.to(device), y.to(device)\n            y_hat = net(X)\n            l = loss(y_hat, y)\n            l.backward()\n            trainer.step()\n            with torch.no_grad():\n                metric.add(l * X.shape[0], d2l.accuracy(y_hat, y), X.shape[0])\n            train_loss = metric[0] / metric[2]\n            train_acc = metric[1] / metric[2]\n            if (i + 1) % 50 == 0:\n                animator.add(epoch + i / len(train_iter), (train_loss, train_acc, None))\n        test_acc = d2l.evaluate_accuracy_gpu(net, test_iter)\n        animator.add(epoch+1, (None, None, test_acc))\n        if scheduler:\n            if scheduler.__module__ == lr_scheduler.__name__:\n                scheduler.step()\n            else:\n                for param_group in trainer.param_groups:\n                    param_group['lr'] = scheduler(epoch)\n    print(f'train loss {train_loss:.3f}, train acc {train_acc:.3f}, f'test acc {test_acc:.3f}')\nlr, num_epochs = 0.3, 30\nnet = net_fn()\ntrainer = torch.optim.SGD(net.parameters(), lr=lr)\ntrain(net, train_iter, test_iter, num_epochs, loss, trainer, device)\nlr = 0.1\ntrainer.param_groups[0][\"lr\"] = lr\nscheduler = SquareRootScheduler(lr=0.1)\nd2l.plot(torch.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])\nnet = net_fn()\ntrainer = torch.optim.SGD(net.parameters(), lr)\ntrain(net, train_iter, test_iter, num_epochs, loss, trainer, device, scheduler)\nclass FactorScheduler:\n    def __init__(self, factor=1, stop_factor_lr=1e-7, base_lr=0.1):\n        self.factor = factor\n        self.stop_factor_lr = stop_factor_lr\n        self.base_lr = base_lr\n    def __call__(self, num_update):\n        self.base_lr = max(self.stop_factor_lr, self.base_lr * self.factor)\n        return self.base_lr\nscheduler = FactorScheduler(factor=0.9, stop_factor_lr=1e-2, base_lr=2.0)\nd2l.plot(torch.arange(50), [scheduler(t) for t in range(50)])\nnet = net_fn()\ntrainer = torch.optim.SGD(net.parameters(), lr=0.5)\nscheduler = lr_scheduler.MultiStepLR(trainer, milestones=[15, 30], gamma=0.5)\ndef get_lr(trainer, scheduler):\n    lr = scheduler.get_last_lr()[0]\n    trainer.step()\n    scheduler.step()\n    return lr\nd2l.plot(torch.arange(num_epochs), [get_lr(trainer, scheduler) for t in range(num_epochs)])\nscheduler = CosineScheduler(max_update=20, base_lr=0.3, final_lr=0.01)\nd2l.plot(torch.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])\nnet = net_fn()\ntrainer = torch.optim.SGD(net.parameters(), lr=0.3)\ntrain(net, train_iter, test_iter, num_epochs, loss, trainer, device, scheduler)\nscheduler = CosineScheduler(20, warmup_steps=5, base_lr=0.3, final_lr=0.01)\nd2l.plot(torch.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])\nnet = net_fn()\ntrainer = torch.optim.SGD(net.parameters(), lr=0.3)\ntrain(net, train_iter, test_iter, num_epochs, loss, trainer, device, scheduler)",
+  "query_25_corpus_2": "%matplotlib inline\nimport math\nimport time\nimport numpy as np\nimport torch\nfrom d2l import torch as d2l\nn = 10000\na = torch.ones(n)\nb = torch.ones(n)\nc = torch.zeros(n)\ntimer = Timer()\nfor i in range(n):\n    c[i] = a[i] + b[i]",
+  "query_25_corpus_3": "%matplotlib inline\nimport math\nimport torch\nfrom torch import nn\nfrom torch.optim import lr_scheduler\nfrom d2l import torch as d2l\ndef net_fn():\n    model = nn.Sequential(\n        nn.Conv2d(1, 6, kernel_size=5, padding=2), nn.ReLU(),\n        nn.MaxPool2d(kernel_size=2, stride=2),\n        nn.Conv2d(6, 16, kernel_size=5), nn.ReLU(),\n        nn.MaxPool2d(kernel_size=2, stride=2),\n        nn.Flatten(),\n        nn.Linear(16 * 5 * 5, 120), nn.ReLU(),\n        nn.Linear(120, 84), nn.ReLU(),\n        nn.Linear(84, 10))\n    return model\nloss = nn.CrossEntropyLoss()\ndevice = d2l.try_gpu()\nbatch_size = 256\ntrain_iter, test_iter = d2l.load_data_fashion_mnist(batch_size=batch_size)\ndef train(net, train_iter, test_iter, num_epochs, loss, trainer, device, scheduler=None):\n    net.to(device)\n    animator = d2l.Animator(xlabel='epoch', xlim=[0, num_epochs], legend=['train loss', 'train acc', 'test acc'])\n    for epoch in range(num_epochs):\n        metric = d2l.Accumulator(3)\n        for i, (X, y) in enumerate(train_iter):\n            net.train()\n            trainer.zero_grad()\n            X, y = X.to(device), y.to(device)\n            y_hat = net(X)\n            l = loss(y_hat, y)\n            l.backward()\n            trainer.step()\n            with torch.no_grad():\n                metric.add(l * X.shape[0], d2l.accuracy(y_hat, y), X.shape[0])\n            train_loss = metric[0] / metric[2]\n            train_acc = metric[1] / metric[2]\n            if (i + 1) % 50 == 0:\n                animator.add(epoch + i / len(train_iter), (train_loss, train_acc, None))\n        test_acc = d2l.evaluate_accuracy_gpu(net, test_iter)\n        animator.add(epoch+1, (None, None, test_acc))\n        if scheduler:\n            if scheduler.__module__ == lr_scheduler.__name__:\n                scheduler.step()\n            else:\n                for param_group in trainer.param_groups:\n                    param_group['lr'] = scheduler(epoch)\n    print(f'train loss {train_loss:.3f}, train acc {train_acc:.3f}, f'test acc {test_acc:.3f}')\nlr, num_epochs = 0.3, 30\nnet = net_fn()\ntrainer = torch.optim.SGD(net.parameters(), lr=lr)\ntrain(net, train_iter, test_iter, num_epochs, loss, trainer, device)\nlr = 0.1\ntrainer.param_groups[0][\"lr\"] = lr\nscheduler = SquareRootScheduler(lr=0.1)\nd2l.plot(torch.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])\nnet = net_fn()\ntrainer = torch.optim.SGD(net.parameters(), lr)\ntrain(net, train_iter, test_iter, num_epochs, loss, trainer, device, scheduler)\nclass FactorScheduler:\n    def __init__(self, factor=1, stop_factor_lr=1e-7, base_lr=0.1):\n        self.factor = factor\n        self.stop_factor_lr = stop_factor_lr\n        self.base_lr = base_lr\n    def __call__(self, num_update):\n        self.base_lr = max(self.stop_factor_lr, self.base_lr * self.factor)\n        return self.base_lr\nscheduler = FactorScheduler(factor=0.9, stop_factor_lr=1e-2, base_lr=2.0)\nd2l.plot(torch.arange(50), [scheduler(t) for t in range(50)])\nnet = net_fn()\ntrainer = torch.optim.SGD(net.parameters(), lr=0.5)\nscheduler = lr_scheduler.MultiStepLR(trainer, milestones=[15, 30], gamma=0.5)\ndef get_lr(trainer, scheduler):\n    lr = scheduler.get_last_lr()[0]\n    trainer.step()\n    scheduler.step()\n    return lr\nd2l.plot(torch.arange(num_epochs), [get_lr(trainer, scheduler) for t in range(num_epochs)])\nscheduler = CosineScheduler(max_update=20, base_lr=0.3, final_lr=0.01)\nd2l.plot(torch.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])\nnet = net_fn()\ntrainer = torch.optim.SGD(net.parameters(), lr=0.3)\ntrain(net, train_iter, test_iter, num_epochs, loss, trainer, device, scheduler)\nscheduler = CosineScheduler(20, warmup_steps=5, base_lr=0.3, final_lr=0.01)\nd2l.plot(torch.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])\nnet = net_fn()\ntrainer = torch.optim.SGD(net.parameters(), lr=0.3)\ntrain(net, train_iter, test_iter, num_epochs, loss, trainer, device, scheduler)",
+  "query_25_corpus_4": "import math\nimport torch\nfrom torch import nn\nfrom d2l import torch as d2l\nnum_hiddens, num_heads = 100, 5\nattention = d2l.MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens, num_hiddens, num_heads, 0.5)\nattention.eval()\nclass PositionalEncoding(nn.Module):\n    def __init__(self, num_hiddens, dropout, max_len=1000):\n        super(PositionalEncoding, self).__init__()\n        self.dropout = nn.Dropout(dropout)\n        self.P = torch.zeros((1, max_len, num_hiddens))\n        X = torch.arange(max_len, dtype=torch.float32).reshape(-1, 1) / torch.pow(10000, torch.arange(0, num_hiddens, 2, dtype=torch.float32) / num_hiddens)\n        self.P[:, :, 0::2] = torch.sin(X)\n        self.P[:, :, 1::2] = torch.cos(X)\n    def forward(self, X):\n        X = X + self.P[:, :X.shape[1], :].to(X.device)\n        return self.dropout(X)\nencoding_dim, num_steps = 32, 60\npos_encoding = PositionalEncoding(encoding_dim, 0)\npos_encoding.eval()\nX = pos_encoding(torch.zeros((1, num_steps, encoding_dim)))\nP = pos_encoding.P[:, :X.shape[1], :]\nd2l.plot(torch.arange(num_steps), P[0, :, 6:10].T, xlabel='Row (position)', figsize=(6, 2.5), legend=[\"Col %d\" % d for d in torch.arange(6, 10)])\nP = P[0, :, :].unsqueeze(0).unsqueeze(0)\nd2l.show_heatmaps(P, xlabel='Column (encoding dimension)', ylabel='Row (position)', figsize=(3.5, 4), cmap='Blues')",
+  "query_25_chunk": {
+    "language": "python",
+    "imports": [
+      "math",
+      "paddle",
+      "warnings"
+    ],
+    "classes": [],
+    "functions": [
+      "init_rmsprop_states",
+      "rmsprop"
+    ]
+  },
+  "query_25_corpuses_chunks": [
+    {
+      "language": "python",
+      "imports": [
+        "math",
+        "numpy",
+        "time",
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "lr_scheduler",
+        "math",
+        "nn",
+        "torch"
+      ],
+      "classes": [
+        "FactorScheduler"
+      ],
+      "functions": [
+        "net_fn",
+        "train",
+        "get_lr"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "math",
+        "numpy",
+        "time",
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "lr_scheduler",
+        "math",
+        "nn",
+        "torch"
+      ],
+      "classes": [
+        "FactorScheduler"
+      ],
+      "functions": [
+        "net_fn",
+        "train",
+        "get_lr"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "math",
+        "nn",
+        "torch"
+      ],
+      "classes": [
+        "PositionalEncoding"
+      ],
+      "functions": []
+    }
+  ],
+  "query_50": "%matplotlib inline\nimport warnings\nfrom d2l import paddle as d2l\nwarnings.filterwarnings(\"ignore\")\nimport numpy as np\nimport paddle\ndef f(x):\n    return x ** 2\ndef f_grad(x):\n    return 2 * x\ndef show_trace(results, f):\n    n = max(abs(min(results)), abs(max(results)))\n    f_line = paddle.arange(-n, n, 0.01, dtype='float32')\n    d2l.set_figsize()\n    d2l.plot([f_line, results], [[f(x) for x in f_line], [f(x) for x in results]], 'x', 'f(x)', fmts=['-', '-o'])\nshow_trace(results, f)",
+  "query_50_corpus_0": "import collections\nimport re\nfrom d2l import paddle as d2l\ndef tokenize(lines, token='word'):\n    if token == 'word':\n        return [line.split() for line in lines]\n    elif token == 'char':\n        return [list(line) for line in lines]\n    else:\n        print('Error: Unknown word element type:' + token)\ntokens = tokenize(lines)\nfor i in range(11):\n    print(tokens[i])\ndef load_corpus_time_machine(max_tokens=-1):\n    lines = read_time_machine()\n    tokens = tokenize(lines, 'char')\n    vocab = Vocab(tokens)\n    corpus = [vocab[token] for line in tokens for token in line]\n    if max_tokens > 0:\n        corpus = corpus[:max_tokens]\n    return corpus, vocab\ncorpus, vocab = load_corpus_time_machine()\nlen(corpus), len(vocab)",
+  "query_50_corpus_1": "import collections\nimport re\nfrom d2l import paddle as d2l\ndef tokenize(lines, token='word'):\n    if token == 'word':\n        return [line.split() for line in lines]\n    elif token == 'char':\n        return [list(line) for line in lines]\n    else:\n        print('Error: Unknown word element type:' + token)\ntokens = tokenize(lines)\nfor i in range(11):\n    print(tokens[i])\ndef load_corpus_time_machine(max_tokens=-1):\n    lines = read_time_machine()\n    tokens = tokenize(lines, 'char')\n    vocab = Vocab(tokens)\n    corpus = [vocab[token] for line in tokens for token in line]\n    if max_tokens > 0:\n        corpus = corpus[:max_tokens]\n    return corpus, vocab\ncorpus, vocab = load_corpus_time_machine()\nlen(corpus), len(vocab)",
+  "query_50_corpus_2": "import paddle\nfrom paddle import nn\npaddle.device.set_device(\"cpu\"), paddle.CUDAPlace(0), paddle.CUDAPlace(1)\npaddle.device.cuda.device_count()\n    if paddle.device.cuda.device_count() >= i + 1:\n        return paddle.CUDAPlace(i)\n    return paddle.CPUPlace()\ndef try_all_gpus():\n    devices = [paddle.CUDAPlace(i) for i in range(paddle.device.cuda.device_count())]\n    return devices if devices else paddle.CPUPlace()\ntry_gpu(),try_gpu(10),try_all_gpus()\nx = paddle.to_tensor([1, 2, 3])\nx.place\nX = paddle.to_tensor(paddle.ones(shape=[2, 3]), place=try_gpu())\nY = paddle.to_tensor(paddle.rand([2, 3]), place=try_gpu(1))\nZ = X.cuda(1)\nZ.cuda(1) is Z\nnet = nn.Sequential(nn.Linear(3, 1))\nnet=net.to(try_gpu())\nnet[0].weight.place",
+  "query_50_corpus_3": "import warnings\nwarnings.filterwarnings(\"ignore\")\nfrom paddle import nn\nclass Encoder(nn.Layer):\n    def __init__(self, **kwargs):\n        super(Encoder, self).__init__(**kwargs)\n    def forward(self, X, *args):\n        raise NotImplementedError\nclass Decoder(nn.Layer):\n    def __init__(self, **kwargs):\n        super(Decoder, self).__init__(**kwargs)\n    def init_state(self, enc_outputs, *args):\n        raise NotImplementedError\n    def forward(self, X, state):\n        raise NotImplementedError\nclass EncoderDecoder(nn.Layer):\n    def __init__(self, encoder, decoder, **kwargs):\n        super(EncoderDecoder, self).__init__(**kwargs)\n        self.encoder = encoder\n        self.decoder = decoder\n    def forward(self, enc_X, dec_X, *args):\n        enc_outputs = self.encoder(enc_X, *args)\n        dec_state = self.decoder.init_state(enc_outputs, *args)\n        return self.decoder(dec_X, dec_state)",
+  "query_50_corpus_4": "import numpy as np\nimport torch\nfrom torch.utils import data\nfrom d2l import torch as d2l\ntrue_w = torch.tensor([2, -3.4])\ntrue_b = 4.2\nfeatures, labels = d2l.synthetic_data(true_w, true_b, 1000)\ndef load_array(data_arrays, batch_size, is_train=True):\n    dataset = data.TensorDataset(*data_arrays)\n    return data.DataLoader(dataset, batch_size, shuffle=is_train)\nbatch_size = 10\ndata_iter = load_array((features, labels), batch_size)\nfrom torch import nn\nnet = nn.Sequential(nn.Linear(2, 1))\nnet[0].weight.data.normal_(0, 0.01)\nnet[0].bias.data.fill_(0)\ntrainer = torch.optim.SGD(net.parameters(), lr=0.03)\nw = net[0].weight.data\nb = net[0].bias.data",
+  "query_50_chunk": {
+    "language": "python",
+    "imports": [
+      "numpy",
+      "paddle",
+      "warnings"
+    ],
+    "classes": [],
+    "functions": [
+      "f",
+      "f_grad",
+      "show_trace"
+    ]
+  },
+  "query_50_corpuses_chunks": [
+    {
+      "language": "python",
+      "imports": [
+        "collections",
+        "paddle",
+        "re"
+      ],
+      "classes": [],
+      "functions": [
+        "tokenize",
+        "load_corpus_time_machine"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "collections",
+        "paddle",
+        "re"
+      ],
+      "classes": [],
+      "functions": [
+        "tokenize",
+        "load_corpus_time_machine"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn",
+        "paddle"
+      ],
+      "classes": [],
+      "functions": [
+        "try_all_gpus"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn",
+        "warnings"
+      ],
+      "classes": [
+        "Encoder",
+        "Decoder",
+        "EncoderDecoder"
+      ],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "data",
+        "nn",
+        "numpy",
+        "torch"
+      ],
+      "classes": [],
+      "functions": [
+        "load_array"
+      ]
+    }
+  ],
+  "query_75": "import tensorflow as tf\nfrom d2l import tensorflow as d2l\nclass MultiHeadAttention(tf.keras.layers.Layer):\n    def __init__(self, key_size, query_size, value_size, num_hiddens, num_heads, dropout, bias=False, **kwargs):\n        super().__init__(**kwargs)\n        self.num_heads = num_heads\n        self.attention = d2l.DotProductAttention(dropout)\n        self.W_q = tf.keras.layers.Dense(num_hiddens, use_bias=bias)\n        self.W_k = tf.keras.layers.Dense(num_hiddens, use_bias=bias)\n        self.W_v = tf.keras.layers.Dense(num_hiddens, use_bias=bias)\n        self.W_o = tf.keras.layers.Dense(num_hiddens, use_bias=bias)\n    def call(self, queries, keys, values, valid_lens, **kwargs):\n\n        queries = transpose_qkv(self.W_q(queries), self.num_heads)\n        keys = transpose_qkv(self.W_k(keys), self.num_heads)\n        values = transpose_qkv(self.W_v(values), self.num_heads)\n        if valid_lens is not None:\n            valid_lens = tf.repeat(valid_lens, repeats=self.num_heads, axis=0)\n        output = self.attention(queries, keys, values, valid_lens, **kwargs)\n        output_concat = transpose_output(output, self.num_heads)\n        return self.W_o(output_concat)\ndef transpose_qkv(X, num_heads):\n    X = tf.reshape(X, shape=(X.shape[0], X.shape[1], num_heads, -1))\n    X = tf.transpose(X, perm=(0, 2, 1, 3))\n    return tf.reshape(X, shape=(-1, X.shape[2], X.shape[3]))\ndef transpose_output(X, num_heads):\n    X = tf.reshape(X, shape=(-1, num_heads, X.shape[1], X.shape[2]))\n    X = tf.transpose(X, perm=(0, 2, 1, 3))\n    return tf.reshape(X, shape=(X.shape[0], X.shape[1], -1))\nnum_hiddens, num_heads = 100, 5\nattention = MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens, num_hiddens, num_heads, 0.5)\nbatch_size, num_queries = 2, 4\nnum_kvpairs, valid_lens = 6, tf.constant([3, 2])\nX = tf.ones((batch_size, num_queries, num_hiddens))\nY = tf.ones((batch_size, num_kvpairs, num_hiddens))\nattention(X, Y, Y, valid_lens, training=False).shape",
+  "query_75_chunk": {
+    "language": "python",
+    "imports": [
+      "tensorflow"
+    ],
+    "classes": [
+      "MultiHeadAttention"
+    ],
+    "functions": [
+      "transpose_qkv",
+      "transpose_output"
+    ]
+  },
+  "query_75_corpuses_chunks": [],
+  "query_100": "import math\nimport tensorflow as tf\nfrom d2l import tensorflow as d2l\nd2l.set_figsize()\ngammas = [0.95, 0.9, 0.8, 0.7]\nfor gamma in gammas:\n    x = tf.range(40).numpy()\n    d2l.plt.plot(x, (1-gamma) * gamma ** x, label=f'gamma = {gamma:.2f}')\nd2l.plt.xlabel('time');\ndef init_rmsprop_states(feature_dim):\n    s_w = tf.Variable(tf.zeros((feature_dim, 1)))\n    s_b = tf.Variable(tf.zeros(1))\n    return (s_w, s_b)\ndef rmsprop(params, grads, states, hyperparams):\n    gamma, eps = hyperparams['gamma'], 1e-6\n    for p, s, g in zip(params, states, grads):\n        s[:].assign(gamma * s + (1 - gamma) * tf.math.square(g))\n        p[:].assign(p - hyperparams['lr'] * g / tf.math.sqrt(s + eps))\ntrainer = tf.keras.optimizers.RMSprop\nd2l.train_concise_ch11(trainer, {'learning_rate': 0.01, 'rho': 0.9}, data_iter)",
+  "query_100_corpus_0": "%matplotlib inline\nimport math\nimport time\nimport numpy as np\nimport torch\nfrom d2l import torch as d2l\nn = 10000\na = torch.ones(n)\nb = torch.ones(n)\nc = torch.zeros(n)\ntimer = Timer()\nfor i in range(n):\n    c[i] = a[i] + b[i]",
+  "query_100_corpus_1": "%matplotlib inline\nimport math\nimport time\nimport numpy as np\nimport torch\nfrom d2l import torch as d2l\nn = 10000\na = torch.ones(n)\nb = torch.ones(n)\nc = torch.zeros(n)\ntimer = Timer()\nfor i in range(n):\n    c[i] = a[i] + b[i]",
+  "query_100_corpus_2": "%matplotlib inline\nimport math\nimport time\nfrom mxnet import np\nfrom d2l import mxnet as d2l\nn = 10000\na = np.ones(n)\nb = np.ones(n)\nc = np.zeros(n)\ntimer = Timer()\nfor i in range(n):\n    c[i] = a[i] + b[i]\nx = np.arange(-7, 7, 0.01)\nparams = [(0, 1), (0, 2), (3, 1)]\nd2l.plot(x.asnumpy(), [normal(x, mu, sigma).asnumpy() for mu, sigma in params], xlabel='x', ylabel='p(x)', figsize=(4.5, 2.5), legend=[f'mean {mu}, std {sigma}' for mu, sigma in params])",
+  "query_100_corpus_3": "%matplotlib inline\nimport warnings\nfrom d2l import paddle as d2l\nwarnings.filterwarnings(\"ignore\")\nimport math\nimport time\nimport numpy as np\nimport paddle\nn = 10000\na = paddle.ones([n])\nb = paddle.ones([n])\nc = paddle.zeros([n])\ntimer = Timer()\nfor i in range(n):\n    c[i] = a[i] + b[i]\nx = np.arange(-7, 7, 0.01)\nparams = [(0, 1), (0, 2), (3, 1)]\nd2l.plot(x, [normal(x, mu, sigma) for mu, sigma in params], xlabel='x',\n        ylabel='p(x)', figsize=(4.5, 2.5), legend=[f'mean {mu}, std {sigma}' for mu, sigma in params])",
+  "query_100_corpus_4": "c = np.array(0.15 * np.pi)\ndef f(x):\n    return x * np.cos(c * x)\ndef f_grad(x):\n    return np.cos(c * x) - c * x * np.sin(c * x)\nshow_trace(gd(2, f_grad), f)\ndef show_trace_2d(f, results):\n    d2l.set_figsize()\n    d2l.plt.plot(*zip(*results), '-o', color='\n    x1, x2 = np.meshgrid(np.arange(-5.5, 1.0, 0.1), np.arange(-3.0, 1.0, 0.1))\n    d2l.plt.contour(x1, x2, f(x1, x2), colors='\n    d2l.plt.xlabel('x1')\n    d2l.plt.ylabel('x2')\nc = np.array(0.5)\ndef f(x):\n    return np.cosh(c * x)\ndef f_grad(x):\n    return c * np.sinh(c * x)\ndef f_hess(x):\n    return c**2 * np.cosh(c * x)\ndef newton(eta=1):\n    x = 10.0\n    results = [x]\n    for i in range(10):\n        x -= eta * f_grad(x) / f_hess(x)\n        results.append(float(x))\n    return results\nshow_trace(newton(), f)\nc = np.array(0.15 * np.pi)\ndef f(x):\n    return x * np.cos(c * x)\ndef f_grad(x):\n    return np.cos(c * x) - c * x * np.sin(c * x)\ndef f_hess(x):\n    return - 2 * c * np.sin(c * x) - x * c**2 * np.cos(c * x)\nshow_trace(newton(), f)\n%matplotlib inline\nimport math\nfrom mxnet import np, npx\nfrom d2l import mxnet as d2l\nnpx.set_np()\ndef f(x1, x2):\n    return x1 ** 2 + 2 * x2 ** 2\ndef f_grad(x1, x2):\n    return 2 * x1, 4 * x2\ndef sgd(x1, x2, s1, s2, f_grad):\n    g1, g2 = f_grad(x1, x2)\n    g1 += np.random.normal(0.0, 1, (1,))\n    g2 += np.random.normal(0.0, 1, (1,))\n    eta_t = eta * lr()\n    return (x1 - eta_t * g1, x2 - eta_t * g2, 0, 0)\ndef constant_lr():\n    return 1\neta = 0.1\nlr = constant_lr\nd2l.show_trace_2d(f, d2l.train_2d(sgd, steps=50, f_grad=f_grad))",
+  "query_100_chunk": {
+    "language": "python",
+    "imports": [
+      "math",
+      "tensorflow"
+    ],
+    "classes": [],
+    "functions": [
+      "init_rmsprop_states",
+      "rmsprop"
+    ]
+  },
+  "query_100_corpuses_chunks": [
+    {
+      "language": "python",
+      "imports": [
+        "math",
+        "numpy",
+        "time",
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "math",
+        "numpy",
+        "time",
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "math",
+        "mxnet",
+        "np",
+        "time"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "math",
+        "numpy",
+        "paddle",
+        "time",
+        "warnings"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "math",
+        "mxnet",
+        "np",
+        "npx"
+      ],
+      "classes": [],
+      "functions": [
+        "f",
+        "f_grad",
+        "show_trace_2d",
+        "f",
+        "f_grad",
+        "f_hess",
+        "f",
+        "f_grad",
+        "sgd",
+        "constant_lr"
+      ]
+    }
+  ]
+}

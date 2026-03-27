@@ -1,0 +1,16 @@
+trainer = paddle.optimizer.SGD(learning_rate=0.5, parameters=net.parameters())
+d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+%matplotlib inline
+import warnings
+from d2l import paddle as d2l
+warnings.filterwarnings("ignore")
+import paddle
+x = paddle.arange(start=-8.0, end=8.0, step=0.1, dtype='float32')
+x.stop_gradient = False
+y = paddle.nn.functional.sigmoid(x)
+y.backward(paddle.ones_like(x))
+d2l.plot(x.detach().numpy(), [y.detach().numpy(), x.grad.numpy()],
+        legend=['sigmoid', 'gradient'], figsize=(4.5, 2.5))
+M = paddle.normal(0, 1, shape=(4,4))
+for i in range(100):
+    M = paddle.mm(M, paddle.normal(0, 1, shape=(4, 4)))

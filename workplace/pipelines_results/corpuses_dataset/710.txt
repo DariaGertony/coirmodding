@@ -1,0 +1,22 @@
+import warnings
+from d2l import paddle as d2l
+warnings.filterwarnings("ignore")
+import paddle
+from paddle import nn
+from paddle.jit import to_static
+from paddle.static import InputSpec
+def get_net():
+    blocks = [
+        nn.Linear(512, 256),
+        nn.ReLU(),
+        nn.Linear(256, 128),
+        nn.ReLU(),
+        nn.Linear(128, 2)
+    ]
+    net = nn.Sequential(*blocks)
+    return net
+x = paddle.randn((1, 512))
+net = get_net()
+net(x)
+net = paddle.jit.to_static(net)
+net(x)

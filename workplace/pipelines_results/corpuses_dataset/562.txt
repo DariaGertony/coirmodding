@@ -1,0 +1,21 @@
+from mxnet import autograd, gluon, np, npx
+from d2l import mxnet as d2l
+npx.set_np()
+true_w = np.array([2, -3.4])
+true_b = 4.2
+features, labels = d2l.synthetic_data(true_w, true_b, 1000)
+def load_array(data_arrays, batch_size, is_train=True):
+    dataset = gluon.data.ArrayDataset(*data_arrays)
+    return gluon.data.DataLoader(dataset, batch_size, shuffle=is_train)
+batch_size = 10
+data_iter = load_array((features, labels), batch_size)
+from mxnet.gluon import nn
+net = nn.Sequential()
+net.add(nn.Dense(1))
+from mxnet import init
+net.initialize(init.Normal(sigma=0.01))
+loss = gluon.loss.L2Loss()
+from mxnet import gluon
+trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.03})
+w = net[0].weight.data()
+b = net[0].bias.data()

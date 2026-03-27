@@ -1,0 +1,41 @@
+from mxnet import autograd, gluon, init, np, npx
+from mxnet.gluon import nn
+from d2l import mxnet as d2l
+npx.set_np()
+net = nn.Sequential()
+net.add(nn.Conv2D(channels=6, kernel_size=5, padding=2, activation='sigmoid'),
+        nn.AvgPool2D(pool_size=2, strides=2),
+        nn.Conv2D(channels=16, kernel_size=5, activation='sigmoid'),
+        nn.AvgPool2D(pool_size=2, strides=2),
+        nn.Dense(120, activation='sigmoid'),
+        nn.Dense(84, activation='sigmoid'),
+        nn.Dense(10))
+X = np.random.uniform(size=(1, 1, 28, 28))
+net.initialize()
+for layer in net:
+    X = layer(X)
+    print(layer.name, 'output shape:	', X.shape)
+def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
+    net.initialize(force_reinit=True, ctx=device, init=init.Xavier())
+    loss = gluon.loss.SoftmaxCrossEntropyLoss()
+    trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': lr})
+    animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs], legend=['train loss', 'train acc', 'test acc'])
+    timer, num_batches = d2l.Timer(), len(train_iter)
+    for epoch in range(num_epochs):
+        metric = d2l.Accumulator(3)
+        for i, (X, y) in enumerate(train_iter):
+            timer.start()
+            X, y = X.as_in_ctx(device), y.as_in_ctx(device)
+            with autograd.record():
+                y_hat = net(X)
+                l = loss(y_hat, y)
+            l.backward()
+            trainer.step(X.shape[0])
+            metric.add(l.sum(), d2l.accuracy(y_hat, y), X.shape[0])
+            timer.stop()
+            train_l = metric[0] / metric[2]
+            train_acc = metric[1] / metric[2]
+            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+                animator.add(epoch + (i + 1) / num_batches, (train_l, train_acc, None))
+        test_acc = evaluate_accuracy_gpu(net, test_iter)
+        animator.add(epoch + 1, (None, None, test_acc))

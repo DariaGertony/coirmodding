@@ -1,0 +1,14 @@
+import warnings
+from d2l import paddle as d2l
+warnings.filterwarnings("ignore")
+import paddle
+from paddle import nn
+batch_size = 256
+train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
+net = nn.Sequential(nn.Flatten(), nn.Linear(784, 10))
+def init_weights(m):
+    if type(m) == nn.Linear:
+        nn.initializer.Normal(m.weight, std=0.01)
+net.apply(init_weights);
+loss = nn.CrossEntropyLoss(reduction='none')
+trainer = paddle.optimizer.SGD(learning_rate=0.1, parameters=net.parameters())

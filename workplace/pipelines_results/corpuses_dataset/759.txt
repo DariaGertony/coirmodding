@@ -1,0 +1,15 @@
+import torch
+from torch import nn
+from d2l import torch as d2l
+def get_net():
+    net = nn.Sequential(nn.Linear(512, 256),
+            nn.ReLU(),
+            nn.Linear(256, 128),
+            nn.ReLU(),
+            nn.Linear(128, 2))
+    return net
+x = torch.randn(size=(1, 512))
+net = get_net()
+net(x)
+net = torch.jit.script(net)
+net(x)

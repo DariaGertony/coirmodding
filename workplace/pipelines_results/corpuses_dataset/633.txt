@@ -1,0 +1,17 @@
+counts = paddle.distribution.Multinomial(10, paddle.to_tensor(fair_probs)).sample((500,1))
+cum_counts = counts.cumsum(axis=0)
+cum_counts = cum_counts.squeeze(axis=1)
+estimates = cum_counts / cum_counts.sum(axis=1, keepdim=True)
+d2l.set_figsize((6, 4.5))
+for i in range(6):
+    d2l.plt.plot(estimates[:, i],
+                label=("P(die=" + str(i + 1) + ")"))
+d2l.plt.axhline(y=0.167, color='black', linestyle='dashed')
+d2l.plt.gca().set_xlabel('Groups of experiments')
+d2l.plt.gca().set_ylabel('Estimated probability')
+d2l.plt.legend()
+import warnings
+warnings.filterwarnings(action='ignore')
+import paddle
+help(paddle.ones)
+paddle.ones([4], dtype='float32')

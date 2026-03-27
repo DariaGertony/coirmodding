@@ -1,0 +1,54 @@
+from mxnet import autograd, gluon, np, npx
+from mxnet.gluon import nn
+from d2l import mxnet as d2l
+npx.set_np()
+n_train = 50
+x_train = np.sort(np.random.rand(n_train) * 5)
+def f(x):
+    return 2 * np.sin(x) + x**0.8
+y_train = f(x_train) + np.random.normal(0.0, 0.5, (n_train,))
+x_test = np.arange(0, 5, 0.1)
+y_truth = f(x_test)
+n_test = len(x_test)
+n_test
+y_hat = y_train.mean().repeat(n_test)
+plot_kernel_reg(y_hat)
+X_repeat = x_test.repeat(n_train).reshape((-1, n_train))
+attention_weights = npx.softmax(-(X_repeat - x_train)**2 / 2)
+y_hat = np.dot(attention_weights, y_train)
+plot_kernel_reg(y_hat)
+d2l.show_heatmaps(np.expand_dims(np.expand_dims(attention_weights, 0), 0), xlabel='Sorted training inputs', ylabel='Sorted testing inputs')
+X = np.ones((2, 1, 4))
+Y = np.ones((2, 4, 6))
+npx.batch_dot(X, Y).shape
+weights = np.ones((2, 10)) * 0.1
+values = np.arange(20).reshape((2, 10))
+npx.batch_dot(np.expand_dims(weights, 1), np.expand_dims(values, -1))
+class NWKernelRegression(nn.Block):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.w = self.params.get('w', shape=(1,))
+    def forward(self, queries, keys, values):
+        queries = queries.repeat(keys.shape[1]).reshape((-1, keys.shape[1]))
+        self.attention_weights = npx.softmax(-((queries - keys) * self.w.data())**2 / 2)
+        return npx.batch_dot(np.expand_dims(self.attention_weights, 1), np.expand_dims(values, -1)).reshape(-1)
+X_tile = np.tile(x_train, (n_train, 1))
+Y_tile = np.tile(y_train, (n_train, 1))
+keys = X_tile[(1 - np.eye(n_train)).astype('bool')].reshape((n_train, -1))
+values = Y_tile[(1 - np.eye(n_train)).astype('bool')].reshape((n_train, -1))
+net = NWKernelRegression()
+net.initialize()
+loss = gluon.loss.L2Loss()
+trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.5})
+animator = d2l.Animator(xlabel='epoch', ylabel='loss', xlim=[1, 5])
+for epoch in range(5):
+    with autograd.record():
+        l = loss(net(x_train, keys, values), y_train)
+    l.backward()
+    trainer.step(1)
+    animator.add(epoch + 1, float(l.sum()))
+keys = np.tile(x_train, (n_test, 1))
+values = np.tile(y_train, (n_test, 1))
+y_hat = net(x_test, keys, values)
+plot_kernel_reg(y_hat)
+d2l.show_heatmaps(np.expand_dims(np.expand_dims(net.attention_weights, 0), 0), xlabel='Sorted training inputs', ylabel='Sorted testing inputs')

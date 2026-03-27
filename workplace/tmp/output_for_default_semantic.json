@@ -1,0 +1,384 @@
+{
+  "query_1": "import numpy as np\nimport tensorflow as tf\nfrom d2l import tensorflow as d2l\nnum_hiddens, num_heads = 100, 5\nattention = d2l.MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens, num_hiddens, num_heads, 0.5)\nbatch_size, num_queries, valid_lens = 2, 4, tf.constant([3, 2])\nX = tf.ones((batch_size, num_queries, num_hiddens))\nattention(X, X, X, valid_lens, training=False).shape\nclass PositionalEncoding(tf.keras.layers.Layer):\n    def __init__(self, num_hiddens, dropout, max_len=1000):\n        super().__init__()\n        self.dropout = tf.keras.layers.Dropout(dropout)\n        self.P = np.zeros((1, max_len, num_hiddens))\n        X = np.arange(max_len, dtype=np.float32).reshape(-1,1)/np.power(10000, np.arange(0, num_hiddens, 2, dtype=np.float32) / num_hiddens)\n        self.P[:, :, 0::2] = np.sin(X)\n        self.P[:, :, 1::2] = np.cos(X)\n    def call(self, X, **kwargs):\n        X = X + self.P[:, :X.shape[1], :]\n        return self.dropout(X, **kwargs)\nencoding_dim, num_steps = 32, 60\npos_encoding = PositionalEncoding(encoding_dim, 0)\nX = pos_encoding(tf.zeros((1, num_steps, encoding_dim)), training=False)\nP = pos_encoding.P[:, :X.shape[1], :]\nd2l.plot(np.arange(num_steps), P[0, :, 6:10].T, xlabel='Row (position)', figsize=(6, 2.5), legend=[\"Col %d\" % d for d in np.arange(6, 10)])\nP = tf.expand_dims(tf.expand_dims(P[0, :, :], axis=0), axis=0)\nd2l.show_heatmaps(P, xlabel='Column (encoding dimension)', ylabel='Row (position)', figsize=(3.5, 4), cmap='Blues')",
+  "query_1_corpus_0": "import collections\nimport re\nfrom d2l import paddle as d2l\ndef tokenize(lines, token='word'):\n    if token == 'word':\n        return [line.split() for line in lines]\n    elif token == 'char':\n        return [list(line) for line in lines]\n    else:\n        print('Error: Unknown word element type:' + token)\ntokens = tokenize(lines)\nfor i in range(11):\n    print(tokens[i])\ndef load_corpus_time_machine(max_tokens=-1):\n    lines = read_time_machine()\n    tokens = tokenize(lines, 'char')\n    vocab = Vocab(tokens)\n    corpus = [vocab[token] for line in tokens for token in line]\n    if max_tokens > 0:\n        corpus = corpus[:max_tokens]\n    return corpus, vocab\ncorpus, vocab = load_corpus_time_machine()\nlen(corpus), len(vocab)",
+  "query_1_corpus_1": "counts = multinomial.Multinomial(10, fair_probs).sample((500,))\ncum_counts = counts.cumsum(dim=0)\nestimates = cum_counts / cum_counts.sum(dim=1, keepdims=True)\nd2l.set_figsize((6, 4.5))\nfor i in range(6):\n    d2l.plt.plot(estimates[:, i].numpy(), label=(\"P(die=\" + str(i + 1) + \")\"))\nd2l.plt.axhline(y=0.167, color='black', linestyle='dashed')\nd2l.plt.gca().set_xlabel('Groups of experiments')\nd2l.plt.gca().set_ylabel('Estimated probability')\nd2l.plt.legend();\nimport torch\na = dir(torch.distributions)\nhelp(torch.ones)\ntorch.ones(4)",
+  "query_1_corpus_2": "import collections\nimport re\nfrom d2l import paddle as d2l\ndef tokenize(lines, token='word'):\n    if token == 'word':\n        return [line.split() for line in lines]\n    elif token == 'char':\n        return [list(line) for line in lines]\n    else:\n        print('Error: Unknown word element type:' + token)\ntokens = tokenize(lines)\nfor i in range(11):\n    print(tokens[i])\ndef load_corpus_time_machine(max_tokens=-1):\n    lines = read_time_machine()\n    tokens = tokenize(lines, 'char')\n    vocab = Vocab(tokens)\n    corpus = [vocab[token] for line in tokens for token in line]\n    if max_tokens > 0:\n        corpus = corpus[:max_tokens]\n    return corpus, vocab\ncorpus, vocab = load_corpus_time_machine()\nlen(corpus), len(vocab)",
+  "query_1_corpus_3": "import torch\nfrom torch import nn\nnet = nn.Sequential(nn.Linear(4, 8), nn.ReLU(), nn.Linear(8, 1))\nX = torch.rand(size=(2, 4))\nnet(X)\nnet.state_dict()['2.bias'].data\ndef block1():\n    return nn.Sequential(nn.Linear(4, 8), nn.ReLU(), nn.Linear(8, 4), nn.ReLU())\ndef block2():\n    net = nn.Sequential()\n    for i in range(4):\n        net.add_module(f'block {i}', block1())\n    return net\nrgnet = nn.Sequential(block2(), nn.Linear(4, 1))\nrgnet(X)\ndef init_normal(m):\n    if type(m) == nn.Linear:\n        nn.init.normal_(m.weight, mean=0, std=0.01)\n        nn.init.zeros_(m.bias)\nnet.apply(init_normal)\nnet[0].weight.data[0], net[0].bias.data[0]\ndef init_constant(m):\n    if type(m) == nn.Linear:\n        nn.init.constant_(m.weight, 1)\n        nn.init.zeros_(m.bias)\nnet.apply(init_constant)\nnet[0].weight.data[0], net[0].bias.data[0]\ndef init_xavier(m):\n    if type(m) == nn.Linear:\n        nn.init.xavier_uniform_(m.weight)\ndef init_42(m):\n    if type(m) == nn.Linear:\n        nn.init.constant_(m.weight, 42)\nnet[0].apply(init_xavier)\nnet[2].apply(init_42)\ndef my_init(m):\n    if type(m) == nn.Linear:\n        nn.init.uniform_(m.weight, -10, 10)\n        m.weight.data *= m.weight.data.abs() >= 5\nnet.apply(my_init)\nnet[0].weight[:2]\nnet[0].weight.data[:] += 1\nnet[0].weight.data[0, 0] = 42\nnet[0].weight.data[0]\nlayer = CenteredLayer()\nlayer(torch.FloatTensor([1, 2, 3, 4, 5]))\nnet = nn.Sequential(nn.Linear(8, 128), CenteredLayer())",
+  "query_1_corpus_4": "counts = multinomial.Multinomial(10, fair_probs).sample((500,))\ncum_counts = counts.cumsum(dim=0)\nestimates = cum_counts / cum_counts.sum(dim=1, keepdims=True)\nd2l.set_figsize((6, 4.5))\nfor i in range(6):\n    d2l.plt.plot(estimates[:, i].numpy(), label=(\"P(die=\" + str(i + 1) + \")\"))\nd2l.plt.axhline(y=0.167, color='black', linestyle='dashed')\nd2l.plt.gca().set_xlabel('Groups of experiments')\nd2l.plt.gca().set_ylabel('Estimated probability')\nd2l.plt.legend();\nimport torch\na = dir(torch.distributions)\nhelp(torch.ones)\ntorch.ones(4)",
+  "query_1_chunk": {
+    "language": "python",
+    "imports": [
+      "numpy",
+      "tensorflow"
+    ],
+    "classes": [
+      "PositionalEncoding"
+    ],
+    "functions": []
+  },
+  "query_1_corpuses_chunks": [
+    {
+      "language": "python",
+      "imports": [
+        "collections",
+        "paddle",
+        "re"
+      ],
+      "classes": [],
+      "functions": [
+        "tokenize",
+        "load_corpus_time_machine"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "collections",
+        "paddle",
+        "re"
+      ],
+      "classes": [],
+      "functions": [
+        "tokenize",
+        "load_corpus_time_machine"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn",
+        "torch"
+      ],
+      "classes": [],
+      "functions": [
+        "block1",
+        "block2",
+        "init_normal",
+        "init_constant",
+        "init_xavier",
+        "init_42",
+        "my_init"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    }
+  ],
+  "query_25": "import warnings\nfrom d2l import paddle as d2l\nwarnings.filterwarnings(\"ignore\")\nimport math\nimport paddle\nd2l.set_figsize()\ngammas = [0.95, 0.9, 0.8, 0.7]\nfor gamma in gammas:\n    x = paddle.arange(40).detach().numpy()\n    d2l.plt.plot(x, (1-gamma) * gamma ** x, label=f'gamma = {gamma:.2f}')\nd2l.plt.xlabel('time');\ndef init_rmsprop_states(feature_dim):\n    s_w = paddle.zeros((feature_dim, 1))\n    s_b = paddle.zeros([1])\n    return (s_w, s_b)\ndef rmsprop(params, states, hyperparams):\n    a = []\n    gamma, eps = hyperparams['gamma'], 1e-6\n    for p, s in zip(params, states):\n        with paddle.no_grad():\n            s[:] = gamma * s + (1 - gamma) * paddle.square(p.grad)\n            p[:] -= hyperparams['lr'] * p.grad / paddle.sqrt(s + eps)\n        p.grad.zero_()\n        a.append(p)\n    return a\ntrainer = paddle.optimizer.RMSProp\nd2l.train_concise_ch11(trainer, {'learning_rate': 0.01, 'rho': 0.9}, data_iter)",
+  "query_25_corpus_0": "x = np.arange(12)\nx.size\nX = x.reshape(3, 4)\nnp.zeros((2, 3, 4))\nnp.ones((2, 3, 4))\nnp.random.normal(0, 1, size=(3, 4))\nnp.array([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\nx = np.array([1, 2, 4, 8])\ny = np.array([2, 2, 2, 2])\nx + y, x - y, x * y, x / y, x ** y\nnp.exp(x)\nX = np.arange(12).reshape(3, 4)\nY = np.array([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\nnp.concatenate([X, Y], axis=0), np.concatenate([X, Y], axis=1)\nX.sum()\na = np.arange(3).reshape(3, 1)\nb = np.arange(2).reshape(1, 2)\nX[1, 2] = 9\nX[0:2, :] = 12\nZ = np.zeros_like(Y)\nZ[:] = X + Y\nbefore = id(X)\nX += Y\nid(X) == before\nA = X.asnumpy()\nB = np.array(A)\na = np.array([3.5])\nprint(a, a.item(), float(a), int(a))",
+  "query_25_corpus_1": "from mxnet.gluon import nn\nclass Encoder(nn.Block):\n    def __init__(self, **kwargs):\n        super(Encoder, self).__init__(**kwargs)\n    def forward(self, X, *args):\n        raise NotImplementedError\nclass Decoder(tf.keras.layers.Layer):\n    def __init__(self, **kwargs):\n        super(Decoder, self).__init__(**kwargs)\n    def init_state(self, enc_outputs, *args):\n        raise NotImplementedError\n    def forward(self, X, state):\n        raise NotImplementedError\nclass EncoderDecoder(nn.Block):\n    def __init__(self, encoder, decoder, **kwargs):\n        super(EncoderDecoder, self).__init__(**kwargs)\n        self.encoder = encoder\n        self.decoder = decoder\n    def forward(self, enc_X, dec_X, *args):\n        enc_outputs = self.encoder(enc_X, *args)\n        dec_state = self.decoder.init_state(enc_outputs, *args)\n        return self.decoder(dec_X, dec_state)",
+  "query_25_corpus_2": "x = np.arange(12)\nx.size\nX = x.reshape(3, 4)\nnp.zeros((2, 3, 4))\nnp.ones((2, 3, 4))\nnp.random.normal(0, 1, size=(3, 4))\nnp.array([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\nx = np.array([1, 2, 4, 8])\ny = np.array([2, 2, 2, 2])\nx + y, x - y, x * y, x / y, x ** y\nnp.exp(x)\nX = np.arange(12).reshape(3, 4)\nY = np.array([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\nnp.concatenate([X, Y], axis=0), np.concatenate([X, Y], axis=1)\nX.sum()\na = np.arange(3).reshape(3, 1)\nb = np.arange(2).reshape(1, 2)\nX[1, 2] = 9\nX[0:2, :] = 12\nZ = np.zeros_like(Y)\nZ[:] = X + Y\nbefore = id(X)\nX += Y\nid(X) == before\nA = X.asnumpy()\nB = np.array(A)\na = np.array([3.5])\nprint(a, a.item(), float(a), int(a))",
+  "query_25_corpus_3": "from mxnet import np, npx\nfrom mxnet.gluon import nn\nnpx.set_np()\nnet = nn.Sequential()\nnet.add(nn.Dense(256, activation='relu'))\nnet.add(nn.Dense(10))\nnet.initialize()\nX = np.random.uniform(size=(2, 20))\nnet(X)\nclass MLP(nn.Block):\n    def __init__(self, **kwargs):\n        super().__init__(**kwargs)\n        self.hidden = nn.Dense(256, activation='relu')\n        self.out = nn.Dense(10)\n    def forward(self, X):\n        return self.out(self.hidden(X))\nnet = MLP()\nnet.initialize()\nnet(X)\nclass MySequential(nn.Block):\n    def add(self, block):\n\n        self._children[block.name] = block\n    def forward(self, X):\n        for block in self._children.values():\n            X = block(X)\n        return X\nnet = MySequential()\nnet.add(nn.Dense(256, activation='relu'))\nnet.add(nn.Dense(10))\nnet.initialize()\nnet(X)\nclass FixedHiddenMLP(nn.Block):\n    def __init__(self, **kwargs):\n        super().__init__(**kwargs)\n        self.rand_weight = self.params.get_constant('rand_weight', np.random.uniform(size=(20, 20)))\n        self.dense = nn.Dense(20, activation='relu')\n    def forward(self, X):\n        X = self.dense(X)\n        X = npx.relu(np.dot(X, self.rand_weight.data()) + 1)\n        X = self.dense(X)\n        while np.abs(X).sum() > 1:\n            X /= 2\n        return X.sum()\nnet = FixedHiddenMLP()\nnet.initialize()\nnet(X)\nclass NestMLP(nn.Block):\n    def __init__(self, **kwargs):\n        super().__init__(**kwargs)\n        self.net = nn.Sequential()\n        self.net.add(nn.Dense(64, activation='relu'), nn.Dense(32, activation='relu'))\n        self.dense = nn.Dense(16, activation='relu')\n    def forward(self, X):\n        return self.dense(self.net(X))\nchimera = nn.Sequential()\nchimera.add(NestMLP(), nn.Dense(20), FixedHiddenMLP())\nchimera.initialize()\nchimera(X)",
+  "query_25_corpus_4": "from mxnet.gluon import nn\nclass Encoder(nn.Block):\n    def __init__(self, **kwargs):\n        super(Encoder, self).__init__(**kwargs)\n    def forward(self, X, *args):\n        raise NotImplementedError\nclass Decoder(tf.keras.layers.Layer):\n    def __init__(self, **kwargs):\n        super(Decoder, self).__init__(**kwargs)\n    def init_state(self, enc_outputs, *args):\n        raise NotImplementedError\n    def forward(self, X, state):\n        raise NotImplementedError\nclass EncoderDecoder(nn.Block):\n    def __init__(self, encoder, decoder, **kwargs):\n        super(EncoderDecoder, self).__init__(**kwargs)\n        self.encoder = encoder\n        self.decoder = decoder\n    def forward(self, enc_X, dec_X, *args):\n        enc_outputs = self.encoder(enc_X, *args)\n        dec_state = self.decoder.init_state(enc_outputs, *args)\n        return self.decoder(dec_X, dec_state)",
+  "query_25_chunk": {
+    "language": "python",
+    "imports": [
+      "math",
+      "paddle",
+      "warnings"
+    ],
+    "classes": [],
+    "functions": [
+      "init_rmsprop_states",
+      "rmsprop"
+    ]
+  },
+  "query_25_corpuses_chunks": [
+    {
+      "language": "python",
+      "imports": [],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn"
+      ],
+      "classes": [
+        "Encoder",
+        "Decoder",
+        "EncoderDecoder"
+      ],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn",
+        "np",
+        "npx"
+      ],
+      "classes": [
+        "MLP",
+        "MySequential",
+        "FixedHiddenMLP",
+        "NestMLP"
+      ],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn"
+      ],
+      "classes": [
+        "Encoder",
+        "Decoder",
+        "EncoderDecoder"
+      ],
+      "functions": []
+    }
+  ],
+  "query_50": "%matplotlib inline\nimport warnings\nfrom d2l import paddle as d2l\nwarnings.filterwarnings(\"ignore\")\nimport numpy as np\nimport paddle\ndef f(x):\n    return x ** 2\ndef f_grad(x):\n    return 2 * x\ndef show_trace(results, f):\n    n = max(abs(min(results)), abs(max(results)))\n    f_line = paddle.arange(-n, n, 0.01, dtype='float32')\n    d2l.set_figsize()\n    d2l.plot([f_line, results], [[f(x) for x in f_line], [f(x) for x in results]], 'x', 'f(x)', fmts=['-', '-o'])\nshow_trace(results, f)",
+  "query_50_corpus_0": "from torch import nn\nclass Encoder(nn.Module):\n    def __init__(self, **kwargs):\n        super(Encoder, self).__init__(**kwargs)\n    def forward(self, X, *args):\n        raise NotImplementedError\nclass Decoder(nn.Module):\n    def __init__(self, **kwargs):\n        super(Decoder, self).__init__(**kwargs)\n    def init_state(self, enc_outputs, *args):\n        raise NotImplementedError\n    def forward(self, X, state):\n        raise NotImplementedError\nclass EncoderDecoder(nn.Module):\n    def __init__(self, encoder, decoder, **kwargs):\n        super(EncoderDecoder, self).__init__(**kwargs)\n        self.encoder = encoder\n        self.decoder = decoder\n    def forward(self, enc_X, dec_X, *args):\n        enc_outputs = self.encoder(enc_X, *args)\n        dec_state = self.decoder.init_state(enc_outputs, *args)\n        return self.decoder(dec_X, dec_state)",
+  "query_50_corpus_1": "from mxnet.gluon import nn\nclass Encoder(nn.Block):\n    def __init__(self, **kwargs):\n        super(Encoder, self).__init__(**kwargs)\n    def forward(self, X, *args):\n        raise NotImplementedError\nclass Decoder(tf.keras.layers.Layer):\n    def __init__(self, **kwargs):\n        super(Decoder, self).__init__(**kwargs)\n    def init_state(self, enc_outputs, *args):\n        raise NotImplementedError\n    def forward(self, X, state):\n        raise NotImplementedError\nclass EncoderDecoder(nn.Block):\n    def __init__(self, encoder, decoder, **kwargs):\n        super(EncoderDecoder, self).__init__(**kwargs)\n        self.encoder = encoder\n        self.decoder = decoder\n    def forward(self, enc_X, dec_X, *args):\n        enc_outputs = self.encoder(enc_X, *args)\n        dec_state = self.decoder.init_state(enc_outputs, *args)\n        return self.decoder(dec_X, dec_state)",
+  "query_50_corpus_2": "from torch import nn\nclass Encoder(nn.Module):\n    def __init__(self, **kwargs):\n        super(Encoder, self).__init__(**kwargs)\n    def forward(self, X, *args):\n        raise NotImplementedError\nclass Decoder(nn.Module):\n    def __init__(self, **kwargs):\n        super(Decoder, self).__init__(**kwargs)\n    def init_state(self, enc_outputs, *args):\n        raise NotImplementedError\n    def forward(self, X, state):\n        raise NotImplementedError\nclass EncoderDecoder(nn.Module):\n    def __init__(self, encoder, decoder, **kwargs):\n        super(EncoderDecoder, self).__init__(**kwargs)\n        self.encoder = encoder\n        self.decoder = decoder\n    def forward(self, enc_X, dec_X, *args):\n        enc_outputs = self.encoder(enc_X, *args)\n        dec_state = self.decoder.init_state(enc_outputs, *args)\n        return self.decoder(dec_X, dec_state)",
+  "query_50_corpus_3": "import torch\nfrom torch import nn\nfrom d2l import torch as d2l\nbatch_size, num_steps = 32, 35\ntrain_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)\ndef get_lstm_params(vocab_size, num_hiddens, device):\n    num_inputs = num_outputs = vocab_size\n    def normal(shape):\n        return torch.randn(size=shape, device=device)*0.01\n    def three():\n        return (normal((num_inputs, num_hiddens)), normal((num_hiddens, num_hiddens)), torch.zeros(num_hiddens, device=device))\n    W_xi, W_hi, b_i = three()\n    W_xf, W_hf, b_f = three()\n    W_xo, W_ho, b_o = three()\n    W_xc, W_hc, b_c = three()\n    W_hq = normal((num_hiddens, num_outputs))\n    b_q = torch.zeros(num_outputs, device=device)\n    params = [W_xi, W_hi, b_i, W_xf, W_hf, b_f, W_xo, W_ho, b_o, W_xc, W_hc, b_c, W_hq, b_q]\n    for param in params:\n        param.requires_grad_(True)\n    return params\ndef init_lstm_state(batch_size, num_hiddens, device):\n    return (torch.zeros((batch_size, num_hiddens), device=device), torch.zeros((batch_size, num_hiddens), device=device))\ndef lstm(inputs, state, params):\n    [W_xi, W_hi, b_i, W_xf, W_hf, b_f, W_xo, W_ho, b_o, W_xc, W_hc, b_c,\n    W_hq, b_q] = params\n    (H, C) = state\n    outputs = []\n    for X in inputs:\n        I = torch.sigmoid((X @ W_xi) + (H @ W_hi) + b_i)\n        F = torch.sigmoid((X @ W_xf) + (H @ W_hf) + b_f)\n        O = torch.sigmoid((X @ W_xo) + (H @ W_ho) + b_o)\n        C_tilda = torch.tanh((X @ W_xc) + (H @ W_hc) + b_c)\n        C = F * C + I * C_tilda\n        H = O * torch.tanh(C)\n        Y = (H @ W_hq) + b_q\n        outputs.append(Y)\n    return torch.cat(outputs, dim=0), (H, C)\nvocab_size, num_hiddens, device = len(vocab), 256, d2l.try_gpu()\nnum_epochs, lr = 500, 1\nmodel = d2l.RNNModelScratch(len(vocab), num_hiddens, device, get_lstm_params, init_lstm_state, lstm)\nd2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)\nnum_inputs = vocab_size\nlstm_layer = nn.LSTM(num_inputs, num_hiddens)\nmodel = d2l.RNNModel(lstm_layer, len(vocab))\nmodel = model.to(device)\nd2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)",
+  "query_50_corpus_4": "from mxnet.gluon import nn\nclass Encoder(nn.Block):\n    def __init__(self, **kwargs):\n        super(Encoder, self).__init__(**kwargs)\n    def forward(self, X, *args):\n        raise NotImplementedError\nclass Decoder(tf.keras.layers.Layer):\n    def __init__(self, **kwargs):\n        super(Decoder, self).__init__(**kwargs)\n    def init_state(self, enc_outputs, *args):\n        raise NotImplementedError\n    def forward(self, X, state):\n        raise NotImplementedError\nclass EncoderDecoder(nn.Block):\n    def __init__(self, encoder, decoder, **kwargs):\n        super(EncoderDecoder, self).__init__(**kwargs)\n        self.encoder = encoder\n        self.decoder = decoder\n    def forward(self, enc_X, dec_X, *args):\n        enc_outputs = self.encoder(enc_X, *args)\n        dec_state = self.decoder.init_state(enc_outputs, *args)\n        return self.decoder(dec_X, dec_state)",
+  "query_50_chunk": {
+    "language": "python",
+    "imports": [
+      "numpy",
+      "paddle",
+      "warnings"
+    ],
+    "classes": [],
+    "functions": [
+      "f",
+      "f_grad",
+      "show_trace"
+    ]
+  },
+  "query_50_corpuses_chunks": [
+    {
+      "language": "python",
+      "imports": [
+        "nn"
+      ],
+      "classes": [
+        "Encoder",
+        "Decoder",
+        "EncoderDecoder"
+      ],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn"
+      ],
+      "classes": [
+        "Encoder",
+        "Decoder",
+        "EncoderDecoder"
+      ],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn"
+      ],
+      "classes": [
+        "Encoder",
+        "Decoder",
+        "EncoderDecoder"
+      ],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn",
+        "torch"
+      ],
+      "classes": [],
+      "functions": [
+        "get_lstm_params",
+        "normal",
+        "three",
+        "init_lstm_state",
+        "lstm"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn"
+      ],
+      "classes": [
+        "Encoder",
+        "Decoder",
+        "EncoderDecoder"
+      ],
+      "functions": []
+    }
+  ],
+  "query_75": "import tensorflow as tf\nfrom d2l import tensorflow as d2l\nclass MultiHeadAttention(tf.keras.layers.Layer):\n    def __init__(self, key_size, query_size, value_size, num_hiddens, num_heads, dropout, bias=False, **kwargs):\n        super().__init__(**kwargs)\n        self.num_heads = num_heads\n        self.attention = d2l.DotProductAttention(dropout)\n        self.W_q = tf.keras.layers.Dense(num_hiddens, use_bias=bias)\n        self.W_k = tf.keras.layers.Dense(num_hiddens, use_bias=bias)\n        self.W_v = tf.keras.layers.Dense(num_hiddens, use_bias=bias)\n        self.W_o = tf.keras.layers.Dense(num_hiddens, use_bias=bias)\n    def call(self, queries, keys, values, valid_lens, **kwargs):\n\n        queries = transpose_qkv(self.W_q(queries), self.num_heads)\n        keys = transpose_qkv(self.W_k(keys), self.num_heads)\n        values = transpose_qkv(self.W_v(values), self.num_heads)\n        if valid_lens is not None:\n            valid_lens = tf.repeat(valid_lens, repeats=self.num_heads, axis=0)\n        output = self.attention(queries, keys, values, valid_lens, **kwargs)\n        output_concat = transpose_output(output, self.num_heads)\n        return self.W_o(output_concat)\ndef transpose_qkv(X, num_heads):\n    X = tf.reshape(X, shape=(X.shape[0], X.shape[1], num_heads, -1))\n    X = tf.transpose(X, perm=(0, 2, 1, 3))\n    return tf.reshape(X, shape=(-1, X.shape[2], X.shape[3]))\ndef transpose_output(X, num_heads):\n    X = tf.reshape(X, shape=(-1, num_heads, X.shape[1], X.shape[2]))\n    X = tf.transpose(X, perm=(0, 2, 1, 3))\n    return tf.reshape(X, shape=(X.shape[0], X.shape[1], -1))\nnum_hiddens, num_heads = 100, 5\nattention = MultiHeadAttention(num_hiddens, num_hiddens, num_hiddens, num_hiddens, num_heads, 0.5)\nbatch_size, num_queries = 2, 4\nnum_kvpairs, valid_lens = 6, tf.constant([3, 2])\nX = tf.ones((batch_size, num_queries, num_hiddens))\nY = tf.ones((batch_size, num_kvpairs, num_hiddens))\nattention(X, Y, Y, valid_lens, training=False).shape",
+  "query_75_corpus_0": "%matplotlib inline\nimport math\nimport time\nimport numpy as np\nimport torch\nfrom d2l import torch as d2l\nn = 10000\na = torch.ones(n)\nb = torch.ones(n)\nc = torch.zeros(n)\ntimer = Timer()\nfor i in range(n):\n    c[i] = a[i] + b[i]",
+  "query_75_corpus_1": "counts = multinomial.Multinomial(10, fair_probs).sample((500,))\ncum_counts = counts.cumsum(dim=0)\nestimates = cum_counts / cum_counts.sum(dim=1, keepdims=True)\nd2l.set_figsize((6, 4.5))\nfor i in range(6):\n    d2l.plt.plot(estimates[:, i].numpy(), label=(\"P(die=\" + str(i + 1) + \")\"))\nd2l.plt.axhline(y=0.167, color='black', linestyle='dashed')\nd2l.plt.gca().set_xlabel('Groups of experiments')\nd2l.plt.gca().set_ylabel('Estimated probability')\nd2l.plt.legend();\nimport torch\na = dir(torch.distributions)\nhelp(torch.ones)\ntorch.ones(4)",
+  "query_75_corpus_2": "%matplotlib inline\nimport math\nimport time\nimport numpy as np\nimport torch\nfrom d2l import torch as d2l\nn = 10000\na = torch.ones(n)\nb = torch.ones(n)\nc = torch.zeros(n)\ntimer = Timer()\nfor i in range(n):\n    c[i] = a[i] + b[i]",
+  "query_75_corpus_3": "%matplotlib inline\nimport numpy as np\nfrom matplotlib_inline import backend_inline\nfrom d2l import torch as d2l\ndef f(x):\n    return 3 * x ** 2 - 4 * x",
+  "query_75_corpus_4": "counts = multinomial.Multinomial(10, fair_probs).sample((500,))\ncum_counts = counts.cumsum(dim=0)\nestimates = cum_counts / cum_counts.sum(dim=1, keepdims=True)\nd2l.set_figsize((6, 4.5))\nfor i in range(6):\n    d2l.plt.plot(estimates[:, i].numpy(), label=(\"P(die=\" + str(i + 1) + \")\"))\nd2l.plt.axhline(y=0.167, color='black', linestyle='dashed')\nd2l.plt.gca().set_xlabel('Groups of experiments')\nd2l.plt.gca().set_ylabel('Estimated probability')\nd2l.plt.legend();\nimport torch\na = dir(torch.distributions)\nhelp(torch.ones)\ntorch.ones(4)",
+  "query_75_chunk": {
+    "language": "python",
+    "imports": [
+      "tensorflow"
+    ],
+    "classes": [
+      "MultiHeadAttention"
+    ],
+    "functions": [
+      "transpose_qkv",
+      "transpose_output"
+    ]
+  },
+  "query_75_corpuses_chunks": [
+    {
+      "language": "python",
+      "imports": [
+        "math",
+        "numpy",
+        "time",
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "math",
+        "numpy",
+        "time",
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "backend_inline",
+        "numpy",
+        "torch"
+      ],
+      "classes": [],
+      "functions": [
+        "f"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "torch"
+      ],
+      "classes": [],
+      "functions": []
+    }
+  ],
+  "query_100": "import math\nimport tensorflow as tf\nfrom d2l import tensorflow as d2l\nd2l.set_figsize()\ngammas = [0.95, 0.9, 0.8, 0.7]\nfor gamma in gammas:\n    x = tf.range(40).numpy()\n    d2l.plt.plot(x, (1-gamma) * gamma ** x, label=f'gamma = {gamma:.2f}')\nd2l.plt.xlabel('time');\ndef init_rmsprop_states(feature_dim):\n    s_w = tf.Variable(tf.zeros((feature_dim, 1)))\n    s_b = tf.Variable(tf.zeros(1))\n    return (s_w, s_b)\ndef rmsprop(params, grads, states, hyperparams):\n    gamma, eps = hyperparams['gamma'], 1e-6\n    for p, s, g in zip(params, states, grads):\n        s[:].assign(gamma * s + (1 - gamma) * tf.math.square(g))\n        p[:].assign(p - hyperparams['lr'] * g / tf.math.sqrt(s + eps))\ntrainer = tf.keras.optimizers.RMSprop\nd2l.train_concise_ch11(trainer, {'learning_rate': 0.01, 'rho': 0.9}, data_iter)",
+  "query_100_corpus_0": "import collections\nimport re\nfrom d2l import paddle as d2l\ndef tokenize(lines, token='word'):\n    if token == 'word':\n        return [line.split() for line in lines]\n    elif token == 'char':\n        return [list(line) for line in lines]\n    else:\n        print('Error: Unknown word element type:' + token)\ntokens = tokenize(lines)\nfor i in range(11):\n    print(tokens[i])\ndef load_corpus_time_machine(max_tokens=-1):\n    lines = read_time_machine()\n    tokens = tokenize(lines, 'char')\n    vocab = Vocab(tokens)\n    corpus = [vocab[token] for line in tokens for token in line]\n    if max_tokens > 0:\n        corpus = corpus[:max_tokens]\n    return corpus, vocab\ncorpus, vocab = load_corpus_time_machine()\nlen(corpus), len(vocab)",
+  "query_100_corpus_1": "from torch import nn\nclass Encoder(nn.Module):\n    def __init__(self, **kwargs):\n        super(Encoder, self).__init__(**kwargs)\n    def forward(self, X, *args):\n        raise NotImplementedError\nclass Decoder(nn.Module):\n    def __init__(self, **kwargs):\n        super(Decoder, self).__init__(**kwargs)\n    def init_state(self, enc_outputs, *args):\n        raise NotImplementedError\n    def forward(self, X, state):\n        raise NotImplementedError\nclass EncoderDecoder(nn.Module):\n    def __init__(self, encoder, decoder, **kwargs):\n        super(EncoderDecoder, self).__init__(**kwargs)\n        self.encoder = encoder\n        self.decoder = decoder\n    def forward(self, enc_X, dec_X, *args):\n        enc_outputs = self.encoder(enc_X, *args)\n        dec_state = self.decoder.init_state(enc_outputs, *args)\n        return self.decoder(dec_X, dec_state)",
+  "query_100_corpus_2": "import collections\nimport re\nfrom d2l import paddle as d2l\ndef tokenize(lines, token='word'):\n    if token == 'word':\n        return [line.split() for line in lines]\n    elif token == 'char':\n        return [list(line) for line in lines]\n    else:\n        print('Error: Unknown word element type:' + token)\ntokens = tokenize(lines)\nfor i in range(11):\n    print(tokens[i])\ndef load_corpus_time_machine(max_tokens=-1):\n    lines = read_time_machine()\n    tokens = tokenize(lines, 'char')\n    vocab = Vocab(tokens)\n    corpus = [vocab[token] for line in tokens for token in line]\n    if max_tokens > 0:\n        corpus = corpus[:max_tokens]\n    return corpus, vocab\ncorpus, vocab = load_corpus_time_machine()\nlen(corpus), len(vocab)",
+  "query_100_corpus_3": "x = torch.arange(12)\nX = x.reshape(3, 4)\ntorch.zeros((2, 3, 4))\ntorch.ones((2, 3, 4))\ntorch.randn(3, 4)\ntorch.tensor([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\nx = torch.tensor([1.0, 2, 4, 8])\ny = torch.tensor([2, 2, 2, 2])\nx + y, x - y, x * y, x / y, x ** y\ntorch.exp(x)\nX = torch.arange(12, dtype=torch.float32).reshape((3,4))\nY = torch.tensor([[2.0, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])\ntorch.cat((X, Y), dim=0), torch.cat((X, Y), dim=1)\na = torch.arange(3).reshape((3, 1))\nb = torch.arange(2).reshape((1, 2))\nZ = torch.zeros_like(Y)\nZ[:] = X + Y\nA = X.numpy()\nB = torch.tensor(A)\na = torch.tensor([3.5])\nprint(a, a.item(), float(a), int(a))",
+  "query_100_corpus_4": "from torch import nn\nclass Encoder(nn.Module):\n    def __init__(self, **kwargs):\n        super(Encoder, self).__init__(**kwargs)\n    def forward(self, X, *args):\n        raise NotImplementedError\nclass Decoder(nn.Module):\n    def __init__(self, **kwargs):\n        super(Decoder, self).__init__(**kwargs)\n    def init_state(self, enc_outputs, *args):\n        raise NotImplementedError\n    def forward(self, X, state):\n        raise NotImplementedError\nclass EncoderDecoder(nn.Module):\n    def __init__(self, encoder, decoder, **kwargs):\n        super(EncoderDecoder, self).__init__(**kwargs)\n        self.encoder = encoder\n        self.decoder = decoder\n    def forward(self, enc_X, dec_X, *args):\n        enc_outputs = self.encoder(enc_X, *args)\n        dec_state = self.decoder.init_state(enc_outputs, *args)\n        return self.decoder(dec_X, dec_state)",
+  "query_100_chunk": {
+    "language": "python",
+    "imports": [
+      "math",
+      "tensorflow"
+    ],
+    "classes": [],
+    "functions": [
+      "init_rmsprop_states",
+      "rmsprop"
+    ]
+  },
+  "query_100_corpuses_chunks": [
+    {
+      "language": "python",
+      "imports": [
+        "collections",
+        "paddle",
+        "re"
+      ],
+      "classes": [],
+      "functions": [
+        "tokenize",
+        "load_corpus_time_machine"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn"
+      ],
+      "classes": [
+        "Encoder",
+        "Decoder",
+        "EncoderDecoder"
+      ],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "collections",
+        "paddle",
+        "re"
+      ],
+      "classes": [],
+      "functions": [
+        "tokenize",
+        "load_corpus_time_machine"
+      ]
+    },
+    {
+      "language": "python",
+      "imports": [],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "language": "python",
+      "imports": [
+        "nn"
+      ],
+      "classes": [
+        "Encoder",
+        "Decoder",
+        "EncoderDecoder"
+      ],
+      "functions": []
+    }
+  ]
+}

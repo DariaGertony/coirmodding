@@ -5,24 +5,19 @@ from coir.models import YourCustomDEModel
 from sentence_transformers import SentenceTransformer
 import ollama
 import torch
-import dotenv
-import os
 
 
-poss_LLM= ["meta-llama/llama-4-scout-17b-16e-instruct"]
-#["qwen/qwen3-32b"]
-# ["llama3", "gemma3", "phi3"] for ollama
+
+poss_LLM= {"llama3.2", "gemma3", "phi3"}
+
 # intfloat/e5-base   BAAI/bge-m3 intfloat/e5-base-v2
 
 model_name = "BAAI/bge-m3"
+chos_LLMmodel = {"phi3"}
+useLLm = False
+rerank = False
 
-
-useLLm = True
-
-dotenv.load_dotenv()
-kee = os.getenv("GK")
-
-poss_prompts = {'Give comprehensive description for this query','Give additional information for this query to improve understanding'}
+poss_prompts = {'Give context words for this query', 'Give some suitable or similar code in different programming languages'}
 
 
 # Load the model
@@ -30,31 +25,29 @@ model = YourCustomDEModel(model_name)
 
 # Get tasks
 all_task = ["codetrans-dl","stackoverflow-qa","apps","codefeedback-mt","codefeedback-st","codetrans-contest","synthetic-text2sql","cosqa","codesearchnet","codesearchnet-ccr"]
-req_tasks = ["apps","stackoverflow-qa"]
+req_tasks = ["codetrans-dl","apps","stackoverflow-qa"]
+
+##flag for requeueing
+# Initialize evaluation
+
 types = ["bm25_hybrid_combMNZ", "bm25_hybrid_interpolation", "bm25_hybrid_rrf", "bm25_hybrid_weighted", "bm25_lexical", "jaccard_lexical", "default_semantic", "jaccard_hybrid"]
 
-tasks = get_tasks(tasks=["apps"])
+torch.backends.cuda.matmul.allow_tf32 = False
+torch.backends.cudnn.allow_tf32 = False
 
-evaluation = COIR(tasks=tasks,batch_size=64, type ="default_semantic")
-evaluation.llm_init("meta-llama/llama-4-scout-17b-16e-instruct", 'Give description of this query to improve understanding', kee)
-
-results = evaluation.run(model, output_folder="results", useLLm=False, expanded=False, local_data=False)
-
-
-"""
-    
-if useLLm :
+for t in req_tasks:
     tasks = get_tasks(tasks=["codetrans-dl"])
-    for ty in poss_LLM:
-        print(ty)
-        evaluation = COIR(tasks=tasks,batch_size=64, type ="default_semantic")
-        evaluation.llm_init(ty, 'Give description of this query to improve understanding', kee)
-        results = evaluation.run(model, output_folder="testing_results_for_groq", useLLm=useLLm, expanded=True)
-else:
-    for t in req_tasks:
-        tasks = get_tasks(tasks=t)
-        for ty in types:
-            evaluation = COIR(tasks=tasks,batch_size=64, type =ty)
-            res = evaluation.run(model, output_folder="results", useLLm=useLLm, to_rerank=False)
-        
-"""
+    for ty in types:
+        evaluation = COIR(tasks=tasks,batch_size=64, type =ty)
+        res = evaluation.run(model, output_folder="results", useLLm=useLLm, llmname='', prompt='', to_rerank=rerank)
+
+    
+if useLLm and chos_LLMmodel:
+    for llm in chos_LLMmodel.intersection(poss_LLM):
+        for pmp in poss_prompts.intersection({'Give context words for this query'}):
+            results = evaluation.run(model, output_folder="results", useLLm=useLLm, llmname=llm, prompt=pmp, to_rerank=rerank)
+#else:
+    # Run evaluation
+    #results = evaluation.run(model, output_folder="results", useLLm=useLLm, llmname='', prompt='', to_rerank=rerank)
+    
+

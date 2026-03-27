@@ -1,0 +1,21 @@
+%matplotlib inline
+import math
+from mxnet import np, npx
+from d2l import mxnet as d2l
+npx.set_np()
+d2l.set_figsize()
+gammas = [0.95, 0.9, 0.8, 0.7]
+for gamma in gammas:
+    x = np.arange(40).asnumpy()
+    d2l.plt.plot(x, (1-gamma) * gamma ** x, label=f'gamma = {gamma:.2f}')
+d2l.plt.xlabel('time');
+def init_rmsprop_states(feature_dim):
+    s_w = np.zeros((feature_dim, 1))
+    s_b = np.zeros(1)
+    return (s_w, s_b)
+def rmsprop(params, states, hyperparams):
+    gamma, eps = hyperparams['gamma'], 1e-6
+    for p, s in zip(params, states):
+        s[:] = gamma * s + (1 - gamma) * np.square(p.grad)
+        p[:] -= hyperparams['lr'] * p.grad / np.sqrt(s + eps)
+d2l.train_concise_ch11('rmsprop', {'learning_rate': 0.01, 'gamma1': 0.9}, data_iter)

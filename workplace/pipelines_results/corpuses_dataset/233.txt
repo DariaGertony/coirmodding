@@ -1,0 +1,42 @@
+from mxnet import np, npx
+from mxnet.gluon import rnn
+from d2l import mxnet as d2l
+npx.set_np()
+batch_size, num_steps = 32, 35
+train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
+def get_params(vocab_size, num_hiddens, device):
+    num_inputs = num_outputs = vocab_size
+    def normal(shape):
+        return np.random.normal(scale=0.01, size=shape, ctx=device)
+    def three():
+        return (normal((num_inputs, num_hiddens)), normal((num_hiddens, num_hiddens)), np.zeros(num_hiddens, ctx=device))
+    W_xz, W_hz, b_z = three()
+    W_xr, W_hr, b_r = three()
+    W_xh, W_hh, b_h = three()
+    W_hq = normal((num_hiddens, num_outputs))
+    b_q = np.zeros(num_outputs, ctx=device)
+    params = [W_xz, W_hz, b_z, W_xr, W_hr, b_r, W_xh, W_hh, b_h, W_hq, b_q]
+    for param in params:
+        param.attach_grad()
+    return params
+def init_gru_state(batch_size, num_hiddens, device):
+    return (np.zeros(shape=(batch_size, num_hiddens), ctx=device), )
+def gru(inputs, state, params):
+    W_xz, W_hz, b_z, W_xr, W_hr, b_r, W_xh, W_hh, b_h, W_hq, b_q = params
+    H, = state
+    outputs = []
+    for X in inputs:
+        Z = npx.sigmoid(np.dot(X, W_xz) + np.dot(H, W_hz) + b_z)
+        R = npx.sigmoid(np.dot(X, W_xr) + np.dot(H, W_hr) + b_r)
+        H_tilda = np.tanh(np.dot(X, W_xh) + np.dot(R * H, W_hh) + b_h)
+        H = Z * H + (1 - Z) * H_tilda
+        Y = np.dot(H, W_hq) + b_q
+        outputs.append(Y)
+    return np.concatenate(outputs, axis=0), (H,)
+vocab_size, num_hiddens, device = len(vocab), 256, d2l.try_gpu()
+num_epochs, lr = 500, 1
+model = d2l.RNNModelScratch(len(vocab), num_hiddens, device, get_params, init_gru_state, gru)
+d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
+gru_layer = rnn.GRU(num_hiddens)
+model = d2l.RNNModel(gru_layer, len(vocab))
+d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)

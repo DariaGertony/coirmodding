@@ -358,6 +358,109 @@ def plot_pareto_front_all_models(task_name, methods_data, output_dir, xm = "Reca
     print(f"  ✓ pareto-all: {task_name}")
     return True
 
+def compare_average_metrics_two_folders(root1, root2, output_dir, task_filter=None, model_filter=None):
+    """
+    Сравнивает средние показатели метрик из двух папок на одном графике.
+    Агрегирует все найденные методы по заданным задаче/модели (или все сразу)
+    и строит сгруппированную столбчатую диаграмму.
+    
+    Args:
+        root1, root2 (str): пути к папкам с результатами
+        output_dir (str): папка для сохранения графика
+        task_filter (str, optional): имя конкретной задачи
+        model_filter (str, optional): имя конкретной модели
+    """
+    from pathlib import Path
+    import os
+    
+    data1 = load_tasks_and_models(root1)
+    data2 = load_tasks_and_models(root2)
+
+    def flatten_metrics(data, t_filter, m_filter):
+        res = []
+        for task, models in data.items():
+            if t_filter and task != t_filter: continue
+            for model, methods in models.items():
+                if m_filter and model != m_filter: continue
+                for method_metrics in methods.values():
+                    res.append(method_metrics)
+        return res
+
+    metrics_list1 = flatten_metrics(data1, task_filter, model_filter)
+    metrics_list2 = flatten_metrics(data2, task_filter, model_filter)
+
+    if not metrics_list1 or not metrics_list2:
+        print("⚠ Недостаточно данных в одной из папок для сравнения.")
+        return False
+
+    # Вычисление средних значений по каждому ключу метрики
+    def calc_averages(m_list):
+        all_keys = set()
+        for m in m_list: all_keys.update(m.keys())
+        avgs = {}
+        for k in all_keys:
+            vals = [m[k] for m in m_list if k in m]
+            avgs[k] = np.mean(vals) if vals else 0.0
+        return avgs
+
+    avg1 = calc_averages(metrics_list1)
+    avg2 = calc_averages(metrics_list2)
+
+    # Метрики для отображения (можно расширить или сузить)
+    key_metrics = [
+        "NDCG@1", "NDCG@10", "NDCG@100",
+        "MAP@10", "MAP@100",
+        "Recall@10", "Recall@100",
+        "P@1", "P@10"
+    ]
+    available = [m for m in key_metrics if m in avg1 or m in avg2]
+
+    if not available:
+        print("⚠ Нет общих метрик для сравнения.")
+        return False
+
+    x = np.arange(len(available))
+    width = 0.35
+    v1 = [avg1.get(m, 0) for m in available]
+    v2 = [avg2.get(m, 0) for m in available]
+
+    fig, ax = plt.subplots(figsize=(max(9, len(available)*1.1), 7))
+    label1 = Path(root1).resolve().name
+    label2 = Path(root2).resolve().name
+
+    bars1 = ax.bar(x - width/2, v1, width, label=label1, color='steelblue', edgecolor='black', alpha=0.85)
+    bars2 = ax.bar(x + width/2, v2, width, label=label2, color='darkorange', edgecolor='black', alpha=0.85)
+
+    ax.set_xlabel('Метрика', fontweight='bold')
+    ax.set_ylabel('Среднее значение', fontweight='bold')
+
+    title_parts = []
+    if task_filter: title_parts.append(f"Задача: {task_filter}")
+    if model_filter: title_parts.append(f"Модель: {model_filter}")
+    title = "Сравнение средних показателей\n" + " | ".join(title_parts) if title_parts else "Сравнение средних показателей (все данные)"
+    ax.set_title(title, fontweight='bold')
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(available, rotation=45, ha='right')
+    ax.legend(frameon=True, framealpha=0.92)
+    ax.grid(axis='y', alpha=0.35)
+    max_val = max(max(v1), max(v2))
+    ax.set_ylim(0, max_val * 1.12)
+
+    # Подписи значений над столбцами
+    for bar in bars1 + bars2:
+        h = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2, h + max_val*0.01,
+                f'{h:.3f}', ha='center', va='bottom', fontsize=8, fontweight='bold')
+
+    plt.tight_layout()
+    os.makedirs(output_dir, exist_ok=True)
+    out_path = os.path.join(output_dir, 'avg_comparison_two_folders.png')
+    plt.savefig(out_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"✓ Сохранено: {out_path}")
+    return True
+
 
 def visualize_tasks(input_root="./results", output_base="./visualizations"):
     print("=" * 60)
@@ -371,7 +474,7 @@ def visualize_tasks(input_root="./results", output_base="./visualizations"):
 
     # Создаём общую выходную папку
     os.makedirs(output_base, exist_ok=True)
-    clear_folder(output_base)
+    
 
     for task_name, models in tasks_by_model.items():
         for model_name, methods_data in models.items():
@@ -397,4 +500,10 @@ def visualize_tasks(input_root="./results", output_base="./visualizations"):
 
 
 if __name__ == "__main__":
-    visualize_tasks()
+    #visualize_tasks()
+    compare_average_metrics_two_folders(
+        root1="./results/codetrans-contest",
+        root2="./results/codetrans-contest-local",
+        output_dir="./visualizations/comparison_codetrans-contest",
+        
+    )

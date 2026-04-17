@@ -6,3 +6,4 @@ workplace/.env
 /workplace/.venv/Lib/site-packages/coir/beir/retrieval/__pycache__
 /workplace/.venv/Lib/site-packages/coir/beir/retrieval/search/__pycache__
 /workplace/.venv/Lib/site-packages/coir/beir/retrieval/search/dense/__pycache__
+/workplace/.venv/Lib/site-packages/coir/beir/reranking/__pycache__
